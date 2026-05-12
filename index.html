@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Australia's Baby Drought</title>
+    <link rel="stylesheet" href="style/general.css" />
+    <link rel="stylesheet" href="style/part1.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero-section" aria-labelledby="story-title">
+        <div class="hero-kicker">FIT2179 Data Visualisation 2</div>
+        <h1 id="story-title">Australia's Baby Drought</h1>
+        <p class="hero-subtitle">
+          Why Australians are having fewer children than ever.
+        </p>
+      </section>
+
+      <section class="story-section" aria-labelledby="part-one-title">
+        <div class="section-header">
+          <span class="section-number">Part 1</span>
+          <h2 id="part-one-title">Total Fertility Rate</h2>
+          <p>
+            Australia's fertility rate reached a record low in 2024, sitting
+            well below the 2.1 births per woman needed for population replacement.
+          </p>
+        </div>
+
+        <div class="hero-visual">
+          <div class="replacement-note">
+            <span class="note-label">The ideal replacement level</span>
+            <span class="note-value">2.1</span>
+            <span class="note-copy">births per woman</span>
+          </div>
+
+          <div class="big-number" aria-label="Australia total fertility rate in 2024">
+            <span class="number">1.48</span>
+            <span class="number-label">children per woman in 2024</span>
+            <span class="number-tag">Lowest since records began</span>
+          </div>
+        </div>
+
+        <div class="chart-block">
+          <div class="chart-title-row">
+            <h3>Total fertility rate, 1927-2024</h3>
+            <span>Children per woman</span>
+          </div>
+          <div id="hero-chart"></div>
+        </div>
+
+        <p class="hero-copy">
+          Australia's total fertility rate has fallen to a record low of 1.48 children per woman in 2024 — less 
+          than half the Baby Boom peak of 3.55 reached in 1961. The long decline began almost immediately after 
+          the contraceptive pill became widely available in the early 1960s, with the rate dropping below the 
+          replacement level of 2.1 for the first time in 1976. A brief recovery followed the introduction of the 
+          Federal Government's Baby Bonus in 2004, which provided a one-off payment of up to $5,000 per birth — but 
+          the effect proved temporary. The scheme was phased out on 1 March 2014 and replaced by the Newborn Supplement, 
+          a more targeted payment tied to the parental leave system. Since then, the fertility rate has fallen sharply and 
+          without interruption, reaching its lowest point on record in 2024.
+        </p>
+      </section>
+    </main>
+
+    <script src="script/visualize1.js"></script>
+  </body>
+</html>
