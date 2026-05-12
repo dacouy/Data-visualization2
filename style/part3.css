@@ -1,0 +1,59 @@
+.map-section {
+  padding: 34px 70px 60px 70px;
+}
+
+.map-chart-block {
+  width: 980px;
+  max-width: 100%;
+  margin-top: 30px;
+  padding: 24px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+}
+
+.map-subheader {
+  max-width: 860px;
+  margin-top: 34px;
+}
+
+.map-subheader h3 {
+  margin: 0 0 8px 0;
+  font-size: 26px;
+}
+
+.map-subheader p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+#lga-map,
+#state-births-map {
+  width: 100%;
+}
+
+.state-bubble-block {
+  margin-top: 24px;
+}
+
+.state-bubble-heading {
+  margin-top: 42px;
+}
+
+.map-note {
+  margin: 14px 0 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+@media (max-width: 860px) {
+  .map-section {
+    padding: 28px 24px 44px 24px;
+  }
+
+  .map-chart-block {
+    width: 100%;
+  }
+}

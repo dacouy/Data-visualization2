@@ -6,6 +6,8 @@
     <title>Australia's Baby Drought</title>
     <link rel="stylesheet" href="style/general.css" />
     <link rel="stylesheet" href="style/part1.css" />
+    <link rel="stylesheet" href="style/part2.css" />
+    <link rel="stylesheet" href="style/part3.css" />
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
@@ -63,8 +65,107 @@
           without interruption, reaching its lowest point on record in 2024.
         </p>
       </section>
+
+      <section class="slope-section" aria-labelledby="state-slope-title">
+        <div class="section-header">
+          <span class="section-number">Part 2</span>
+          <h2 id="state-slope-title">State by State</h2>
+          <p>
+            Every state and territory now sits below its 2014 fertility rate,
+            except Victoria, where registration delays make the latest increase
+            an important outlier.
+          </p>
+        </div>
+
+        <div class="slope-chart-block">
+          <div id="state-slope-chart"></div>
+          <p class = "hero-copy">
+            A decade ago, fertility rates across Australia's states and territories ranged from 1.72 to 2.04. By 2024, every 
+            single one had fallen — converging toward a narrow band around the national average of 1.48. The ACT recorded the 
+            steepest decline of any jurisdiction, dropping from 1.74 to 1.27 over ten years — a fall driven in part by its highly 
+            educated, career-focused population. The Northern Territory bucked the trend in relative terms, falling the least and 
+            remaining the only jurisdiction above the national average — though even its rate of 1.63 sits well below replacement level.
+          </p>
+        </div>
+
+        <!--
+          In 2024, no state or territory recorded a higher fertility rate than it did a decade ago.
+          The Northern Territory, historically one of Australia's highest, saw the smallest decline —
+          falling from 2.04 to 1.63 — and remains the only jurisdiction above the national average.
+          At the other end, the ACT recorded the steepest drop of any state, falling from 1.74 to
+          just 1.27 — the lowest of any state or territory in the country.
+          Every line points downward. No exception.
+        -->
+      </section>
+      <section class="map-section" aria-labelledby="lga-map-title">
+        <div class="section-header">
+          <span class="section-number">Part 3</span>
+          <h2 id="lga-map-title">Where Babies Are Born</h2>
+          <p>
+            Fertility rates vary sharply at the local level — from inner-city
+            lows to remote community highs — far beyond what state averages reveal.
+          </p>
+        </div>
+
+        <div class="map-subheader">
+          <h3>LGA fertility rates, 2024</h3>
+          <p>
+            This map shows how fertility varies between local government areas.
+            Red areas are below the national average, green areas are higher, and grey areas have too few births for a published rate.
+          </p>
+        </div>
+
+        <div class="map-chart-block">
+          <div id="lga-map"></div>
+          <p class="map-note">
+            White circles mark each state capital and are sized by total births registered in 2024.
+            Hover any local area for its LGA, state, births, and TFR. Unpublished values appear as N/P.
+          </p>
+        </div>
+
+        <p class="hero-copy">
+          Australia's fertility landscape tells a clear geographic story. The lowest rates are found in the hearts
+          of the major cities: Melbourne's CBD recorded just 0.54 children per woman in 2024 — the lowest of any LGA
+          in the country — followed closely by Adelaide (0.57), Perth (0.61) and Sydney (0.73). These are places
+          where young professionals are concentrated, housing costs are at their peak, and the pace of life leaves
+          little room for raising children.
+        </p>
+        <p class="hero-copy">
+          At the other extreme, the highest fertility rates are found in small, remote Indigenous communities.
+          Cherbourg in Queensland recorded 3.99 — the highest in Australia — followed by Hope Vale (3.95) and
+          Doomadgee (3.40), all in Queensland. These communities have distinct cultural, social and economic
+          circumstances that shape very different family patterns.
+        </p>
+        <p class="hero-copy">
+          In the vast interior of Australia — the outback stretching across the centre of the continent — fertility
+          rates tend to sit in the moderate-to-high range, typically between 2.0 and 3.0. This band runs through
+          central Queensland, outback New South Wales, South Australia's interior and the Northern Territory. Much
+          of this reflects a combination of younger populations, stronger cultural ties to family, and economic
+          conditions that differ markedly from coastal cities. Notably, many of these central LGAs appear unfilled on the
+          map — not because fertility is zero, but because the population is so small that the ABS does not publish
+          a reliable rate.
+        </p>
+
+        <div class="map-subheader state-bubble-heading">
+          <h3>Birth volume by state, 2024</h3>
+          <p>
+            The bubble map tells a different story from the LGA fertility map. Large states dominate the number of
+            babies born because they have more people, even when their fertility rates are not especially high.
+          </p>
+        </div>
+
+        <div class="map-chart-block state-bubble-block">
+          <div id="state-births-map"></div>
+          <p class="map-note">
+            State and territory bubbles are sized by births registered in 2024. Colour still shows the
+            total fertility rate, making the gap between birth volume and fertility rate easier to compare.
+          </p>
+        </div>
+      </section>
     </main>
 
     <script src="script/visualize1.js"></script>
+    <script src="script/visualize2.js"></script>
+    <script src="script/visualize3.js"></script>
   </body>
 </html>

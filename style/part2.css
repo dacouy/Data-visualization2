@@ -1,0 +1,26 @@
+.slope-section {
+  padding: 34px 70px 60px 70px;
+}
+
+.slope-chart-block {
+  width: 980px;
+  max-width: 100%;
+  margin-top: 30px;
+  padding: 24px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+}
+
+#state-slope-chart {
+  width: 100%;
+}
+
+@media (max-width: 860px) {
+  .slope-section {
+    padding: 28px 24px 44px 24px;
+  }
+
+  .slope-chart-block {
+    width: 100%;
+  }
+}
