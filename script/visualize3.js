@@ -11,7 +11,7 @@ const NATIONAL_AVG = 1.481;
 const LOW_TFR_COLOR = "#8B1A1A";
 const MID_TFR_COLOR = "#EAD9BB";
 const HIGH_TFR_COLOR = "#2D6B2D";
-const MAP_BACKGROUND = "#F5F0E8";
+const MAP_BACKGROUND = "#FFFFFF";
 const LOW_COUNT_COLOR = "#C6BDAB";
 const MIN_BIRTHS_FOR_COLOR = 20;
 
@@ -144,7 +144,7 @@ const australiaStateProjection = {
   type: "mercator",
   center: [134, -28],
   scale: 650,
-  translate: [490, 330],
+  translate: [490, 285],
 };
 
 function buildMapSpec() {
@@ -302,7 +302,7 @@ function buildStateBubbleMapSpec() {
   return {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
     width: "container",
-    height: 620,
+    height: 520,
     background: MAP_BACKGROUND,
     padding: { left: 0, right: 0, top: 0, bottom: 0 },
     projection: australiaStateProjection,
@@ -329,7 +329,7 @@ function buildStateBubbleMapSpec() {
         ],
         mark: {
           type: "geoshape",
-          fill: "#EFE6D8",
+          fill: MAP_BACKGROUND,
           stroke: "#5E5449",
           strokeWidth: 1.15,
         },

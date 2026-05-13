@@ -1,6 +1,6 @@
 :root {
   --cream: #f5f0e8;
-  --paper: #fffaf1;
+  --paper: #ffffff;
   --ink: #1c1c1c;
   --muted: #6f6255;
   --red: #8b1a1a;
@@ -26,6 +26,31 @@ main {
   min-height: 100vh;
   width: 100%;
   max-width: 1180px;
+}
+
+/* Thin horizontal rule between every part (same tone as Part 1 hero-visual borders). */
+main > section + section {
+  border-top: 1px solid var(--rule);
+}
+
+/* Short left-aligned rule between two chart/visual blocks inside a part. */
+hr.visual-divider {
+  border: none;
+  height: 1px;
+  width: min(480px, 55%);
+  max-width: 100%;
+  margin: 26px 0 26px 0;
+  margin-right: auto;
+  margin-left: 0;
+  background: var(--rule);
+}
+
+@media (max-width: 860px) {
+  hr.visual-divider {
+    width: min(100%, 320px);
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 }
 
 .hero-section {

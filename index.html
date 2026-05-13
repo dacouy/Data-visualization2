@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style/part1.css" />
     <link rel="stylesheet" href="style/part2.css" />
     <link rel="stylesheet" href="style/part3.css" />
+    <link rel="stylesheet" href="style/part4.css" />
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
@@ -71,31 +72,39 @@
           <span class="section-number">Part 2</span>
           <h2 id="state-slope-title">State by State</h2>
           <p>
-            Every state and territory now sits below its 2014 fertility rate,
-            except Victoria, where registration delays make the latest increase
-            an important outlier.
+            The decline is national, but its pace differs sharply between
+            states and territories.
           </p>
         </div>
 
         <div class="slope-chart-block">
           <div id="state-slope-chart"></div>
-          <p class = "hero-copy">
-            A decade ago, fertility rates across Australia's states and territories ranged from 1.72 to 2.04. By 2024, every 
-            single one had fallen — converging toward a narrow band around the national average of 1.48. The ACT recorded the 
-            steepest decline of any jurisdiction, dropping from 1.74 to 1.27 over ten years — a fall driven in part by its highly 
-            educated, career-focused population. The Northern Territory bucked the trend in relative terms, falling the least and 
-            remaining the only jurisdiction above the national average — though even its rate of 1.63 sits well below replacement level.
-          </p>
+          <div class="slope-legend" aria-label="Year legend">
+            <div class="slope-legend-title">Year</div>
+            <div class="slope-legend-item">
+              <span class="slope-legend-dot slope-legend-dot--2014"></span>
+              <span>2014</span>
+            </div>
+            <div class="slope-legend-item">
+              <span class="slope-legend-dot slope-legend-dot--2024"></span>
+              <span>2024</span>
+            </div>
+            <div class="slope-legend-item">
+              <span class="slope-legend-line"></span>
+              <span>Aust. avg</span>
+            </div>
+          </div>
         </div>
+        <p class="hero-copy slope-chart-follow">
+          Every state and territory recorded a lower fertility rate in 2024 than in 2014. The ACT experienced the
+          steepest fall, dropping from 1.738 to 1.273 children per woman, a decline of 26.8%. Western Australia,
+          Tasmania, Queensland and South Australia also fell by more than one-fifth over the decade. The Northern
+          Territory declined the least, from 2.041 to 1.629, and remains the highest-fertility jurisdiction in 2024.
+          The dashed Aust. line marks the national 2024 average of 1.481. By the end of the decade, most states had
+          converged close to that level, showing that fertility rates are not only falling, but becoming more similar
+          across much of the country.
+        </p>
 
-        <!--
-          In 2024, no state or territory recorded a higher fertility rate than it did a decade ago.
-          The Northern Territory, historically one of Australia's highest, saw the smallest decline —
-          falling from 2.04 to 1.63 — and remains the only jurisdiction above the national average.
-          At the other end, the ACT recorded the steepest drop of any state, falling from 1.74 to
-          just 1.27 — the lowest of any state or territory in the country.
-          Every line points downward. No exception.
-        -->
       </section>
       <section class="map-section" aria-labelledby="lga-map-title">
         <div class="section-header">
@@ -146,6 +155,8 @@
           a reliable rate.
         </p>
 
+        <hr class="visual-divider" />
+
         <div class="map-subheader state-bubble-heading">
           <h3>Birth volume by state, 2024</h3>
           <p>
@@ -161,11 +172,77 @@
             total fertility rate, making the gap between birth volume and fertility rate easier to compare.
           </p>
         </div>
+
+        <p class="hero-copy">
+          Birth volume is concentrated in Australia's most populous states. New South Wales recorded the most
+          births in 2024, with 89,030 babies, followed by Victoria (81,193) and Queensland (58,838). Western
+          Australia sits well behind the three eastern states at 30,541 births, while South Australia recorded
+          18,444. The smallest totals are in the smaller jurisdictions: Tasmania (5,509), the ACT (5,218) and
+          the Northern Territory (3,521). This shows that the number of babies born is driven mainly by population
+          size rather than fertility rate. The Northern Territory has the highest TFR, but the fewest births;
+          New South Wales has the largest birth count despite sitting below the national fertility average.
+        </p>
+      </section>
+
+      <section class="ridgeline-section" aria-labelledby="asfr-ridgeline-title">
+        <div class="section-header">
+          <span class="section-number">Part 4</span>
+          <h2 id="asfr-ridgeline-title">Motherhood is moving later</h2>
+          <p>
+            Comparing 1976, 2000 and 2024 shows the age profile shifting right:
+            fertility once peaked in the late twenties, crossed over around
+            2000, and now peaks among women aged 30-34.
+          </p>
+        </div>
+
+        <div class="ridgeline-chart-block">
+          <div id="asfr-ridgeline"></div>
+        </div>
+
+        <p class="hero-copy">
+          The age profile of motherhood has shifted sharply to the right. In 1976, fertility was concentrated
+          in the twenties, with the highest age-specific fertility rate among women aged 25-29 at 146.2 births
+          per 1,000 women, followed closely by women aged 20-24. By 2000, the peak had moved to 30-34, narrowly
+          overtaking 25-29. In 2024, that later pattern is much clearer: women aged 30-34 now record the highest
+          rate at 106.0, while fertility among women aged 20-24 has fallen to just 30.6. At the same time, births
+          among women aged 35-39 and 40-44 have become more common than they were in the 1970s. The overall trend
+          is not just fewer births, but later births.
+        </p>
+
+        <hr class="visual-divider" />
+
+        <div class="ridgeline-subheader">
+          <h3 id="asfr-heatmap-title">Age-specific fertility by state, 2024</h3>
+          <p>
+            Age-specific fertility shows where births concentrate in the life course — and how that
+            pattern differs between states.
+          </p>
+        </div>
+
+        <div class="asfr-chart-block">
+          <h3 class="asfr-viz-heading">Where each state’s fertility peaks</h3>
+          <p class="asfr-viz-note" id="asfr-viz-note"></p>
+          <div id="asfr-heatmap"></div>
+        </div>
+
+        <p class="hero-copy">
+          The state heatmap shows that the delayed motherhood pattern is now national. In every state and territory,
+          the highest age-specific fertility rate is among women aged 30-34. New South Wales, South Australia and
+          Victoria have the strongest peaks in this age band, all sitting around 111 births per 1,000 women. The ACT
+          has the lowest fertility among younger women, especially at ages 15-19 and 20-24, but its 35-39 rate remains
+          close to the national pattern, showing how strongly births are concentrated later in life. The Northern
+          Territory stands out in the opposite direction: it still peaks at 30-34, but has much higher fertility among
+          teenagers and women in their early twenties than any other jurisdiction. Overall, the heatmap confirms that
+          Australia's fertility decline is not evenly spread across age groups; births have shifted away from the
+          teens and twenties and are now concentrated in the early thirties.
+        </p>
       </section>
     </main>
 
     <script src="script/visualize1.js"></script>
     <script src="script/visualize2.js"></script>
     <script src="script/visualize3.js"></script>
+    <script src="script/visualize4.js"></script>
+    <script src="script/visualize5.js"></script>
   </body>
 </html>

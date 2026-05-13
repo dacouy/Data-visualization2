@@ -1,0 +1,223 @@
+.ridgeline-section {
+  padding: 34px 70px 60px 70px;
+}
+
+.ridgeline-chart-block {
+  width: 980px;
+  max-width: 100%;
+  margin-top: 8px;
+  padding: 2px 2px 4px 2px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+}
+
+#asfr-ridgeline {
+  width: 100%;
+}
+
+.ridgeline-subheader {
+  max-width: 860px;
+  margin-top: 34px;
+}
+
+.ridgeline-subheader h3 {
+  margin: 0 0 8px 0;
+  font-size: 26px;
+}
+
+.ridgeline-subheader p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+@media (max-width: 860px) {
+  .ridgeline-section {
+    padding: 28px 24px 44px 24px;
+  }
+
+  .ridgeline-chart-block {
+    width: 100%;
+  }
+}
+
+/* Part 4 — second visual (state ASFR heatmap), rendered by script/visualize5.js */
+
+.asfr-chart-block {
+  width: 980px;
+  max-width: 100%;
+  margin-top: 30px;
+  padding: 24px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+}
+
+.asfr-viz-heading {
+  margin: 0 0 8px 0;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.asfr-viz-note {
+  margin: 0 0 18px 0;
+  max-width: 100%;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+#asfr-heatmap {
+  width: 100%;
+  overflow: visible;
+}
+
+.asfr-heatmap-root {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 28px;
+  width: 100%;
+  font-family: "Times New Roman", Times, serif;
+  color: var(--ink);
+}
+
+.asfr-heatmap-main {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.asfr-heatmap-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: #ffffff;
+  border: 1px solid var(--rule);
+}
+
+.asfr-heatmap-corner {
+  width: 7.5rem;
+  border: 1px solid var(--rule);
+  background: #faf7f2;
+}
+
+.asfr-heatmap-x-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 10px 6px;
+  border: 1px solid var(--rule);
+  background: #faf7f2;
+  color: var(--ink);
+}
+
+.asfr-heatmap-y-title {
+  text-align: left;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 8px 10px;
+  border: 1px solid var(--rule);
+  background: #faf7f2;
+  color: var(--ink);
+  vertical-align: middle;
+}
+
+.asfr-heatmap-table thead th {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 8px 4px;
+  border: 1px solid #e8dfd2;
+  background: #faf7f2;
+  color: var(--ink);
+  text-align: center;
+}
+
+.asfr-heatmap-table tbody th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 8px 10px;
+  border: 1px solid #e8dfd2;
+  background: #faf7f2;
+  color: var(--ink);
+  white-space: nowrap;
+  width: 7.5rem;
+}
+
+.asfr-heatmap-cell {
+  text-align: center;
+  font-size: 11px;
+  font-weight: normal;
+  padding: 10px 4px;
+  border: 1px solid #ffffff;
+  min-width: 3.25rem;
+  box-sizing: border-box;
+}
+
+.asfr-heatmap-cell--peak {
+  box-shadow: inset 0 0 0 2px #1c1c1c;
+}
+
+.asfr-heatmap-legend {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4rem;
+}
+
+.asfr-heatmap-legend-title {
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--muted);
+  text-align: center;
+  max-width: 5.5rem;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+
+.asfr-heatmap-legend-body {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.asfr-heatmap-legend-bar {
+  width: 14px;
+  min-height: 220px;
+  border-radius: 2px;
+  border: 1px solid #c9bdb0;
+  background: linear-gradient(to top, #fff5eb, #7f0f0f);
+}
+
+.asfr-heatmap-legend-ticks {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted);
+  padding: 2px 0;
+  min-height: 220px;
+}
+
+@media (max-width: 860px) {
+  .asfr-chart-block {
+    width: 100%;
+  }
+
+  .asfr-heatmap-root {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .asfr-heatmap-legend {
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 12px;
+    align-items: flex-end;
+  }
+}

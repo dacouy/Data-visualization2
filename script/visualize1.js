@@ -11,7 +11,7 @@ const Y_DOMAIN = [1.0, 3.7];
 const Y_TICKS = [1.0, 1.5, 2.0, 2.1, 2.5, 3.0, 3.5];
 const AXIS_COLOR = "#6f6255";
 const AXIS_RULE_COLOR = "#dacfc0";
-const PAPER_COLOR = "#fffaf1";
+const PAPER_COLOR = "#ffffff";
 
 const tfrTooltip = [
   { field: "year", type: "ordinal", title: "Year" },

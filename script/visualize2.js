@@ -1,33 +1,13 @@
 const STATE_TFR_URL = "data/tfr_bystate.csv";
-const DECREASE_COLOR = "#8B1A1A";
-const INCREASE_COLOR = "#2D6B2D";
-const NATIONAL_COLOR = "#1C1C1C";
-const CREAM_BACKGROUND = "#F5F0E8";
-const MAX_DROP_COLOR = "#8B1A1A"; // ACT — biggest % decline (−26.8%)
-const MIN_DROP_COLOR = "#1a5976"; // VIC — smallest % decline (−11.3%)
-const MUTED_LINE_COLOR = "#C4B9AC";
-const MUTED_LABEL_COLOR = "#9C9690";
-const SLOPE_FONT = "Times New Roman";
+const CHART_BACKGROUND = "#FFFFFF";
+const FONT = "Times New Roman";
+const DUMBBELL_LINE_COLOR = "#d99a8b";
+const NATIONAL_LINE_COLOR = "#7a4b3a";
+const POINT_2014_COLOR = "#e0b23f";
+const POINT_2024_COLOR = "#8B1A1A";
+const CHANGE_LABEL_COLOR = "#6f3d2f";
 const AVG_2014 = 1.795;
 const AVG_2024 = 1.481;
-
-const STATE_LABEL_OFFSETS = {
-  NSW:    { leftDx: -10, leftDy:  0,  rightDx: 10, rightDy:  6  },
-  VIC:    { leftDx: -10, leftDy:  8,  rightDx: 10, rightDy: -4  },
-  QLD:    { leftDx: -10, leftDy: -8,  rightDx: 10, rightDy:  2  },
-  SA:     { leftDx: -10, leftDy:  0,  rightDx: 10, rightDy: 18  },
-  WA:     { leftDx: -10, leftDy:  5,  rightDx: 10, rightDy: 10  },
-  TAS:    { leftDx: -10, leftDy:  0,  rightDx: 10, rightDy: -5  },
-  NT:     { leftDx: -10, leftDy:  0,  rightDx: 10, rightDy:  0  },
-  ACT:    { leftDx: -10, leftDy: -9,  rightDx: 10, rightDy:  0  },
-  "Aust.": { leftDx: -10, leftDy: 0,  rightDx: 10, rightDy: 10  },
-};
-
-const slopeTooltip = [
-  { field: "state", type: "nominal", title: "State" },
-  { field: "year", type: "ordinal", title: "Year" },
-  { field: "tfr", type: "quantitative", title: "TFR", format: ".3f" },
-];
 
 function parseStateTfrCsv(csvText) {
   return csvText
@@ -44,13 +24,11 @@ function parseStateTfrCsv(csvText) {
     });
 }
 
-function prepareSlopeData(rows) {
+function prepareDumbbellData(rows) {
   const byState = {};
 
   rows.forEach((row) => {
-    if (!byState[row.state]) {
-      byState[row.state] = {};
-    }
+    if (!byState[row.state]) byState[row.state] = {};
     byState[row.state][row.year] = row.tfr;
   });
 
@@ -58,282 +36,267 @@ function prepareSlopeData(rows) {
     const tfr2014 = byState[state][2014];
     const tfr2024 = byState[state][2024];
     const delta = tfr2024 - tfr2014;
+    const pctChange = ((tfr2024 - tfr2014) / tfr2014) * 100;
 
     return {
       state,
       tfr2014,
       tfr2024,
       delta,
-      direction: delta >= 0 ? "increased" : "decreased",
+      pctChange,
       isNational: state === "Aust.",
-      deltaLabel: `${delta >= 0 ? "+" : "-"}${Math.abs(delta).toFixed(2)}`,
-      midTfr: (tfr2014 + tfr2024) / 2,
+      changeLabel: `${pctChange.toFixed(1)}%`,
+      tfr2014Label: tfr2014.toFixed(3),
+      tfr2024Label: tfr2024.toFixed(3),
     };
   });
 
-  const enrichedRows = rows.map((row) => {
-    const stateMeta = meta.find((item) => item.state === row.state);
-    return {
-      ...row,
-      direction: stateMeta.direction,
-      isNational: stateMeta.isNational,
-    };
-  });
+  const national = meta.find((d) => d.isNational);
+  const jurisdictions = meta
+    .filter((d) => !d.isNational)
+    .sort((a, b) => a.pctChange - b.pctChange);
 
-  return { rows: enrichedRows, meta };
+  const stateOrder = jurisdictions.map((d) => d.state);
+
+  const segments = jurisdictions.map((d) => ({
+    ...d,
+  }));
+
+  const points = segments.flatMap((d) => [
+    {
+      state: d.state,
+      year: "2014",
+      tfr: d.tfr2014,
+      pctChange: d.pctChange,
+      changeLabel: d.changeLabel,
+    },
+    {
+      state: d.state,
+      year: "2024",
+      tfr: d.tfr2024,
+      pctChange: d.pctChange,
+      changeLabel: d.changeLabel,
+    },
+  ]);
+
+  return { segments, points, national, stateOrder };
 }
 
-function buildSlopeSpec(rows, meta) {
-  // State labels stay visible; numeric values are available on hover.
-  const labelColor = (state, isNational) =>
-    state === "ACT" ? MAX_DROP_COLOR
-    : state === "VIC" ? MIN_DROP_COLOR
-    : isNational      ? NATIONAL_COLOR
-    : MUTED_LABEL_COLOR;
-
-  const leftLabels = meta.map((d) => ({
-    state: d.state,
-    year: 2014,
-    tfr: d.tfr2014,
-    label: d.state,
-    dx: STATE_LABEL_OFFSETS[d.state].leftDx,
-    dy: STATE_LABEL_OFFSETS[d.state].leftDy,
-    align: "right",
-    color: labelColor(d.state, d.isNational),
-  }));
-
-  const rightLabels = meta.map((d) => ({
-    state: d.state,
-    year: 2024,
-    tfr: d.tfr2024,
-    label: d.state,
-    dx: STATE_LABEL_OFFSETS[d.state].rightDx,
-    dy: STATE_LABEL_OFFSETS[d.state].rightDy,
-    align: "left",
-    color: labelColor(d.state, d.isNational),
-  }));
-
-  const stateLabelLayer = (labelData) => ({
-    data: { values: [labelData] },
-    mark: {
-      type: "text",
-      align: labelData.align,
-      baseline: "middle",
-      dx: labelData.dx,
-      dy: labelData.dy,
-      font: SLOPE_FONT,
-      fontSize: 12,
-      fontWeight: labelData.state === "ACT" || labelData.state === "VIC" ? "bold" : "normal",
-      color: labelData.color,
-    },
-    encoding: {
-      x: { field: "year", type: "ordinal", scale: { domain: [2014, 2024] } },
-      y: { field: "tfr", type: "quantitative" },
-      text: { field: "label" },
-    },
-  });
+function buildDumbbellSpec({ segments, points, national, stateOrder }) {
+  const tooltip = [
+    { field: "state", type: "nominal", title: "State / territory" },
+    { field: "tfr2014", type: "quantitative", title: "TFR 2014", format: ".3f" },
+    { field: "tfr2024", type: "quantitative", title: "TFR 2024", format: ".3f" },
+    { field: "pctChange", type: "quantitative", title: "Change vs 2014", format: ".1f" },
+  ];
 
   return {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+    width: "container",
+    height: 300,
+    background: CHART_BACKGROUND,
+    padding: { left: 28, right: 42, top: 38, bottom: 30 },
     title: {
-      text: "Every state has fewer children than a decade ago",
-      subtitle: "Total fertility rate by state, 2014 vs 2024",
+      text: "Every jurisdiction moved lower",
+      subtitle: "Total fertility rate by state and territory, 2014 vs 2024",
       anchor: "start",
-      font: SLOPE_FONT,
-      subtitleFont: SLOPE_FONT,
-      fontSize: 22,
+      font: FONT,
+      subtitleFont: FONT,
+      fontSize: 28,
       subtitleFontSize: 15,
       color: "#1C1C1C",
       subtitleColor: "#6f6255",
-      offset: 14,
+      offset: 12,
     },
-    width: "container",
-    height: 760,
-    background: CREAM_BACKGROUND,
     layer: [
-      // National average reference lines.
       {
-        data: { values: [{ y: AVG_2014, label: "2014 national avg 1.795" }] },
+        data: {
+          values: [
+            { x: AVG_2014, year: "2014" },
+            { x: AVG_2024, year: "2024" },
+          ],
+        },
         mark: {
           type: "rule",
-          stroke: "#6f6255",
-          strokeDash: [5, 5],
-          strokeWidth: 1
+          stroke: NATIONAL_LINE_COLOR,
+          strokeDash: [6, 5],
+          strokeWidth: 1.4,
         },
         encoding: {
-          y: { field: "y", type: "quantitative" },
+          x: { field: "x", type: "quantitative" },
         },
       },
       {
-        data: { values: [{ y: AVG_2024, label: "2024 national avg 1.481" }] },
-        mark: {
-          type: "rule",
-          stroke: "#6f6255",
-          strokeDash: [5, 5],
-          strokeWidth: 1,
+        data: {
+          values: [
+            {
+              x: AVG_2014,
+              state: stateOrder[0],
+              label: `Aust. avg 2014: ${national.tfr2014.toFixed(3)}`,
+            },
+            {
+              x: AVG_2024,
+              state: stateOrder[0],
+              label: `Aust. avg 2024: ${national.tfr2024.toFixed(3)}`,
+            },
+          ],
         },
-        encoding: {
-          y: { field: "y", type: "quantitative" },
-        },
-      },
-      {
-        data: { values: [{ year: 2024, y: AVG_2014, label: "2014 national avg 1.795" }] },
         mark: {
           type: "text",
           align: "left",
           baseline: "bottom",
-          dx: 56,
-          dy: -2,
-          font: SLOPE_FONT,
+          dx: 8,
+          dy: -18,
+          font: FONT,
           fontSize: 12,
-          color: "#6f6255",
+          fontWeight: "bold",
+          color: NATIONAL_LINE_COLOR,
         },
         encoding: {
-          x: { field: "year", type: "ordinal" },
-          y: { field: "y", type: "quantitative" },
+          x: { field: "x", type: "quantitative" },
+          y: { field: "state", type: "nominal", sort: stateOrder },
           text: { field: "label" },
         },
       },
       {
-        data: { values: [{ year: 2024, y: AVG_2024, label: "2024 national avg 1.481" }] },
+        data: { values: segments },
         mark: {
-          type: "text",
-          align: "left",
-          baseline: "top",
-          dx: 56,
-          dy: 2,
-          font: SLOPE_FONT,
-          fontSize: 12,
-          color: "#6f6255",
+          type: "rule",
+          color: DUMBBELL_LINE_COLOR,
+          strokeWidth: 6,
+          opacity: 0.88,
         },
         encoding: {
-          x: { field: "year", type: "ordinal" },
-          y: { field: "y", type: "quantitative" },
-          text: { field: "label" },
-        },
-      },
-      // Muted background lines (all states except ACT and VIC).
-      {
-        data: { values: rows },
-        transform: [{ filter: "!datum.isNational && datum.state !== 'ACT' && datum.state !== 'VIC'" }],
-        mark: { type: "line", color: MUTED_LINE_COLOR, strokeWidth: 1.5 },
-        encoding: {
-          x: {
-            field: "year",
-            type: "ordinal",
-            scale: { domain: [2014, 2024] },
+          x: { field: "tfr2014", type: "quantitative" },
+          x2: { field: "tfr2024" },
+          y: {
+            field: "state",
+            type: "nominal",
+            sort: stateOrder,
             axis: {
               title: null,
-              labelAngle: 0,
-              labelFont: SLOPE_FONT,
-              labelFontSize: 16,
+              labelFont: FONT,
+              labelFontSize: 15,
               labelColor: "#1C1C1C",
-              domain: false,
+              labelPadding: 7,
               ticks: false,
+              domain: false,
             },
           },
-          y: {
-            field: "tfr",
-            type: "quantitative",
-            scale: { domain: [1.25, 2.05], zero: false },
-            axis: {
-              title: "Total fertility rate",
-              titleFont: SLOPE_FONT,
-              labelFont: SLOPE_FONT,
-              labelFontSize: 12,
-              labelColor: "#6f6255",
-              titleColor: "#6f6255",
-              grid: false,
-            },
-          },
-          detail: { field: "state" },
-          tooltip: slopeTooltip,
+          tooltip,
         },
       },
-      // VIC highlight — smallest % decline (−11.3%).
       {
-        data: { values: rows },
-        transform: [{ filter: "datum.state === 'VIC'" }],
-        mark: { type: "line", stroke: MIN_DROP_COLOR, strokeWidth: 2.5 },
-        encoding: {
-          x: { field: "year", type: "ordinal", scale: { domain: [2014, 2024] } },
-          y: { field: "tfr", type: "quantitative" },
-          tooltip: slopeTooltip,
-        },
-      },
-      // ACT highlight — biggest % decline (−26.8%).
-      {
-        data: { values: rows },
-        transform: [{ filter: "datum.state === 'ACT'" }],
-        mark: { type: "line", stroke: MAX_DROP_COLOR, strokeWidth: 2.5 },
-        encoding: {
-          x: { field: "year", type: "ordinal", scale: { domain: [2014, 2024] } },
-          y: { field: "tfr", type: "quantitative" },
-          tooltip: slopeTooltip,
-        },
-      },
-      // National average line.
-      {
-        data: { values: rows },
-        transform: [{ filter: "datum.isNational" }],
-        mark: {
-          type: "line",
-          stroke: NATIONAL_COLOR,
-          strokeWidth: 4,
-          strokeDash: [8, 5],
-        },
-        encoding: {
-          x: { field: "year", type: "ordinal", scale: { domain: [2014, 2024] } },
-          y: { field: "tfr", type: "quantitative" },
-          detail: { field: "state" },
-          tooltip: slopeTooltip,
-        },
-      },
-      // Hoverable dots; exact TFR values appear in tooltip.
-      {
-        data: { values: rows },
+        data: { values: points },
         mark: {
           type: "point",
           filled: true,
-          size: 65,
-          stroke: CREAM_BACKGROUND,
-          strokeWidth: 1.5,
+          size: 145,
+          opacity: 1,
+          stroke: "#5f2f24",
+          strokeWidth: 1.2,
         },
         encoding: {
-          x: { field: "year", type: "ordinal", scale: { domain: [2014, 2024] } },
-          y: { field: "tfr", type: "quantitative" },
-          color: {
-            condition: [
-              { test: "datum.isNational",      value: NATIONAL_COLOR   },
-              { test: "datum.state === 'ACT'", value: MAX_DROP_COLOR   },
-              { test: "datum.state === 'VIC'", value: MIN_DROP_COLOR   },
-            ],
-            value: MUTED_LINE_COLOR,
+          x: {
+            field: "tfr",
+            type: "quantitative",
+            scale: { domain: [1.2, 2.05], zero: false },
+            axis: {
+              title: "Children per woman",
+              titleFont: FONT,
+              labelFont: FONT,
+              titleFontSize: 13,
+              labelFontSize: 12,
+              labelColor: "#6f6255",
+              titleColor: "#6f6255",
+              grid: true,
+              gridColor: "#ece5dc",
+              tickColor: "#cfc5b9",
+              domainColor: "#cfc5b9",
+            },
           },
-          tooltip: slopeTooltip,
+          y: { field: "state", type: "nominal", sort: stateOrder },
+          color: {
+            field: "year",
+            type: "nominal",
+            scale: {
+              domain: ["2014", "2024"],
+              range: [POINT_2014_COLOR, POINT_2024_COLOR],
+            },
+            legend: null,
+          },
+          tooltip: [
+            { field: "state", type: "nominal", title: "State / territory" },
+            { field: "year", type: "nominal", title: "Year" },
+            { field: "tfr", type: "quantitative", title: "TFR", format: ".3f" },
+            { field: "pctChange", type: "quantitative", title: "Change vs 2014", format: ".1f" },
+          ],
         },
       },
-      // State labels on both sides. Edit STATE_LABEL_OFFSETS to move each one.
-      ...leftLabels.map(stateLabelLayer),
-      ...rightLabels.map(stateLabelLayer),
+      {
+        data: { values: segments },
+        mark: {
+          type: "text",
+          align: "left",
+          baseline: "middle",
+          dx: 50,
+          font: FONT,
+          fontSize: 13,
+          fontWeight: "bold",
+          color: CHANGE_LABEL_COLOR,
+        },
+        encoding: {
+          x: { datum: 2.05, type: "quantitative" },
+          y: { field: "state", type: "nominal", sort: stateOrder },
+          text: { field: "changeLabel" },
+          tooltip,
+        },
+      },
+      {
+        data: {
+          values: [
+            { state: stateOrder[0], x: 2.05, label: "Change" },
+          ],
+        },
+        mark: {
+          type: "text",
+          align: "left",
+          baseline: "bottom",
+          dx: 50,
+          dy: -15,
+          font: FONT,
+          fontSize: 12,
+          fontWeight: "bold",
+          color: CHANGE_LABEL_COLOR,
+        },
+        encoding: {
+          x: { field: "x", type: "quantitative" },
+          y: { field: "state", type: "nominal", sort: stateOrder },
+          text: { field: "label" },
+        },
+      },
     ],
+    resolve: {
+      scale: { color: "independent" },
+    },
     config: {
       view: { stroke: null },
-      axis: { labelFont: SLOPE_FONT, titleFont: SLOPE_FONT },
+      axis: { labelFont: FONT, titleFont: FONT },
     },
   };
 }
 
-async function renderStateSlopeChart() {
+async function renderStateDumbbellChart() {
   const response = await fetch(STATE_TFR_URL);
   const csvText = await response.text();
-  const parsed = parseStateTfrCsv(csvText);
-  const { rows, meta } = prepareSlopeData(parsed);
+  const rows = parseStateTfrCsv(csvText);
+  const data = prepareDumbbellData(rows);
 
-  vegaEmbed("#state-slope-chart", buildSlopeSpec(rows, meta), {
+  vegaEmbed("#state-slope-chart", buildDumbbellSpec(data), {
     actions: false,
     renderer: "svg",
+    tooltip: { theme: "light" },
   });
 }
 
-renderStateSlopeChart();
+renderStateDumbbellChart();

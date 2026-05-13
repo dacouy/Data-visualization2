@@ -3,16 +3,73 @@
 }
 
 .slope-chart-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 64px;
+  gap: 4px;
+  align-items: start;
   width: 980px;
   max-width: 100%;
   margin-top: 30px;
-  padding: 24px;
+  padding: 0 16px 0 24px;
   background: var(--paper);
   border: 1px solid var(--rule);
 }
 
 #state-slope-chart {
   width: 100%;
+  min-width: 0;
+}
+
+.slope-legend {
+  align-self: center;
+  padding-top: 0;
+  color: var(--ink);
+  font-family: "Times New Roman", Times, serif;
+}
+
+.slope-legend-title {
+  margin-bottom: 9px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.slope-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  line-height: 1.15;
+}
+
+.slope-legend-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid #5f2f24;
+}
+
+.slope-legend-dot--2014 {
+  background: #e0b23f;
+}
+
+.slope-legend-dot--2024 {
+  background: #8b1a1a;
+}
+
+.slope-legend-line {
+  width: 18px;
+  height: 0;
+  display: inline-block;
+  border-top: 2px dashed #7a4b3a;
+  flex-shrink: 0;
+}
+
+.slope-chart-follow {
+  margin-top: 22px;
+  max-width: 860px;
 }
 
 @media (max-width: 860px) {
@@ -21,6 +78,19 @@
   }
 
   .slope-chart-block {
+    display: block;
     width: 100%;
+  }
+
+  .slope-legend {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding-top: 12px;
+  }
+
+  .slope-legend-title,
+  .slope-legend-item {
+    margin-bottom: 0;
   }
 }
