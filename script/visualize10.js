@@ -55,9 +55,13 @@ function drawReplacementGap(rows) {
   }
 
   const gapPeople = Number(gap.population);
-  const units = Math.round(gapPeople / UNIT_VALUE);
-  const squares = Array.from({ length: units }, (_, index) => (
-    `<span class="waffle-square ${index >= 30 ? "waffle-square--navy" : ""}" title="Square ${index + 1}: 100,000 people"></span>`
+  const mediumPeople = Number(medium.population);
+  const highPeople = Number(high.population);
+  const mediumUnits = Math.round(mediumPeople / UNIT_VALUE);
+  const highUnits = Math.round(highPeople / UNIT_VALUE);
+  const gapUnits = highUnits - mediumUnits;
+  const squares = Array.from({ length: highUnits }, (_, index) => (
+    `<span class="waffle-square ${index >= mediumUnits ? "waffle-square--extra" : ""}" title="${index < mediumUnits ? "Medium path" : "Additional in stronger path"}: 100,000 people"></span>`
   )).join("");
 
   container.innerHTML = `
@@ -85,35 +89,35 @@ function drawReplacementGap(rows) {
         <div class="waffle-heading">
           <div class="waffle-big">${formatPopulation(gapPeople)}</div>
           <div class="waffle-heading-copy">
-            <strong>people separate the ABS high and medium 2054 futures</strong>
-            <span>${Number(high.population).toLocaleString()} vs ${Number(medium.population).toLocaleString()}</span>
+            <strong>people not reached under the medium fertility path</strong>
+            <span>Red squares show the medium 2054 population.</span>
+            <span>Grey squares are the extra population in the stronger fertility path.</span>
           </div>
         </div>
 
-        <div class="waffle-grid" aria-label="${units} squares. Each square represents 100,000 people.">
+        <div class="waffle-grid" aria-label="${mediumUnits} red medium-path squares plus ${gapUnits} grey stronger-path squares. Each square represents 100,000 people.">
           ${squares}
         </div>
 
         <div class="waffle-legend">
           <div class="projection-legend">
-            <div class="projection-item projection-item--high">
-              <span></span>
-              <strong>High 2054</strong>
-              <em>${formatPopulation(Number(high.population))} people</em>
-            </div>
             <div class="projection-item projection-item--medium">
               <span></span>
-              <strong>Medium 2054</strong>
-              <em>${formatPopulation(Number(medium.population))} people</em>
+              <strong>Medium fertility path</strong>
+              <em>${formatPopulation(mediumPeople)} people</em>
+            </div>
+            <div class="projection-item projection-item--extra">
+              <span></span>
+              <strong>Extra under stronger fertility</strong>
+              <em>+${formatPopulation(gapPeople)} people</em>
             </div>
           </div>
           <span class="waffle-square waffle-square--legend"></span>
           <span>1 square = 100,000 people</span>
-          <strong>${units} squares, rounded from ${gapPeople.toLocaleString()} people</strong>
         </div>
       </div>
     </div>
-    <p class="waffle-source">Source: ABS 3222.0 Population Projections, Australia. Gap is high minus medium series; it is a projection gap, not literal missing people.</p>
+    <p class="waffle-source">Source: ABS 3222.0 Population Projections, Australia. Red shows the medium 2054 projection; grey shows the additional high-minus-medium projection gap. ABS scenarios also include migration and mortality assumptions.</p>
   `;
 }
 
