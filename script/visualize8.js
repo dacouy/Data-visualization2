@@ -3,8 +3,14 @@ const EDUCATION_URL = "data/part5/education.csv";
 const FERTILITY_URL = "data/part5/fertility_rate.csv";
 const POPULATION_URL = "data/part5/population_2024.csv";
 const WORLD_FONT = "Times New Roman";
-const POINT_COLOR = "#1A3A5C";
+const POINT_COLOR = "#9B9690";
 const TREND_COLOR = "#8B1A1A";
+const HIGHLIGHT_COLORS = {
+  AUS: "#8B1A1A",
+  KOR: "#1A3A5C",
+  CHN: "#A65F1A",
+  IND: "#2F6F4E",
+};
 const AGGREGATE_CODES = new Set([
   "AFE", "AFW", "ARB", "CEB", "CSS", "EAP", "EAR", "EAS", "ECA", "ECS",
   "EMU", "EUU", "FCS", "HIC", "HPC", "IBD", "IBT", "IDA", "IDB", "IDX",
@@ -275,7 +281,6 @@ function drawScatter(rows) {
     18
   );
   const regression = linearRegression(rows);
-  const selectedCodes = new Set(["AUS", "USA", "GBR", "JPN", "KOR", "CHN", "IND", "THA", "SGP"]);
 
   const svg = createSvgElement("svg", {
     viewBox: `0 0 ${width} ${height}`,
@@ -397,7 +402,7 @@ function drawScatter(rows) {
   [...rows]
     .sort((a, b) => (b.population ?? 0) - (a.population ?? 0))
     .forEach((row) => {
-      const highlighted = selectedCodes.has(row.code);
+      const highlighted = Boolean(HIGHLIGHT_COLORS[row.code]);
       const radius =
         row.population !== null && row.population > 0
           ? populationScale(row.population)
@@ -407,11 +412,11 @@ function drawScatter(rows) {
       const point = createSvgElement("circle", {
         cx: xScale(row.education),
         cy: yScale(row.fertility),
-        r: radius,
-        fill: highlighted ? TREND_COLOR : POINT_COLOR,
-        opacity: highlighted ? 0.86 : 0.46,
-        stroke: highlighted ? "#3A0D0D" : "#FFFFFF",
-        "stroke-width": highlighted ? 1.5 : 1.1,
+        r: highlighted ? radius + 2.2 : radius,
+        fill: highlighted ? HIGHLIGHT_COLORS[row.code] : POINT_COLOR,
+        opacity: highlighted ? 0.96 : 0.34,
+        stroke: highlighted ? "#1C1C1C" : "#FFFFFF",
+        "stroke-width": highlighted ? 2 : 1,
       });
       point.addEventListener("mouseenter", (event) => showTooltip(event, tooltip, row));
       point.addEventListener("mousemove", (event) => showTooltip(event, tooltip, row));
@@ -453,16 +458,18 @@ function drawScatter(rows) {
   });
 
   rows
-    .filter((row) => ["AUS", "JPN", "KOR", "IND"].includes(row.code))
+    .filter((row) => HIGHLIGHT_COLORS[row.code])
     .forEach((row) => {
       const labelOffset = {
-        IND: { dx: 7, dy: -11 },
-        JPN: { dx: 2, dy: 9 },
-      }[row.code] ?? { dx: 7, dy: -6 };
+        AUS: { dx: 8, dy: -8 },
+        KOR: { dx: 8, dy: -8 },
+        CHN: { dx: 8, dy: 27 },
+        IND: { dx: 8, dy: -21 },
+      }[row.code];
       appendText(svg, row.code, xScale(row.education) + labelOffset.dx, yScale(row.fertility) + labelOffset.dy, {
         "font-size": 11,
         "font-weight": "bold",
-        fill: TREND_COLOR,
+        fill: HIGHLIGHT_COLORS[row.code],
       });
     });
 
