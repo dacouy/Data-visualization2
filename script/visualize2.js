@@ -1,4 +1,4 @@
-const STATE_TFR_URL = "data/tfr_bystate.csv";
+const STATE_TFR_URL = "data/part2/tfr_bystate.csv";
 const CHART_BACKGROUND = "#FFFFFF";
 const FONT = "Times New Roman";
 const DUMBBELL_LINE_COLOR = "#d99a8b";

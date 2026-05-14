@@ -1,4 +1,4 @@
-const ASFR_THREE_YEAR_URL = "data/asfr_national_1976_2000_2024.csv";
+const ASFR_THREE_YEAR_URL = "data/part4/asfr_national_1976_2000_2024.csv";
 const RIDGE_FONT = "Times New Roman";
 const RIDGE_BACKGROUND = "#FFFFFF";
 const RIDGE_AGE_GROUPS = ["15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49"];

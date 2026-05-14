@@ -11,27 +11,48 @@
   border: 1px solid var(--rule);
 }
 
-.housing-timeline-block {
+.world-subheader {
+  max-width: 980px;
   margin-top: 34px;
 }
 
+.world-subheader h3 {
+  margin: 0 0 8px 0;
+  font-size: 26px;
+}
+
+.world-subheader p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.housing-timeline-block {
+  margin-top: 30px;
+}
+
+#education-fertility-scatter,
 #housing-tfr-chart {
   position: relative;
   width: 100%;
 }
 
+#education-fertility-scatter .error-message,
 #housing-tfr-chart .error-message {
   color: #8B1A1A;
   font-size: 16px;
   line-height: 1.4;
 }
 
+#education-fertility-scatter svg,
 #housing-tfr-chart svg {
   display: block;
   width: 100%;
   height: auto;
 }
 
+.scatter-tooltip,
 .housing-tooltip {
   position: absolute;
   opacity: 0;
@@ -46,23 +67,6 @@
   box-shadow: 0 8px 18px rgba(28, 28, 28, 0.12);
   transition: opacity 0.08s ease;
   z-index: 4;
-}
-
-.world-map-heading {
-  max-width: 980px;
-  margin-bottom: 12px;
-}
-
-.world-map-heading h3 {
-  margin: 0 0 8px 0;
-  font-size: 26px;
-}
-
-.world-map-heading p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 17px;
-  line-height: 1.45;
 }
 
 .world-globe-stage {

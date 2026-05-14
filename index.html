@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="style/part3.css" />
     <link rel="stylesheet" href="style/part4.css" />
     <link rel="stylesheet" href="style/part5.css" />
+    <link rel="stylesheet" href="style/part6.css" />
+    <link rel="stylesheet" href="style/part7.css" />
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
@@ -256,14 +258,15 @@
           </p>
         </div>
 
+        <div class="world-subheader">
+          <h3>Global comparison</h3>
+          <p>
+            Total fertility rate, latest available World Bank value. The globe is zoomed out so
+            Australia, India, the United States and Europe can be read together.
+          </p>
+        </div>
+
         <div class="world-chart-block">
-          <div class="world-map-heading">
-            <h3>Global comparison</h3>
-            <p>
-              Total fertility rate, latest available World Bank value. The globe is zoomed out so
-              Australia, India, the United States and Europe can be read together.
-            </p>
-          </div>
           <div class="world-globe-stage">
             <div id="world-fertility-globe"></div>
             <div class="world-lens world-lens--europe" aria-label="EU Europe zoom lens">
@@ -291,6 +294,37 @@
           access to family planning, child-care costs, gender expectations and the age structure of each population.
         </p>
 
+        <hr class="visual-divider" />
+
+        <div class="world-subheader">
+          <h3>Education and fertility</h3>
+          <p>
+            This scatterplot compares tertiary education enrolment with total fertility rate across countries,
+            with circle size showing each country's 2024 population.
+          </p>
+        </div>
+
+        <div class="world-chart-block education-scatter-block">
+          <div id="education-fertility-scatter"></div>
+        </div>
+        <p class="hero-copy">
+          The education scatterplot tests one part of that explanation. In the joined country data, tertiary education
+          enrolment and fertility have a moderate negative relationship: countries with higher education enrolment tend
+          to sit lower on the fertility scale, while many countries with lower tertiary enrolment retain much higher
+          fertility. The pattern should be read as an association rather than proof of direct causation: education often
+          moves together with urbanisation, later marriage, higher female labour-force participation, access to
+          contraception and the rising opportunity cost of having children.
+        </p>
+
+        <hr class="visual-divider" />
+
+        <div class="world-subheader">
+          <h3>The housing trap</h3>
+          <p>
+            This chart compares Australia's fertility rate with the real home price index from 2009 to 2024.
+          </p>
+        </div>
+
         <div class="world-chart-block housing-timeline-block">
           <div id="housing-tfr-chart"></div>
         </div>
@@ -304,6 +338,62 @@
           partnering, insecure work, child-care costs and changing expectations around parenthood.
         </p>
       </section>
+
+      <section class="pyramid-section" aria-labelledby="population-pyramid-title">
+        <div class="section-header">
+          <span class="section-number">Part 6</span>
+          <h2 id="population-pyramid-title">The Ageing Future</h2>
+          <p>
+            Low fertility does not only reduce births today. Over time, it reshapes the whole population structure.
+          </p>
+        </div>
+
+        <div class="pyramid-subheader">
+          <h3>Population pyramid: 2024 vs 2054</h3>
+          <p>
+            Australia’s medium projection shows the base narrowing while the older population expands sharply.
+          </p>
+        </div>
+
+        <div class="pyramid-chart-block">
+          <div id="population-pyramid-chart"></div>
+        </div>
+
+        <p class="hero-copy">
+          The pyramid makes the long-term consequence of low fertility visible. In 2024, Australia’s age structure is
+          still relatively balanced: children aged 0-14 make up 17.9% of the population, close to the 17.6% aged 65 and
+          over. By 2054, the population is larger overall, so the number of children also rises slightly. The important
+          change is the balance of the structure: children aged 0-14 fall from 17.9% to 15.4% of the population, while
+          the 65+ share rises to 23.1%. The oldest group changes most dramatically in absolute terms, with Australians
+          aged 85 and over growing from about 0.59 million to 1.64 million. That shift means young people become a
+          smaller part of the population supporting a much larger older cohort, increasing pressure on health care,
+          pensions, aged care and the working-age tax base.
+        </p>
+      </section>
+
+      <section class="closing-section" aria-labelledby="replacement-gap-title">
+        <div class="section-header">
+          <span class="section-number">Part 7</span>
+          <h2 id="replacement-gap-title">The Replacement Gap</h2>
+          <p>
+            Australia does not need a small correction. It needs a structural reversal.
+          </p>
+        </div>
+
+        <div class="closing-chart-block">
+          <div id="replacement-gap-waffle"></div>
+        </div>
+
+        <p class="hero-copy">
+          The replacement benchmark is 2.1 births per woman. Australia’s 2024 fertility rate is 1.48, leaving a gap of
+          0.62 births per woman. That number is not just a statistic; it changes the scale of the country’s future.
+          In the ABS 2054 projections, the gap between the high and medium population futures is about 3.7 million
+          people. The waffle chart turns that difference into units: each square represents 100,000 people. The exact
+          future will depend on migration, mortality, housing, work, family policy and culture, but the direction is
+          clear. If fertility remains low, Australia becomes older, more dependent on migration for growth, and more
+          exposed to the economic pressure of supporting a larger older population with a smaller younger share.
+        </p>
+      </section>
     </main>
 
     <script src="script/visualize1.js"></script>
@@ -313,5 +403,8 @@
     <script src="script/visualize5.js"></script>
     <script src="script/visualize6.js"></script>
     <script src="script/visualize7.js"></script>
+    <script src="script/visualize8.js"></script>
+    <script src="script/visualize9.js"></script>
+    <script src="script/visualize10.js"></script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 (() => {
-const HOUSING_TFR_URL = "data/tfr_house_price_2009_2024.csv";
+const HOUSING_TFR_URL = "data/part5/tfr_house_price_2009_2024.csv";
 const HOUSING_FONT = "Times New Roman";
 const HOUSE_COLOR = "#1A3A5C";
 const TFR_COLOR = "#8B1A1A";
@@ -220,8 +220,8 @@ function renderChart(data) {
   });
   container.appendChild(svg);
 
-  appendText(svg, "The Housing Trap", innerLeft, 36, {
-    "font-size": 25,
+  appendText(svg, "Affordability pressure", innerLeft, 36, {
+    "font-size": 24,
     "font-weight": "bold",
     fill: "#1C1C1C",
   });

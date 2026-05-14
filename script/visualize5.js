@@ -1,5 +1,5 @@
-// visualize5.js — state × age ASFR heatmap (Part 4, second visual). Data: data/asfr_state_2024.csv
-const ASFR_CSV_URL = "data/asfr_state_2024.csv";
+// visualize5.js — state × age ASFR heatmap (Part 4, second visual). Data: data/part4/asfr_state_2024.csv
+const ASFR_CSV_URL = "data/part4/asfr_state_2024.csv";
 const AGE_ORDER = ["15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49"];
 const ALL_STATES = ["NSW", "VIC", "QLD", "SA", "WA", "TAS", "NT", "ACT", "Australia"];
 const ASFR_EPS = 1e-6;

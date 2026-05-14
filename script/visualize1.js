@@ -1,4 +1,4 @@
-const DATA_URL = "data/total-fertility-rate.csv";
+const DATA_URL = "data/part1/total-fertility-rate.csv";
 const REPLACEMENT_LEVEL = 2.1;
 const START_YEAR = 1924;
 const END_YEAR = 2024;

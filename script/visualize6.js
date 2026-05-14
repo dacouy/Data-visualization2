@@ -1,5 +1,5 @@
-const WORLD_GEO_URL = "map/data/world.geojson";
-const WORLD_FERTILITY_URL = "map/data/fertility.json";
+const WORLD_GEO_URL = "data/part5/world.geojson";
+const WORLD_FERTILITY_URL = "data/part5/fertility.json";
 const WORLD_FONT = "Times New Roman";
 const WORLD_BACKGROUND = "#FFFFFF";
 const WORLD_OCEAN = "#edf5f0";

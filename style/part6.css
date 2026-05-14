@@ -1,0 +1,73 @@
+.pyramid-section {
+  padding: 34px 70px 60px 70px;
+}
+
+.pyramid-subheader {
+  max-width: 980px;
+  margin-top: 34px;
+}
+
+.pyramid-subheader h3 {
+  margin: 0 0 8px 0;
+  font-size: 26px;
+}
+
+.pyramid-subheader p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.pyramid-chart-block {
+  width: 980px;
+  max-width: 100%;
+  margin-top: 30px;
+  padding: 24px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+}
+
+#population-pyramid-chart {
+  position: relative;
+  width: 100%;
+}
+
+#population-pyramid-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#population-pyramid-chart .error-message {
+  color: #8B1A1A;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.pyramid-tooltip {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  font-family: "Times New Roman", serif;
+  font-size: 13px;
+  line-height: 1.35;
+  box-shadow: 0 8px 18px rgba(28, 28, 28, 0.12);
+  transition: opacity 0.08s ease;
+  z-index: 4;
+}
+
+@media (max-width: 860px) {
+  .pyramid-section {
+    padding: 28px 24px 44px 24px;
+  }
+
+  .pyramid-chart-block {
+    width: 100%;
+    padding: 18px;
+  }
+}

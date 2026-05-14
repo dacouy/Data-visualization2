@@ -1,7 +1,7 @@
-const LGA_TOPO_URL = "data/lga_topo.json";
-const LGA_CSV_URL = "data/tfr_lga_2024_full.csv";
-const STATE_GEO_URL = "data/australia-states.json";
-const STATE_CSV_URL = "data/state_births_2024.csv";
+const LGA_TOPO_URL = "data/part3/lga_topo.json";
+const LGA_CSV_URL = "data/part3/tfr_lga_2024_full.csv";
+const STATE_GEO_URL = "data/part3/australia-states.json";
+const STATE_CSV_URL = "data/part3/state_births_2024.csv";
 const TOPO_FEATURE = "LGA_2025_AUST_GDA2020";
 const TOPO_KEY = "LGA_CODE25";
 const NOT_PROVIDED = "N/P";
@@ -337,7 +337,7 @@ function buildStateBubbleMapSpec() {
       offset: 12,
     },
     layer: [
-      // State boundaries from data/australia-states.json.
+      // State boundaries from data/part3/australia-states.json.
       {
         data: stateGeoData,
         transform: [
