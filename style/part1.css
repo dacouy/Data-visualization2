@@ -3,7 +3,7 @@
 }
 
 .section-header {
-  max-width: 760px;
+  max-width: 980px;
 }
 
 .section-number {
@@ -138,7 +138,7 @@ h3 {
 }
 
 .hero-copy {
-  max-width: 860px;
+  max-width: 980px;
   margin: 28px 0 0 0;
   font-size: 20px;
   line-height: 1.55;

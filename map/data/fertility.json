@@ -1,0 +1,1576 @@
+{
+  "source": {
+    "title": "World Bank - Fertility rate, total (births per woman)",
+    "indicator": "SP.DYN.TFRT.IN",
+    "lastUpdated": "2026-04-08",
+    "api": "https://api.worldbank.org/v2/country/all/indicator/SP.DYN.TFRT.IN?format=json&per_page=20000"
+  },
+  "countries": [
+    {
+      "iso3": "ABW",
+      "name": "Aruba",
+      "year": 2024,
+      "fertility": 1.606
+    },
+    {
+      "iso3": "AFE",
+      "name": "Africa Eastern and Southern",
+      "year": 2024,
+      "fertility": 4.16404379125111
+    },
+    {
+      "iso3": "AFG",
+      "name": "Afghanistan",
+      "year": 2024,
+      "fertility": 4.761
+    },
+    {
+      "iso3": "AFW",
+      "name": "Africa Western and Central",
+      "year": 2024,
+      "fertility": 4.41598323738392
+    },
+    {
+      "iso3": "AGO",
+      "name": "Angola",
+      "year": 2024,
+      "fertility": 5.048
+    },
+    {
+      "iso3": "ALB",
+      "name": "Albania",
+      "year": 2024,
+      "fertility": 1.341
+    },
+    {
+      "iso3": "AND",
+      "name": "Andorra",
+      "year": 2024,
+      "fertility": 1.087
+    },
+    {
+      "iso3": "ARB",
+      "name": "Arab World",
+      "year": 2024,
+      "fertility": 3.05741457915216
+    },
+    {
+      "iso3": "ARE",
+      "name": "United Arab Emirates",
+      "year": 2024,
+      "fertility": 1.213
+    },
+    {
+      "iso3": "ARG",
+      "name": "Argentina",
+      "year": 2024,
+      "fertility": 1.504
+    },
+    {
+      "iso3": "ARM",
+      "name": "Armenia",
+      "year": 2024,
+      "fertility": 1.7
+    },
+    {
+      "iso3": "ASM",
+      "name": "American Samoa",
+      "year": 2024,
+      "fertility": 2.267
+    },
+    {
+      "iso3": "ATG",
+      "name": "Antigua and Barbuda",
+      "year": 2024,
+      "fertility": 1.582
+    },
+    {
+      "iso3": "AUS",
+      "name": "Australia",
+      "year": 2024,
+      "fertility": 1.481
+    },
+    {
+      "iso3": "AUT",
+      "name": "Austria",
+      "year": 2024,
+      "fertility": 1.31
+    },
+    {
+      "iso3": "AZE",
+      "name": "Azerbaijan",
+      "year": 2024,
+      "fertility": 1.43
+    },
+    {
+      "iso3": "BDI",
+      "name": "Burundi",
+      "year": 2024,
+      "fertility": 4.789
+    },
+    {
+      "iso3": "BEL",
+      "name": "Belgium",
+      "year": 2024,
+      "fertility": 1.44
+    },
+    {
+      "iso3": "BEN",
+      "name": "Benin",
+      "year": 2024,
+      "fertility": 4.48
+    },
+    {
+      "iso3": "BFA",
+      "name": "Burkina Faso",
+      "year": 2024,
+      "fertility": 4.11
+    },
+    {
+      "iso3": "BGD",
+      "name": "Bangladesh",
+      "year": 2024,
+      "fertility": 2.138
+    },
+    {
+      "iso3": "BGR",
+      "name": "Bulgaria",
+      "year": 2024,
+      "fertility": 1.72
+    },
+    {
+      "iso3": "BHR",
+      "name": "Bahrain",
+      "year": 2024,
+      "fertility": 1.805
+    },
+    {
+      "iso3": "BHS",
+      "name": "Bahamas, The",
+      "year": 2024,
+      "fertility": 1.374
+    },
+    {
+      "iso3": "BIH",
+      "name": "Bosnia and Herzegovina",
+      "year": 2024,
+      "fertility": 1.492
+    },
+    {
+      "iso3": "BLR",
+      "name": "Belarus",
+      "year": 2024,
+      "fertility": 1.217
+    },
+    {
+      "iso3": "BLZ",
+      "name": "Belize",
+      "year": 2024,
+      "fertility": 2.021
+    },
+    {
+      "iso3": "BMU",
+      "name": "Bermuda",
+      "year": 2024,
+      "fertility": 1.405
+    },
+    {
+      "iso3": "BOL",
+      "name": "Bolivia",
+      "year": 2024,
+      "fertility": 2.523
+    },
+    {
+      "iso3": "BRA",
+      "name": "Brazil",
+      "year": 2024,
+      "fertility": 1.614
+    },
+    {
+      "iso3": "BRB",
+      "name": "Barbados",
+      "year": 2024,
+      "fertility": 1.708
+    },
+    {
+      "iso3": "BRN",
+      "name": "Brunei Darussalam",
+      "year": 2024,
+      "fertility": 1.731
+    },
+    {
+      "iso3": "BTN",
+      "name": "Bhutan",
+      "year": 2024,
+      "fertility": 1.449
+    },
+    {
+      "iso3": "BWA",
+      "name": "Botswana",
+      "year": 2024,
+      "fertility": 2.703
+    },
+    {
+      "iso3": "CAF",
+      "name": "Central African Republic",
+      "year": 2024,
+      "fertility": 5.954
+    },
+    {
+      "iso3": "CAN",
+      "name": "Canada",
+      "year": 2024,
+      "fertility": 1.25
+    },
+    {
+      "iso3": "CEB",
+      "name": "Central Europe and the Baltics",
+      "year": 2024,
+      "fertility": 1.30912544338199
+    },
+    {
+      "iso3": "CHE",
+      "name": "Switzerland",
+      "year": 2024,
+      "fertility": 1.29
+    },
+    {
+      "iso3": "CHI",
+      "name": "Channel Islands",
+      "year": 2024,
+      "fertility": 1.37
+    },
+    {
+      "iso3": "CHL",
+      "name": "Chile",
+      "year": 2024,
+      "fertility": 1.14
+    },
+    {
+      "iso3": "CHN",
+      "name": "China",
+      "year": 2024,
+      "fertility": 1.013
+    },
+    {
+      "iso3": "CIV",
+      "name": "Cote d'Ivoire",
+      "year": 2024,
+      "fertility": 4.23
+    },
+    {
+      "iso3": "CMR",
+      "name": "Cameroon",
+      "year": 2024,
+      "fertility": 4.261
+    },
+    {
+      "iso3": "COD",
+      "name": "Congo, Dem. Rep.",
+      "year": 2024,
+      "fertility": 5.981
+    },
+    {
+      "iso3": "COG",
+      "name": "Congo, Rep.",
+      "year": 2024,
+      "fertility": 4.109
+    },
+    {
+      "iso3": "COL",
+      "name": "Colombia",
+      "year": 2024,
+      "fertility": 1.634
+    },
+    {
+      "iso3": "COM",
+      "name": "Comoros",
+      "year": 2024,
+      "fertility": 3.822
+    },
+    {
+      "iso3": "CPV",
+      "name": "Cabo Verde",
+      "year": 2024,
+      "fertility": 1.511
+    },
+    {
+      "iso3": "CRI",
+      "name": "Costa Rica",
+      "year": 2024,
+      "fertility": 1.318
+    },
+    {
+      "iso3": "CSS",
+      "name": "Caribbean small states",
+      "year": 2024,
+      "fertility": 1.82976813968826
+    },
+    {
+      "iso3": "CUB",
+      "name": "Cuba",
+      "year": 2024,
+      "fertility": 1.445
+    },
+    {
+      "iso3": "CUW",
+      "name": "Curacao",
+      "year": 2024,
+      "fertility": 1.4
+    },
+    {
+      "iso3": "CYM",
+      "name": "Cayman Islands",
+      "year": 2024,
+      "fertility": 1.525
+    },
+    {
+      "iso3": "CYP",
+      "name": "Cyprus",
+      "year": 2024,
+      "fertility": 1.38
+    },
+    {
+      "iso3": "CZE",
+      "name": "Czechia",
+      "year": 2024,
+      "fertility": 1.36
+    },
+    {
+      "iso3": "DEU",
+      "name": "Germany",
+      "year": 2024,
+      "fertility": 1.36
+    },
+    {
+      "iso3": "DJI",
+      "name": "Djibouti",
+      "year": 2024,
+      "fertility": 2.618
+    },
+    {
+      "iso3": "DMA",
+      "name": "Dominica",
+      "year": 2024,
+      "fertility": 1.48
+    },
+    {
+      "iso3": "DNK",
+      "name": "Denmark",
+      "year": 2024,
+      "fertility": 1.47
+    },
+    {
+      "iso3": "DOM",
+      "name": "Dominican Republic",
+      "year": 2024,
+      "fertility": 2.222
+    },
+    {
+      "iso3": "DZA",
+      "name": "Algeria",
+      "year": 2024,
+      "fertility": 2.723
+    },
+    {
+      "iso3": "EAP",
+      "name": "East Asia & Pacific (excluding high income)",
+      "year": 2024,
+      "fertility": 1.36829193691809
+    },
+    {
+      "iso3": "EAR",
+      "name": "Early-demographic dividend",
+      "year": 2024,
+      "fertility": 2.2801968226139
+    },
+    {
+      "iso3": "EAS",
+      "name": "East Asia & Pacific",
+      "year": 2024,
+      "fertility": 1.34088488672906
+    },
+    {
+      "iso3": "ECA",
+      "name": "Europe & Central Asia (excluding high income)",
+      "year": 2024,
+      "fertility": 1.9618810271345
+    },
+    {
+      "iso3": "ECS",
+      "name": "Europe & Central Asia",
+      "year": 2024,
+      "fertility": 1.55339827274172
+    },
+    {
+      "iso3": "ECU",
+      "name": "Ecuador",
+      "year": 2024,
+      "fertility": 1.806
+    },
+    {
+      "iso3": "EGY",
+      "name": "Egypt, Arab Rep.",
+      "year": 2024,
+      "fertility": 2.735
+    },
+    {
+      "iso3": "EMU",
+      "name": "Euro area",
+      "year": 2024,
+      "fertility": 1.34667930848404
+    },
+    {
+      "iso3": "ERI",
+      "name": "Eritrea",
+      "year": 2024,
+      "fertility": 3.68
+    },
+    {
+      "iso3": "ESP",
+      "name": "Spain",
+      "year": 2024,
+      "fertility": 1.1
+    },
+    {
+      "iso3": "EST",
+      "name": "Estonia",
+      "year": 2024,
+      "fertility": 1.18
+    },
+    {
+      "iso3": "ETH",
+      "name": "Ethiopia",
+      "year": 2024,
+      "fertility": 3.909
+    },
+    {
+      "iso3": "EUU",
+      "name": "European Union",
+      "year": 2024,
+      "fertility": 1.34087000671597
+    },
+    {
+      "iso3": "FCS",
+      "name": "Fragile and conflict affected situations",
+      "year": 2024,
+      "fertility": 4.12171249736163
+    },
+    {
+      "iso3": "FIN",
+      "name": "Finland",
+      "year": 2024,
+      "fertility": 1.25
+    },
+    {
+      "iso3": "FJI",
+      "name": "Fiji",
+      "year": 2024,
+      "fertility": 2.27
+    },
+    {
+      "iso3": "FRA",
+      "name": "France",
+      "year": 2024,
+      "fertility": 1.61
+    },
+    {
+      "iso3": "FRO",
+      "name": "Faroe Islands",
+      "year": 2024,
+      "fertility": 1.9129
+    },
+    {
+      "iso3": "FSM",
+      "name": "Micronesia, Fed. Sts.",
+      "year": 2024,
+      "fertility": 2.743
+    },
+    {
+      "iso3": "GAB",
+      "name": "Gabon",
+      "year": 2024,
+      "fertility": 3.592
+    },
+    {
+      "iso3": "GBR",
+      "name": "United Kingdom",
+      "year": 2024,
+      "fertility": 1.551
+    },
+    {
+      "iso3": "GEO",
+      "name": "Georgia",
+      "year": 2024,
+      "fertility": 1.802
+    },
+    {
+      "iso3": "GHA",
+      "name": "Ghana",
+      "year": 2024,
+      "fertility": 3.344
+    },
+    {
+      "iso3": "GIB",
+      "name": "Gibraltar",
+      "year": 2024,
+      "fertility": 1.885
+    },
+    {
+      "iso3": "GIN",
+      "name": "Guinea",
+      "year": 2024,
+      "fertility": 4.131
+    },
+    {
+      "iso3": "GMB",
+      "name": "Gambia, The",
+      "year": 2024,
+      "fertility": 3.907
+    },
+    {
+      "iso3": "GNB",
+      "name": "Guinea-Bissau",
+      "year": 2024,
+      "fertility": 3.757
+    },
+    {
+      "iso3": "GNQ",
+      "name": "Equatorial Guinea",
+      "year": 2024,
+      "fertility": 4.116
+    },
+    {
+      "iso3": "GRC",
+      "name": "Greece",
+      "year": 2024,
+      "fertility": 1.24
+    },
+    {
+      "iso3": "GRD",
+      "name": "Grenada",
+      "year": 2024,
+      "fertility": 1.472
+    },
+    {
+      "iso3": "GRL",
+      "name": "Greenland",
+      "year": 2024,
+      "fertility": 1.706
+    },
+    {
+      "iso3": "GTM",
+      "name": "Guatemala",
+      "year": 2024,
+      "fertility": 2.287
+    },
+    {
+      "iso3": "GUM",
+      "name": "Guam",
+      "year": 2024,
+      "fertility": 2.748
+    },
+    {
+      "iso3": "GUY",
+      "name": "Guyana",
+      "year": 2024,
+      "fertility": 2.395
+    },
+    {
+      "iso3": "HKG",
+      "name": "Hong Kong SAR, China",
+      "year": 2024,
+      "fertility": 0.841
+    },
+    {
+      "iso3": "HND",
+      "name": "Honduras",
+      "year": 2024,
+      "fertility": 2.476
+    },
+    {
+      "iso3": "HPC",
+      "name": "Heavily indebted poor countries (HIPC)",
+      "year": 2024,
+      "fertility": 4.40939818135092
+    },
+    {
+      "iso3": "HRV",
+      "name": "Croatia",
+      "year": 2024,
+      "fertility": 1.46
+    },
+    {
+      "iso3": "HTI",
+      "name": "Haiti",
+      "year": 2024,
+      "fertility": 2.625
+    },
+    {
+      "iso3": "HUN",
+      "name": "Hungary",
+      "year": 2024,
+      "fertility": 1.41
+    },
+    {
+      "iso3": "IBD",
+      "name": "IBRD only",
+      "year": 2024,
+      "fertility": 1.71407215348272
+    },
+    {
+      "iso3": "IBT",
+      "name": "IDA & IBRD total",
+      "year": 2024,
+      "fertility": 2.30010002476509
+    },
+    {
+      "iso3": "IDA",
+      "name": "IDA total",
+      "year": 2024,
+      "fertility": 3.78861792667489
+    },
+    {
+      "iso3": "IDB",
+      "name": "IDA blend",
+      "year": 2024,
+      "fertility": 3.84144000700748
+    },
+    {
+      "iso3": "IDN",
+      "name": "Indonesia",
+      "year": 2024,
+      "fertility": 2.115
+    },
+    {
+      "iso3": "IDX",
+      "name": "IDA only",
+      "year": 2024,
+      "fertility": 3.76114125930721
+    },
+    {
+      "iso3": "IMN",
+      "name": "Isle of Man",
+      "year": 2024,
+      "fertility": 1.544
+    },
+    {
+      "iso3": "IND",
+      "name": "India",
+      "year": 2024,
+      "fertility": 1.962
+    },
+    {
+      "iso3": "IRL",
+      "name": "Ireland",
+      "year": 2024,
+      "fertility": 1.47
+    },
+    {
+      "iso3": "IRN",
+      "name": "Iran, Islamic Rep.",
+      "year": 2024,
+      "fertility": 1.684
+    },
+    {
+      "iso3": "IRQ",
+      "name": "Iraq",
+      "year": 2024,
+      "fertility": 3.221
+    },
+    {
+      "iso3": "ISL",
+      "name": "Iceland",
+      "year": 2024,
+      "fertility": 1.56
+    },
+    {
+      "iso3": "ISR",
+      "name": "Israel",
+      "year": 2024,
+      "fertility": 2.87
+    },
+    {
+      "iso3": "ITA",
+      "name": "Italy",
+      "year": 2024,
+      "fertility": 1.18
+    },
+    {
+      "iso3": "JAM",
+      "name": "Jamaica",
+      "year": 2024,
+      "fertility": 1.351
+    },
+    {
+      "iso3": "JOR",
+      "name": "Jordan",
+      "year": 2024,
+      "fertility": 2.604
+    },
+    {
+      "iso3": "JPN",
+      "name": "Japan",
+      "year": 2024,
+      "fertility": 1.15
+    },
+    {
+      "iso3": "KAZ",
+      "name": "Kazakhstan",
+      "year": 2024,
+      "fertility": 2.984
+    },
+    {
+      "iso3": "KEN",
+      "name": "Kenya",
+      "year": 2024,
+      "fertility": 3.167
+    },
+    {
+      "iso3": "KGZ",
+      "name": "Kyrgyz Republic",
+      "year": 2024,
+      "fertility": 2.6
+    },
+    {
+      "iso3": "KHM",
+      "name": "Cambodia",
+      "year": 2024,
+      "fertility": 2.548
+    },
+    {
+      "iso3": "KIR",
+      "name": "Kiribati",
+      "year": 2024,
+      "fertility": 3.124
+    },
+    {
+      "iso3": "KNA",
+      "name": "St. Kitts and Nevis",
+      "year": 2024,
+      "fertility": 1.526
+    },
+    {
+      "iso3": "KOR",
+      "name": "Korea, Rep.",
+      "year": 2024,
+      "fertility": 0.748
+    },
+    {
+      "iso3": "KWT",
+      "name": "Kuwait",
+      "year": 2024,
+      "fertility": 1.56
+    },
+    {
+      "iso3": "LAC",
+      "name": "Latin America & Caribbean (excluding high income)",
+      "year": 2024,
+      "fertility": 1.80087769281424
+    },
+    {
+      "iso3": "LAO",
+      "name": "Lao PDR",
+      "year": 2024,
+      "fertility": 2.397
+    },
+    {
+      "iso3": "LBN",
+      "name": "Lebanon",
+      "year": 2024,
+      "fertility": 2.227
+    },
+    {
+      "iso3": "LBR",
+      "name": "Liberia",
+      "year": 2024,
+      "fertility": 3.864
+    },
+    {
+      "iso3": "LBY",
+      "name": "Libya",
+      "year": 2024,
+      "fertility": 2.298
+    },
+    {
+      "iso3": "LCA",
+      "name": "St. Lucia",
+      "year": 2024,
+      "fertility": 1.385
+    },
+    {
+      "iso3": "LCN",
+      "name": "Latin America & Caribbean",
+      "year": 2024,
+      "fertility": 1.78557351049149
+    },
+    {
+      "iso3": "LDC",
+      "name": "Least developed countries: UN classification",
+      "year": 2024,
+      "fertility": 3.91104305193252
+    },
+    {
+      "iso3": "LIE",
+      "name": "Liechtenstein",
+      "year": 2024,
+      "fertility": 1.37
+    },
+    {
+      "iso3": "LKA",
+      "name": "Sri Lanka",
+      "year": 2024,
+      "fertility": 1.952
+    },
+    {
+      "iso3": "LMY",
+      "name": "Low & middle income",
+      "year": 2024,
+      "fertility": 2.2983377729631
+    },
+    {
+      "iso3": "LSO",
+      "name": "Lesotho",
+      "year": 2024,
+      "fertility": 2.664
+    },
+    {
+      "iso3": "LTE",
+      "name": "Late-demographic dividend",
+      "year": 2024,
+      "fertility": 1.27228248034884
+    },
+    {
+      "iso3": "LTU",
+      "name": "Lithuania",
+      "year": 2024,
+      "fertility": 1.11
+    },
+    {
+      "iso3": "LUX",
+      "name": "Luxembourg",
+      "year": 2024,
+      "fertility": 1.25
+    },
+    {
+      "iso3": "LVA",
+      "name": "Latvia",
+      "year": 2024,
+      "fertility": 1.24
+    },
+    {
+      "iso3": "MAC",
+      "name": "Macao SAR, China",
+      "year": 2024,
+      "fertility": 0.582
+    },
+    {
+      "iso3": "MAF",
+      "name": "St. Martin (French part)",
+      "year": 2024,
+      "fertility": 2.673
+    },
+    {
+      "iso3": "MAR",
+      "name": "Morocco",
+      "year": 2024,
+      "fertility": 2.208
+    },
+    {
+      "iso3": "MCO",
+      "name": "Monaco",
+      "year": 2024,
+      "fertility": 2.102
+    },
+    {
+      "iso3": "MDA",
+      "name": "Moldova",
+      "year": 2024,
+      "fertility": 1.726
+    },
+    {
+      "iso3": "MDG",
+      "name": "Madagascar",
+      "year": 2024,
+      "fertility": 3.912
+    },
+    {
+      "iso3": "MDV",
+      "name": "Maldives",
+      "year": 2024,
+      "fertility": 1.56
+    },
+    {
+      "iso3": "MEA",
+      "name": "Middle East, North Africa, Afghanistan & Pakistan",
+      "year": 2024,
+      "fertility": 2.97597353306197
+    },
+    {
+      "iso3": "MEX",
+      "name": "Mexico",
+      "year": 2024,
+      "fertility": 1.892
+    },
+    {
+      "iso3": "MHL",
+      "name": "Marshall Islands",
+      "year": 2024,
+      "fertility": 2.864
+    },
+    {
+      "iso3": "MIC",
+      "name": "Middle income",
+      "year": 2024,
+      "fertility": 2.06831190009117
+    },
+    {
+      "iso3": "MKD",
+      "name": "North Macedonia",
+      "year": 2024,
+      "fertility": 1.4
+    },
+    {
+      "iso3": "MLI",
+      "name": "Mali",
+      "year": 2024,
+      "fertility": 5.51
+    },
+    {
+      "iso3": "MLT",
+      "name": "Malta",
+      "year": 2024,
+      "fertility": 1.01
+    },
+    {
+      "iso3": "MMR",
+      "name": "Myanmar",
+      "year": 2024,
+      "fertility": 2.098
+    },
+    {
+      "iso3": "MNA",
+      "name": "Middle East, North Africa, Afghanistan & Pakistan (excluding high income)",
+      "year": 2024,
+      "fertility": 3.04961747732347
+    },
+    {
+      "iso3": "MNE",
+      "name": "Montenegro",
+      "year": 2024,
+      "fertility": 1.8
+    },
+    {
+      "iso3": "MNG",
+      "name": "Mongolia",
+      "year": 2024,
+      "fertility": 2.5
+    },
+    {
+      "iso3": "MNP",
+      "name": "Northern Mariana Islands",
+      "year": 2024,
+      "fertility": 2.324
+    },
+    {
+      "iso3": "MOZ",
+      "name": "Mozambique",
+      "year": 2024,
+      "fertility": 4.69
+    },
+    {
+      "iso3": "MRT",
+      "name": "Mauritania",
+      "year": 2024,
+      "fertility": 4.625
+    },
+    {
+      "iso3": "MUS",
+      "name": "Mauritius",
+      "year": 2024,
+      "fertility": 1.44
+    },
+    {
+      "iso3": "MWI",
+      "name": "Malawi",
+      "year": 2024,
+      "fertility": 3.59
+    },
+    {
+      "iso3": "MYS",
+      "name": "Malaysia",
+      "year": 2024,
+      "fertility": 1.543
+    },
+    {
+      "iso3": "NAC",
+      "name": "North America",
+      "year": 2024,
+      "fertility": 1.58552336951657
+    },
+    {
+      "iso3": "NAM",
+      "name": "Namibia",
+      "year": 2024,
+      "fertility": 3.211
+    },
+    {
+      "iso3": "NCL",
+      "name": "New Caledonia",
+      "year": 2024,
+      "fertility": 1.964
+    },
+    {
+      "iso3": "NER",
+      "name": "Niger",
+      "year": 2024,
+      "fertility": 5.935
+    },
+    {
+      "iso3": "NGA",
+      "name": "Nigeria",
+      "year": 2024,
+      "fertility": 4.382
+    },
+    {
+      "iso3": "NIC",
+      "name": "Nicaragua",
+      "year": 2024,
+      "fertility": 2.206
+    },
+    {
+      "iso3": "NLD",
+      "name": "Netherlands",
+      "year": 2024,
+      "fertility": 1.43
+    },
+    {
+      "iso3": "NOR",
+      "name": "Norway",
+      "year": 2024,
+      "fertility": 1.45
+    },
+    {
+      "iso3": "NPL",
+      "name": "Nepal",
+      "year": 2024,
+      "fertility": 1.961
+    },
+    {
+      "iso3": "NRU",
+      "name": "Nauru",
+      "year": 2024,
+      "fertility": 3.29
+    },
+    {
+      "iso3": "NZL",
+      "name": "New Zealand",
+      "year": 2024,
+      "fertility": 1.57
+    },
+    {
+      "iso3": "OED",
+      "name": "OECD members",
+      "year": 2024,
+      "fertility": 1.47748831578197
+    },
+    {
+      "iso3": "OMN",
+      "name": "Oman",
+      "year": 2024,
+      "fertility": 2.508
+    },
+    {
+      "iso3": "OSS",
+      "name": "Other small states",
+      "year": 2024,
+      "fertility": 2.01596667994834
+    },
+    {
+      "iso3": "PAK",
+      "name": "Pakistan",
+      "year": 2024,
+      "fertility": 3.547
+    },
+    {
+      "iso3": "PAN",
+      "name": "Panama",
+      "year": 2024,
+      "fertility": 2.106
+    },
+    {
+      "iso3": "PER",
+      "name": "Peru",
+      "year": 2024,
+      "fertility": 1.965
+    },
+    {
+      "iso3": "PHL",
+      "name": "Philippines",
+      "year": 2024,
+      "fertility": 1.894
+    },
+    {
+      "iso3": "PLW",
+      "name": "Palau",
+      "year": 2024,
+      "fertility": 1.883
+    },
+    {
+      "iso3": "PNG",
+      "name": "Papua New Guinea",
+      "year": 2024,
+      "fertility": 3.072
+    },
+    {
+      "iso3": "POL",
+      "name": "Poland",
+      "year": 2024,
+      "fertility": 1.14
+    },
+    {
+      "iso3": "PRE",
+      "name": "Pre-demographic dividend",
+      "year": 2024,
+      "fertility": 4.48518501809376
+    },
+    {
+      "iso3": "PRI",
+      "name": "Puerto Rico (US)",
+      "year": 2024,
+      "fertility": 0.92
+    },
+    {
+      "iso3": "PRK",
+      "name": "Korea, Dem. People's Rep.",
+      "year": 2024,
+      "fertility": 1.784
+    },
+    {
+      "iso3": "PRT",
+      "name": "Portugal",
+      "year": 2024,
+      "fertility": 1.41
+    },
+    {
+      "iso3": "PRY",
+      "name": "Paraguay",
+      "year": 2024,
+      "fertility": 2.416
+    },
+    {
+      "iso3": "PSE",
+      "name": "West Bank and Gaza",
+      "year": 2024,
+      "fertility": 3.25
+    },
+    {
+      "iso3": "PSS",
+      "name": "Pacific island small states",
+      "year": 2024,
+      "fertility": 3.00590037111189
+    },
+    {
+      "iso3": "PST",
+      "name": "Post-demographic dividend",
+      "year": 2024,
+      "fertility": 1.38619016741304
+    },
+    {
+      "iso3": "PYF",
+      "name": "French Polynesia",
+      "year": 2024,
+      "fertility": 1.491
+    },
+    {
+      "iso3": "QAT",
+      "name": "Qatar",
+      "year": 2024,
+      "fertility": 1.717
+    },
+    {
+      "iso3": "ROU",
+      "name": "Romania",
+      "year": 2024,
+      "fertility": 1.39
+    },
+    {
+      "iso3": "RUS",
+      "name": "Russian Federation",
+      "year": 2024,
+      "fertility": 1.418
+    },
+    {
+      "iso3": "RWA",
+      "name": "Rwanda",
+      "year": 2024,
+      "fertility": 3.645
+    },
+    {
+      "iso3": "SAS",
+      "name": "South Asia",
+      "year": 2024,
+      "fertility": 1.98099187797599
+    },
+    {
+      "iso3": "SAU",
+      "name": "Saudi Arabia",
+      "year": 2024,
+      "fertility": 2.308
+    },
+    {
+      "iso3": "SDN",
+      "name": "Sudan",
+      "year": 2024,
+      "fertility": 4.264
+    },
+    {
+      "iso3": "SEN",
+      "name": "Senegal",
+      "year": 2024,
+      "fertility": 3.765
+    },
+    {
+      "iso3": "SGP",
+      "name": "Singapore",
+      "year": 2024,
+      "fertility": 0.97
+    },
+    {
+      "iso3": "SLB",
+      "name": "Solomon Islands",
+      "year": 2024,
+      "fertility": 3.513
+    },
+    {
+      "iso3": "SLE",
+      "name": "Sierra Leone",
+      "year": 2024,
+      "fertility": 3.703
+    },
+    {
+      "iso3": "SLV",
+      "name": "El Salvador",
+      "year": 2024,
+      "fertility": 1.768
+    },
+    {
+      "iso3": "SMR",
+      "name": "San Marino",
+      "year": 2024,
+      "fertility": 1.158
+    },
+    {
+      "iso3": "SOM",
+      "name": "Somalia, Fed. Rep.",
+      "year": 2024,
+      "fertility": 6.013
+    },
+    {
+      "iso3": "SRB",
+      "name": "Serbia",
+      "year": 2024,
+      "fertility": 1.64
+    },
+    {
+      "iso3": "SSA",
+      "name": "Sub-Saharan Africa (excluding high income)",
+      "year": 2024,
+      "fertility": 4.3058979070685
+    },
+    {
+      "iso3": "SSD",
+      "name": "South Sudan",
+      "year": 2024,
+      "fertility": 3.785
+    },
+    {
+      "iso3": "SSF",
+      "name": "Sub-Saharan Africa",
+      "year": 2024,
+      "fertility": 4.26410404156604
+    },
+    {
+      "iso3": "SST",
+      "name": "Small states",
+      "year": 2024,
+      "fertility": 2.10677723466158
+    },
+    {
+      "iso3": "STP",
+      "name": "Sao Tome and Principe",
+      "year": 2024,
+      "fertility": 3.596
+    },
+    {
+      "iso3": "SUR",
+      "name": "Suriname",
+      "year": 2024,
+      "fertility": 2.231
+    },
+    {
+      "iso3": "SVK",
+      "name": "Slovak Republic",
+      "year": 2024,
+      "fertility": 1.46
+    },
+    {
+      "iso3": "SVN",
+      "name": "Slovenia",
+      "year": 2024,
+      "fertility": 1.52
+    },
+    {
+      "iso3": "SWE",
+      "name": "Sweden",
+      "year": 2024,
+      "fertility": 1.43
+    },
+    {
+      "iso3": "SWZ",
+      "name": "Eswatini",
+      "year": 2024,
+      "fertility": 2.718
+    },
+    {
+      "iso3": "SXM",
+      "name": "Sint Maarten (Dutch part)",
+      "year": 2024,
+      "fertility": 1.44
+    },
+    {
+      "iso3": "SYC",
+      "name": "Seychelles",
+      "year": 2024,
+      "fertility": 1.85
+    },
+    {
+      "iso3": "SYR",
+      "name": "Syrian Arab Republic",
+      "year": 2024,
+      "fertility": 2.7
+    },
+    {
+      "iso3": "TCA",
+      "name": "Turks and Caicos Islands",
+      "year": 2024,
+      "fertility": 1.452
+    },
+    {
+      "iso3": "TCD",
+      "name": "Chad",
+      "year": 2024,
+      "fertility": 6.028
+    },
+    {
+      "iso3": "TEA",
+      "name": "East Asia & Pacific (IDA & IBRD countries)",
+      "year": 2024,
+      "fertility": 1.36313000886682
+    },
+    {
+      "iso3": "TEC",
+      "name": "Europe & Central Asia (IDA & IBRD countries)",
+      "year": 2024,
+      "fertility": 1.70510852153611
+    },
+    {
+      "iso3": "TGO",
+      "name": "Togo",
+      "year": 2024,
+      "fertility": 4.121673
+    },
+    {
+      "iso3": "THA",
+      "name": "Thailand",
+      "year": 2024,
+      "fertility": 1.204
+    },
+    {
+      "iso3": "TJK",
+      "name": "Tajikistan",
+      "year": 2024,
+      "fertility": 3.036
+    },
+    {
+      "iso3": "TKM",
+      "name": "Turkmenistan",
+      "year": 2024,
+      "fertility": 2.661
+    },
+    {
+      "iso3": "TLA",
+      "name": "Latin America & the Caribbean (IDA & IBRD countries)",
+      "year": 2024,
+      "fertility": 1.79422126534979
+    },
+    {
+      "iso3": "TLS",
+      "name": "Timor-Leste",
+      "year": 2024,
+      "fertility": 2.627
+    },
+    {
+      "iso3": "TMN",
+      "name": "Middle East, North Africa, Afghanistan & Pakistan (IDA & IBRD)",
+      "year": 2024,
+      "fertility": 3.04816260323066
+    },
+    {
+      "iso3": "TON",
+      "name": "Tonga",
+      "year": 2024,
+      "fertility": 3.1
+    },
+    {
+      "iso3": "TSA",
+      "name": "South Asia (IDA & IBRD)",
+      "year": 2024,
+      "fertility": 1.98099187797599
+    },
+    {
+      "iso3": "TSS",
+      "name": "Sub-Saharan Africa (IDA & IBRD countries)",
+      "year": 2024,
+      "fertility": 4.26410404156604
+    },
+    {
+      "iso3": "TTO",
+      "name": "Trinidad and Tobago",
+      "year": 2024,
+      "fertility": 1.536
+    },
+    {
+      "iso3": "TUN",
+      "name": "Tunisia",
+      "year": 2024,
+      "fertility": 1.818
+    },
+    {
+      "iso3": "TUR",
+      "name": "Turkiye",
+      "year": 2024,
+      "fertility": 1.48
+    },
+    {
+      "iso3": "TUV",
+      "name": "Tuvalu",
+      "year": 2024,
+      "fertility": 3.174
+    },
+    {
+      "iso3": "TZA",
+      "name": "Tanzania",
+      "year": 2024,
+      "fertility": 4.541
+    },
+    {
+      "iso3": "UGA",
+      "name": "Uganda",
+      "year": 2024,
+      "fertility": 4.165
+    },
+    {
+      "iso3": "UKR",
+      "name": "Ukraine",
+      "year": 2024,
+      "fertility": 0.988
+    },
+    {
+      "iso3": "URY",
+      "name": "Uruguay",
+      "year": 2024,
+      "fertility": 1.397
+    },
+    {
+      "iso3": "USA",
+      "name": "United States",
+      "year": 2024,
+      "fertility": 1.6265
+    },
+    {
+      "iso3": "UZB",
+      "name": "Uzbekistan",
+      "year": 2024,
+      "fertility": 3.486
+    },
+    {
+      "iso3": "VCT",
+      "name": "St. Vincent and the Grenadines",
+      "year": 2024,
+      "fertility": 1.761
+    },
+    {
+      "iso3": "VEN",
+      "name": "Venezuela, RB",
+      "year": 2024,
+      "fertility": 2.077
+    },
+    {
+      "iso3": "VGB",
+      "name": "British Virgin Islands",
+      "year": 2024,
+      "fertility": 1.048
+    },
+    {
+      "iso3": "VIR",
+      "name": "Virgin Islands (U.S.)",
+      "year": 2024,
+      "fertility": 1.97
+    },
+    {
+      "iso3": "VNM",
+      "name": "Viet Nam",
+      "year": 2024,
+      "fertility": 1.895
+    },
+    {
+      "iso3": "VUT",
+      "name": "Vanuatu",
+      "year": 2024,
+      "fertility": 3.569
+    },
+    {
+      "iso3": "WLD",
+      "name": "World",
+      "year": 2024,
+      "fertility": 2.18851525484567
+    },
+    {
+      "iso3": "WSM",
+      "name": "Samoa",
+      "year": 2024,
+      "fertility": 3.801
+    },
+    {
+      "iso3": "XKX",
+      "name": "Kosovo",
+      "year": 2024,
+      "fertility": 1.538
+    },
+    {
+      "iso3": "YEM",
+      "name": "Yemen, Rep.",
+      "year": 2024,
+      "fertility": 4.499
+    },
+    {
+      "iso3": "ZAF",
+      "name": "South Africa",
+      "year": 2024,
+      "fertility": 2.205
+    },
+    {
+      "iso3": "ZMB",
+      "name": "Zambia",
+      "year": 2024,
+      "fertility": 4.036
+    },
+    {
+      "iso3": "ZWE",
+      "name": "Zimbabwe",
+      "year": 2024,
+      "fertility": 3.674
+    }
+  ]
+}

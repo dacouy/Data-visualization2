@@ -12,8 +12,14 @@ const LOW_TFR_COLOR = "#8B1A1A";
 const MID_TFR_COLOR = "#EAD9BB";
 const HIGH_TFR_COLOR = "#2D6B2D";
 const MAP_BACKGROUND = "#FFFFFF";
+const LGA_MAP_BACKGROUND = "#f6eee8";
 const LOW_COUNT_COLOR = "#C6BDAB";
 const MIN_BIRTHS_FOR_COLOR = 20;
+const STATE_BASE_FILL = "#f6eee8";
+const STATE_BOUNDARY_COLOR = "#7a4b3a";
+const STATE_BUBBLE_LOW = "#d7b79f";
+const STATE_BUBBLE_MID = "#b9784f";
+const STATE_BUBBLE_HIGH = "#8B1A1A";
 
 const tfrColorScale = {
   domain: [0.5, NATIONAL_AVG, 4.0],
@@ -32,11 +38,14 @@ const tfrLegend = {
 };
 
 const CAPITAL_CITIES = [
-  { city: "Sydney", state_display: "NSW", lat: -33.87, lon: 151.21, births: 86978, tfr_2024: 0.73 },
-  { city: "Melbourne", state_display: "VIC", lat: -37.81, lon: 144.96, births: 82328, tfr_2024: 0.54 },
-  { city: "Brisbane", state_display: "QLD", lat: -27.47, lon: 153.03, births: 58986, tfr_2024: 1.19 },
-  { city: "Perth", state_display: "WA", lat: -31.95, lon: 115.86, births: 30516, tfr_2024: 0.61 },
-  { city: "Adelaide", state_display: "SA", lat: -34.93, lon: 138.6, births: 18516, tfr_2024: 0.57 },
+  { city: "Sydney", state_display: "NSW", lat: -33.87, lon: 151.21, births: 89030, tfr_2024: 1.46 },
+  { city: "Melbourne", state_display: "VIC", lat: -37.81, lon: 144.96, births: 81193, tfr_2024: 1.52 },
+  { city: "Brisbane", state_display: "QLD", lat: -27.47, lon: 153.03, births: 58838, tfr_2024: 1.51 },
+  { city: "Perth", state_display: "WA", lat: -31.95, lon: 115.86, births: 30541, tfr_2024: 1.43 },
+  { city: "Adelaide", state_display: "SA", lat: -34.93, lon: 138.6, births: 18444, tfr_2024: 1.46 },
+  { city: "Hobart", state_display: "TAS", lat: -42.88, lon: 147.33, births: 5509, tfr_2024: 1.49 },
+  { city: "Darwin", state_display: "NT", lat: -12.46, lon: 130.84, births: 3521, tfr_2024: 1.63 },
+  { city: "Canberra", state_display: "ACT", lat: -35.28, lon: 149.13, births: 5218, tfr_2024: 1.27 },
 ];
 
 const capitalTransforms = [
@@ -174,7 +183,7 @@ function buildMapSpec() {
         data: lgaTopoData,
         mark: {
           type: "geoshape",
-          fill: MAP_BACKGROUND,
+          fill: LGA_MAP_BACKGROUND,
           stroke: "#6f6255",
           strokeWidth: 0.45,
         },
@@ -189,7 +198,7 @@ function buildMapSpec() {
         encoding: {
           color: {
             condition: [
-              { test: "!isValid(datum.tfr_2024)", value: MAP_BACKGROUND },
+              { test: "!isValid(datum.tfr_2024)", value: LGA_MAP_BACKGROUND },
               {
                 test:
                   "!isValid(datum.births_2024) || datum.births_2024 < " +
@@ -210,10 +219,10 @@ function buildMapSpec() {
         transform: capitalTransforms,
         mark: {
           type: "circle",
-          opacity: 0.55,
-          color: "white",
-          stroke: "#1C1C1C",
-          strokeWidth: 1.2,
+          fill: "#b86f5c",
+          fillOpacity: 0.68,
+          stroke: "#7a3b31",
+          strokeWidth: 2,
         },
         encoding: {
           longitude: { field: "lon", type: "quantitative" },
@@ -221,17 +230,26 @@ function buildMapSpec() {
           size: {
             field: "births",
             type: "quantitative",
-            scale: { range: [90, 1200] },
+            scale: { range: [220, 1900] },
             legend: {
               title: "Births in 2024 at capital city",
               titleFont: MAP_FONT,
               labelFont: MAP_FONT,
               titleFontSize: 12,
               labelFontSize: 11,
-              orient: "bottom-left",
-              symbolStrokeColor: "#1C1C1C",
-              symbolFillColor: "white",
-              symbolOpacity: 0.55,
+              titleColor: "#5f2f24",
+              labelColor: "#5f2f24",
+              orient: "none",
+              legendX: 58,
+              legendY: 442,
+              values: [20000, 60000, 90000],
+              labelExpr: "format(datum.value, ',')",
+              symbolType: "circle",
+              symbolLimit: 3,
+              symbolFillColor: "#b86f5c",
+              symbolStrokeColor: "#7a3b31",
+              symbolStrokeWidth: 2,
+              symbolOpacity: 1,
             },
           },
           tooltip: lgaTooltip,
@@ -329,8 +347,8 @@ function buildStateBubbleMapSpec() {
         ],
         mark: {
           type: "geoshape",
-          fill: MAP_BACKGROUND,
-          stroke: "#5E5449",
+          fill: STATE_BASE_FILL,
+          stroke: STATE_BOUNDARY_COLOR,
           strokeWidth: 1.15,
         },
       },
@@ -345,9 +363,9 @@ function buildStateBubbleMapSpec() {
         mark: {
           type: "geoshape",
           fill: null,
-          stroke: "#1C1C1C",
-          strokeWidth: 0.35,
-          opacity: 0.45,
+          stroke: "#5f2f24",
+          strokeWidth: 0.45,
+          opacity: 0.58,
         },
       },
       // Birth volume bubbles from state_births_2024.csv.
@@ -356,9 +374,9 @@ function buildStateBubbleMapSpec() {
         transform: stateBubbleTransforms,
         mark: {
           type: "circle",
-          opacity: 0.72,
-          stroke: "#1C1C1C",
-          strokeWidth: 1.15,
+          opacity: 0.82,
+          stroke: "#5f2f24",
+          strokeWidth: 1.25,
         },
         encoding: {
           longitude: { field: "lon", type: "quantitative" },
@@ -373,8 +391,19 @@ function buildStateBubbleMapSpec() {
               labelFont: MAP_FONT,
               titleFontSize: 12,
               labelFontSize: 11,
-              orient: "bottom-left",
-              symbolStrokeColor: "#1C1C1C",
+              titleColor: "#5f2f24",
+              labelColor: "#5f2f24",
+              orient: "none",
+              legendX: 58,
+              legendY: 378,
+              values: [5000, 30000, 90000],
+              labelExpr: "format(datum.value, ',')",
+              symbolType: "circle",
+              symbolLimit: 3,
+              symbolFillColor: "#b86f5c",
+              symbolStrokeColor: "#7a3b31",
+              symbolStrokeWidth: 2,
+              symbolOpacity: 1,
             },
           },
           color: {
@@ -403,7 +432,7 @@ function buildStateBubbleMapSpec() {
           font: MAP_FONT,
           fontSize: 11,
           fontWeight: "bold",
-          color: "#1C1C1C",
+          color: "#5f2f24",
           stroke: MAP_BACKGROUND,
           strokeWidth: 2,
         },
@@ -423,7 +452,7 @@ function buildStateBubbleMapSpec() {
           font: MAP_FONT,
           fontSize: 11,
           fontWeight: "bold",
-          color: "#1C1C1C",
+          color: "#5f2f24",
         },
         encoding: {
           longitude: { field: "lon", type: "quantitative" },

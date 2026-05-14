@@ -1,0 +1,156 @@
+.world-section {
+  padding: 34px 70px 60px 70px;
+}
+
+.world-chart-block {
+  width: 980px;
+  max-width: 100%;
+  margin-top: 30px;
+  padding: 24px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+}
+
+.housing-timeline-block {
+  margin-top: 34px;
+}
+
+#housing-tfr-chart {
+  position: relative;
+  width: 100%;
+}
+
+#housing-tfr-chart .error-message {
+  color: #8B1A1A;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+#housing-tfr-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.housing-tooltip {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  font-family: "Times New Roman", serif;
+  font-size: 13px;
+  line-height: 1.35;
+  box-shadow: 0 8px 18px rgba(28, 28, 28, 0.12);
+  transition: opacity 0.08s ease;
+  z-index: 4;
+}
+
+.world-map-heading {
+  max-width: 980px;
+  margin-bottom: 12px;
+}
+
+.world-map-heading h3 {
+  margin: 0 0 8px 0;
+  font-size: 26px;
+}
+
+.world-map-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.world-globe-stage {
+  position: relative;
+  width: 100%;
+  min-height: 610px;
+  overflow: hidden;
+}
+
+#world-fertility-globe {
+  width: 100%;
+}
+
+.world-lens {
+  position: absolute;
+  pointer-events: auto;
+  z-index: 2;
+  width: 125px;
+  height: 125px;
+  overflow: hidden;
+  border: 2px solid #1c1c1c;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(28, 28, 28, 0.18);
+}
+
+.world-lens--europe {
+  top: 34px;
+  left: 390px;
+}
+
+.world-lens--sea {
+  top: 195px;
+  left: 725px;
+}
+
+.world-lens-label {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  padding: 2px 7px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+#world-lens-europe,
+#world-lens-sea {
+  width: 125px;
+  height: 125px;
+}
+
+#vg-tooltip-element {
+  pointer-events: none !important;
+}
+
+@media (max-width: 860px) {
+  .world-section {
+    padding: 28px 24px 44px 24px;
+  }
+
+  .world-chart-block {
+    width: 100%;
+  }
+
+  .world-globe-stage {
+    min-height: 520px;
+  }
+
+  .world-lens,
+  #world-lens-europe,
+  #world-lens-sea {
+    width: 105px;
+    height: 105px;
+  }
+
+  .world-lens--europe {
+    top: 40px;
+    left: 35%;
+  }
+
+  .world-lens--sea {
+    top: 205px;
+    right: 8px;
+  }
+}

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style/part2.css" />
     <link rel="stylesheet" href="style/part3.css" />
     <link rel="stylesheet" href="style/part4.css" />
+    <link rel="stylesheet" href="style/part5.css" />
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
@@ -127,7 +128,8 @@
         <div class="map-chart-block">
           <div id="lga-map"></div>
           <p class="map-note">
-            White circles mark each state capital and are sized by total births registered in 2024.
+            White circles mark each state or territory capital and are sized by total births registered
+            in that state or territory in 2024.
             Hover any local area for its LGA, state, births, and TFR. Unpublished values appear as N/P.
           </p>
         </div>
@@ -144,6 +146,12 @@
           Cherbourg in Queensland recorded 3.99 — the highest in Australia — followed by Hope Vale (3.95) and
           Doomadgee (3.40), all in Queensland. These communities have distinct cultural, social and economic
           circumstances that shape very different family patterns.
+        </p>
+        <p class="hero-copy">
+          This is why the map can look greener than the national figure. It is an area map, not a population-weighted
+          map: 371 of the 456 published LGAs sit above the national average, but the LGAs at 2.0 children per woman
+          or higher account for only 13.4% of births in the file. Many below-average LGAs are dense urban councils
+          with far more births, including Brisbane, Gold Coast, Parramatta, Stirling and Sydney.
         </p>
         <p class="hero-copy">
           In the vast interior of Australia — the outback stretching across the centre of the continent — fertility
@@ -237,6 +245,65 @@
           teens and twenties and are now concentrated in the early thirties.
         </p>
       </section>
+
+      <section class="world-section" aria-labelledby="world-map-title">
+        <div class="section-header">
+          <span class="section-number">Part 5</span>
+          <h2 id="world-map-title">WHY</h2>
+          <p>
+            Before returning to Australia, the global view shows how low Australian fertility is
+            compared with much of the world.
+          </p>
+        </div>
+
+        <div class="world-chart-block">
+          <div class="world-map-heading">
+            <h3>Global comparison</h3>
+            <p>
+              Total fertility rate, latest available World Bank value. The globe is zoomed out so
+              Australia, India, the United States and Europe can be read together.
+            </p>
+          </div>
+          <div class="world-globe-stage">
+            <div id="world-fertility-globe"></div>
+            <div class="world-lens world-lens--europe" aria-label="EU Europe zoom lens">
+              <div class="world-lens-label">EU</div>
+              <div id="world-lens-europe"></div>
+            </div>
+            <div class="world-lens world-lens--sea" aria-label="Southeast Asia zoom lens">
+              <div class="world-lens-label">SEA</div>
+              <div id="world-lens-sea"></div>
+            </div>
+          </div>
+          <p class="map-note">
+            Countries are coloured by births per woman. Grey countries have no matched value in the
+            source file. Hover to inspect each country.
+          </p>
+        </div>
+        <p class="hero-copy">
+          The global comparison shows that low fertility is increasingly common across both developed and developing
+          economies. Most high-income countries sit well below the replacement level of 2.1 children per woman, including
+          Australia, the United States, the United Kingdom, Germany, Italy, Japan and South Korea. But the same pattern
+          is also visible in parts of developing Asia, where China, Thailand and Singapore are already very low and India
+          is just below replacement. The major exceptions are concentrated in Sub-Saharan Africa, where countries such
+          as Chad, Somalia, the Democratic Republic of Congo and Niger remain above five children per woman, as well as
+          Afghanistan and Yemen. This divide may reflect differences in income, urban housing pressure, education,
+          access to family planning, child-care costs, gender expectations and the age structure of each population.
+        </p>
+
+        <div class="world-chart-block housing-timeline-block">
+          <div id="housing-tfr-chart"></div>
+        </div>
+        <p class="hero-copy">
+          The housing chart points to one possible pressure behind Australia's decline. Between 2009 and 2024, the
+          real home price index rose from 92.13 to 133.5, an increase of about 45%, while the total fertility rate
+          fell from 1.97 to 1.481, a drop of about 25%. The relationship is not perfectly mechanical: fertility briefly
+          rose in 2021 even as prices surged, and house prices eased in 2023 while fertility still fell. But the broad
+          direction is clear. Over the period when housing became more expensive, fertility moved steadily lower,
+          suggesting that affordability may be one of several forces making family formation harder, alongside delayed
+          partnering, insecure work, child-care costs and changing expectations around parenthood.
+        </p>
+      </section>
     </main>
 
     <script src="script/visualize1.js"></script>
@@ -244,5 +311,7 @@
     <script src="script/visualize3.js"></script>
     <script src="script/visualize4.js"></script>
     <script src="script/visualize5.js"></script>
+    <script src="script/visualize6.js"></script>
+    <script src="script/visualize7.js"></script>
   </body>
 </html>
