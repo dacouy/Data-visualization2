@@ -225,48 +225,6 @@ function buildDumbbellSpec({ segments, points, national, stateOrder }) {
           ],
         },
       },
-      {
-        data: { values: segments },
-        mark: {
-          type: "text",
-          align: "left",
-          baseline: "middle",
-          dx: 50,
-          font: FONT,
-          fontSize: 13,
-          fontWeight: "bold",
-          color: CHANGE_LABEL_COLOR,
-        },
-        encoding: {
-          x: { datum: 2.05, type: "quantitative" },
-          y: { field: "state", type: "nominal", sort: stateOrder },
-          text: { field: "changeLabel" },
-          tooltip,
-        },
-      },
-      {
-        data: {
-          values: [
-            { state: stateOrder[0], x: 2.05, label: "Change" },
-          ],
-        },
-        mark: {
-          type: "text",
-          align: "left",
-          baseline: "bottom",
-          dx: 50,
-          dy: -15,
-          font: FONT,
-          fontSize: 12,
-          fontWeight: "bold",
-          color: CHANGE_LABEL_COLOR,
-        },
-        encoding: {
-          x: { field: "x", type: "quantitative" },
-          y: { field: "state", type: "nominal", sort: stateOrder },
-          text: { field: "label" },
-        },
-      },
     ],
     resolve: {
       scale: { color: "independent" },

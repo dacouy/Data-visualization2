@@ -160,7 +160,7 @@ const australiaStateProjection = {
   type: "mercator",
   center: [134, -28],
   scale: 650,
-  translate: [490, 285],
+  translate: [490, 240],
 };
 
 function buildMapSpec() {
@@ -467,7 +467,7 @@ function buildStatePieMapSpec() {
   return {
     $schema: "https://vega.github.io/schema/vega/v5.json",
     width: 980,
-    height: 520,
+    height: 470,
     autosize: "none",
     background: MAP_BACKGROUND,
     padding: { left: 0, right: 0, top: 0, bottom: 0 },
@@ -555,7 +555,7 @@ function buildStatePieMapSpec() {
         title: "TFR 2024",
         orient: "none",
         legendX: 58,
-        legendY: 330,
+        legendY: 285,
         gradientLength: 130,
         gradientThickness: 12,
         titleFont: MAP_FONT,
@@ -708,7 +708,7 @@ function buildStatePieMapSpec() {
         encode: {
           update: {
             x: { value: 120 },
-            y: { value: 438 },
+            y: { value: 393 },
             text: { value: "Pie slice = share of national births" },
             align: { value: "left" },
             font: { value: MAP_FONT },
