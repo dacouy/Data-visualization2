@@ -15,8 +15,10 @@
   --hair-2: #ddd2c0;
   --shadow-md: 0 2px 6px rgba(45, 22, 14, 0.06), 0 26px 64px rgba(45, 22, 14, 0.09);
   --font-display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
-  --shell: 1280px;
-  --gutter: clamp(22px, 6vw, 92px);
+  --shell: clamp(1280px, 90vw, 1720px);
+  --story-width: clamp(980px, 74vw, 1360px);
+  --story-pad-x: clamp(70px, 5.5vw, 120px);
+  --gutter: clamp(22px, 6vw, 132px);
   --radius: 14px;
 }
 
@@ -37,7 +39,7 @@ body {
 main {
   min-height: 100vh;
   width: 100%;
-  max-width: 1280px;
+  max-width: var(--shell);
 }
 
 /* Thin horizontal rule between every part (same tone as Part 1 hero-visual borders). */
@@ -53,7 +55,7 @@ hr.visual-divider {
   max-width: 100%;
   margin: 26px 0 26px 0;
   margin-right: auto;
-  margin-left: max(0px, calc((100% - 980px) / 2));
+  margin-left: max(0px, calc((100% - var(--story-width)) / 2));
   background: var(--rule);
 }
 
@@ -66,7 +68,7 @@ hr.visual-divider {
 .chart-panel-title {
   margin: 0;
   color: var(--ink);
-  font-size: 22px;
+  font-size: clamp(22px, 1.45vw, 30px);
   line-height: 1.15;
   letter-spacing: 0;
 }
@@ -75,7 +77,7 @@ hr.visual-divider {
   max-width: 760px;
   margin: 6px 0 0 0;
   color: var(--muted);
-  font-size: 15px;
+  font-size: clamp(15px, 1vw, 19px);
   line-height: 1.35;
 }
 
@@ -156,7 +158,7 @@ h1 {
   margin: 18px 0 0;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(44px, 6.6vw, 92px);
+  font-size: clamp(44px, 6.8vw, 128px);
   line-height: 0.94;
   letter-spacing: -0.025em;
   overflow-wrap: break-word;
@@ -169,11 +171,15 @@ h1 em {
   max-width: 30ch;
   margin: 22px auto 0;
   color: var(--ink-soft);
-  font-size: clamp(18px, 2vw, 22px);
+  font-size: clamp(18px, 1.8vw, 30px);
   line-height: 1.45;
 }
 .hero-byline {
-  margin: 26px 0 0;
+  position: absolute;
+  left: 18px;
+  bottom: clamp(20px, 3vw, 36px);
+  z-index: 2;
+  margin: 0;
   color: var(--muted);
   font-size: 14px;
   letter-spacing: 0.02em;
@@ -198,7 +204,7 @@ h1 em {
 .hero-meta strong {
   display: block;
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: clamp(26px, 1.8vw, 36px);
   font-weight: 700;
   color: var(--crimson);
   letter-spacing: -0.01em;
@@ -207,7 +213,7 @@ h1 em {
   display: block;
   max-width: 170px;
   margin-top: 2px;
-  font-size: 12.5px;
+  font-size: clamp(12.5px, 0.85vw, 16px);
   line-height: 1.3;
   color: var(--muted);
   text-transform: uppercase;
@@ -220,7 +226,7 @@ h1 em {
 .hero__figure {
   position: relative;
   margin: 0;
-  width: min(100%, 460px);
+  width: min(100%, clamp(460px, 34vw, 650px));
   aspect-ratio: 4 / 5;
   border-radius: var(--radius);
   box-shadow: var(--shadow-md);
@@ -275,6 +281,13 @@ h1 em {
 .duo--soft::after { opacity: 0.72; }
 
 @media (max-width: 860px) {
+  .hero-byline {
+    left: 14px;
+    right: 24px;
+    bottom: 18px;
+    font-size: 13px;
+  }
+
   .hero__inner {
     grid-template-columns: 1fr;
     transform: translateY(-10px);

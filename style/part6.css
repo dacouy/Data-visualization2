@@ -1,31 +1,32 @@
 .pyramid-section {
-  padding: 34px 70px 60px 70px;
+  padding: 34px var(--story-pad-x) 60px var(--story-pad-x);
 }
 
 .pyramid-subheader {
-  max-width: 980px;
+  max-width: var(--story-width);
   margin: 34px auto 0 auto;
 }
 
 .pyramid-subheader h3 {
   margin: 0 0 8px 0;
-  font-size: 26px;
+  font-size: clamp(26px, 1.8vw, 34px);
 }
 
 .pyramid-subheader p {
   margin: 0;
   color: var(--muted);
-  font-size: 16px;
+  font-size: clamp(16px, 1.08vw, 21px);
   line-height: 1.42;
 }
 
 .pyramid-chart-block {
-  width: 980px;
+  width: var(--story-width);
   max-width: 100%;
   margin: 30px auto 0 auto;
   padding: 24px;
   background: var(--paper);
   border: 1px solid var(--rule);
+  border-radius: 20px;
 }
 
 #population-pyramid-chart {
@@ -40,7 +41,7 @@
 }
 
 .age-stream-block {
-  width: 980px;
+  width: var(--story-width);
   max-width: 100%;
   margin: 30px auto 0 auto;
 }
@@ -65,22 +66,22 @@
 
 #age-stream-chart .error-message {
   color: #8B1A1A;
-  font-size: 16px;
+  font-size: clamp(16px, 1.08vw, 21px);
   line-height: 1.4;
 }
 
 .pyramid-status {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 14px;
+  gap: 8px;
   align-items: center;
-  margin: 0 18px 14px 18px;
+  margin: 0 14px 10px 14px;
 }
 
 .pyramid-status-year {
   color: var(--ink);
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 62px;
+  font-size: 48px;
   font-weight: bold;
   line-height: 0.95;
   text-align: center;
@@ -89,14 +90,14 @@
 .pyramid-status-total {
   color: #4A4038;
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 20px;
+  font-size: 17px;
   text-align: center;
 }
 
 .pyramid-stat-stack {
   display: grid;
-  grid-template-columns: repeat(3, 126px);
-  gap: 10px;
+  grid-template-columns: repeat(3, 112px);
+  gap: 8px;
   justify-content: center;
 }
 
@@ -104,7 +105,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin: 12px 0 0 0;
+  margin: 8px 0 0 0;
   overflow: visible;
 }
 
@@ -121,7 +122,7 @@
 }
 
 .pyramid-stat-card {
-  padding: 10px 12px;
+  padding: 7px 10px;
   background: #FFFFFF;
   border: 1px solid var(--rule);
 }
@@ -135,39 +136,39 @@
 
 .pyramid-stat-card strong {
   color: var(--red);
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .pyramid-stat-card span {
   color: var(--ink);
-  font-size: 22px;
+  font-size: 18px;
   font-weight: bold;
 }
 
 .pyramid-stat-card em {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 11px;
 }
 
 .pyramid-controls {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin: 0 18px 16px 18px;
-  padding: 12px 14px;
+  gap: 10px;
+  margin: 0 14px 10px 14px;
+  padding: 8px 10px;
   background: #FFFFFF;
   border: 1px solid var(--rule);
 }
 
 .pyramid-play-button {
   flex: 0 0 auto;
-  min-width: 92px;
-  padding: 10px 18px;
+  min-width: 76px;
+  padding: 8px 14px;
   border: 1px solid #7A3B2E;
   background: #8B1A1A;
   color: #FFFFFF;
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 8px 18px rgba(139, 26, 26, 0.16);
@@ -180,11 +181,11 @@
 }
 
 .pyramid-play-hint {
-  flex: 0 0 245px;
+  flex: 0 0 220px;
   margin: 0;
   color: #5C2A22;
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.25;
 }
 
@@ -202,15 +203,15 @@
 .pyramid-year-ticks {
   display: flex;
   justify-content: space-between;
-  margin-top: 4px;
+  margin-top: 2px;
   color: var(--muted);
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 11px;
 }
 
 #population-pyramid-chart .error-message {
   color: #8B1A1A;
-  font-size: 16px;
+  font-size: clamp(16px, 1.08vw, 21px);
   line-height: 1.4;
 }
 

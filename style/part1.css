@@ -1,9 +1,9 @@
 .story-section {
-  padding: 34px 70px 60px 70px;
+  padding: 34px var(--story-pad-x) 60px var(--story-pad-x);
 }
 
 .section-header {
-  max-width: 980px;
+  max-width: var(--story-width);
   margin-left: auto;
   margin-right: auto;
 }
@@ -18,14 +18,14 @@
 
 h2 {
   margin: 8px 0 10px 0;
-  font-size: 38px;
+  font-size: clamp(38px, 2.65vw, 54px);
   line-height: 1;
 }
 
 .section-header p {
   margin: 0;
   color: var(--muted);
-  font-size: 16px;
+  font-size: clamp(16px, 1.08vw, 21px);
   line-height: 1.45;
 }
 
@@ -120,12 +120,13 @@ h2 {
 }
 
 .chart-block {
-  width: 980px;
+  width: var(--story-width);
   max-width: 100%;
   margin: 30px auto 0 auto;
   padding: 24px;
   background: var(--paper);
   border: 1px solid var(--rule);
+  border-radius: 20px;
 }
 
 .chart-title-row {
@@ -137,7 +138,7 @@ h2 {
 
 h3 {
   margin: 0;
-  font-size: 26px;
+  font-size: clamp(26px, 1.8vw, 34px);
 }
 
 .chart-title-row span {
@@ -150,9 +151,9 @@ h3 {
 }
 
 .hero-copy {
-  max-width: 980px;
+  max-width: var(--story-width);
   margin: 28px auto 0 auto;
-  font-size: 17px;
+  font-size: clamp(17px, 1.12vw, 22px);
   line-height: 1.5;
 }
 

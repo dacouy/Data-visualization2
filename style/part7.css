@@ -1,15 +1,16 @@
 .closing-section {
-  padding: 34px 70px 68px 70px;
+  padding: 34px var(--story-pad-x) 68px var(--story-pad-x);
   border-bottom: 8px solid var(--red);
 }
 
 .closing-chart-block {
-  width: 980px;
+  width: var(--story-width);
   max-width: 100%;
   margin: 30px auto 0 auto;
   padding: 26px;
   background: var(--paper);
   border: 1px solid var(--rule);
+  border-radius: 20px;
 }
 
 #population-futures-chart {

@@ -1,30 +1,31 @@
 .world-section {
-  padding: 34px 70px 60px 70px;
+  padding: 34px var(--story-pad-x) 60px var(--story-pad-x);
 }
 
 .world-chart-block {
-  width: 980px;
+  width: var(--story-width);
   max-width: 100%;
   margin: 30px auto 0 auto;
   padding: 24px;
   background: var(--paper);
   border: 1px solid var(--rule);
+  border-radius: 20px;
 }
 
 .world-subheader {
-  max-width: 980px;
+  max-width: var(--story-width);
   margin: 34px auto 0 auto;
 }
 
 .world-subheader h3 {
   margin: 0 0 8px 0;
-  font-size: 26px;
+  font-size: clamp(26px, 1.8vw, 34px);
 }
 
 .world-subheader p {
   margin: 0;
   color: var(--muted);
-  font-size: 16px;
+  font-size: clamp(16px, 1.08vw, 21px);
   line-height: 1.42;
 }
 
@@ -41,7 +42,7 @@
 #education-fertility-scatter .error-message,
 #housing-tfr-chart .error-message {
   color: #8B1A1A;
-  font-size: 16px;
+  font-size: clamp(16px, 1.08vw, 21px);
   line-height: 1.4;
 }
 
@@ -72,7 +73,7 @@
 .world-globe-stage {
   position: relative;
   width: 100%;
-  min-height: 610px;
+  min-height: 660px;
   overflow: hidden;
 }
 
@@ -80,12 +81,24 @@
   width: 100%;
 }
 
+#world-fertility-globe .vega-embed,
+#world-fertility-globe svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
 .world-lens {
+  /* Lens grows on bigger screens; clamp keeps it sensible. The two lenses stay
+     symmetric around the centre with a constant gap because the offset uses the
+     same variable. */
+  --lens-size: clamp(150px, 11vw, 175px);
   position: absolute;
+  bottom: 20px;
   pointer-events: auto;
   z-index: 2;
-  width: 125px;
-  height: 125px;
+  width: var(--lens-size);
+  height: var(--lens-size);
   overflow: hidden;
   border: 2px solid #1c1c1c;
   border-radius: 50%;
@@ -94,13 +107,11 @@
 }
 
 .world-lens--europe {
-  top: 34px;
-  left: 390px;
+  left: calc(50% - var(--lens-size) - 15px);
 }
 
 .world-lens--sea {
-  top: 195px;
-  left: 725px;
+  left: calc(50% + 15px);
 }
 
 .world-lens-label {
@@ -120,8 +131,18 @@
 
 #world-lens-europe,
 #world-lens-sea {
-  width: 125px;
-  height: 125px;
+  width: 100%;
+  height: 100%;
+}
+
+/* The lens SVG carries a viewBox, so filling the container scales the map crisply. */
+#world-lens-europe .vega-embed,
+#world-lens-sea .vega-embed,
+#world-lens-europe svg,
+#world-lens-sea svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 #vg-tooltip-element {
@@ -141,11 +162,9 @@
     min-height: 520px;
   }
 
-  .world-lens,
-  #world-lens-europe,
-  #world-lens-sea {
-    width: 105px;
-    height: 105px;
+  .world-lens {
+    --lens-size: 105px;
+    bottom: auto;
   }
 
   .world-lens--europe {
@@ -155,6 +174,7 @@
 
   .world-lens--sea {
     top: 205px;
+    left: auto;
     right: 8px;
   }
 }

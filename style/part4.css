@@ -1,14 +1,15 @@
 .ridgeline-section {
-  padding: 34px 70px 60px 70px;
+  padding: 34px var(--story-pad-x) 60px var(--story-pad-x);
 }
 
 .ridgeline-chart-block {
-  width: 980px;
+  width: var(--story-width);
   max-width: 100%;
   margin: 30px auto 0 auto;
   padding: 24px;
   background: var(--paper);
   border: 1px solid var(--rule);
+  border-radius: 20px;
 }
 
 #asfr-ridgeline {
@@ -16,19 +17,19 @@
 }
 
 .ridgeline-subheader {
-  max-width: 980px;
+  max-width: var(--story-width);
   margin: 34px auto 0 auto;
 }
 
 .ridgeline-subheader h3 {
   margin: 0 0 8px 0;
-  font-size: 26px;
+  font-size: clamp(26px, 1.8vw, 34px);
 }
 
 .ridgeline-subheader p {
   margin: 0;
   color: var(--muted);
-  font-size: 16px;
+  font-size: clamp(16px, 1.08vw, 21px);
   line-height: 1.42;
 }
 
@@ -45,12 +46,13 @@
 /* Part 4 — second visual (state ASFR heatmap), rendered by script/visualize5.js */
 
 .asfr-chart-block {
-  width: 980px;
+  width: var(--story-width);
   max-width: 100%;
   margin: 30px auto 0 auto;
   padding: 24px;
   background: var(--paper);
   border: 1px solid var(--rule);
+  border-radius: 20px;
 }
 
 .asfr-viz-note {

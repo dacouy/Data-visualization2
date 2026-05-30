@@ -1,5 +1,5 @@
 .slope-section {
-  padding: 34px 70px 60px 70px;
+  padding: 34px var(--story-pad-x) 60px var(--story-pad-x);
 }
 
 .slope-chart-block {
@@ -7,12 +7,13 @@
   grid-template-columns: minmax(0, 1fr) 64px;
   gap: 4px;
   align-items: start;
-  width: 980px;
+  width: var(--story-width);
   max-width: 100%;
   margin: 30px auto 0 auto;
   padding: 24px 16px 16px 24px;
   background: var(--paper);
   border: 1px solid var(--rule);
+  border-radius: 20px;
 }
 
 .slope-chart-block .chart-panel-header {
@@ -77,7 +78,7 @@
 
 .slope-chart-follow {
   margin: 22px auto 0 auto;
-  max-width: 980px;
+  max-width: var(--story-width);
 }
 
 @media (max-width: 860px) {

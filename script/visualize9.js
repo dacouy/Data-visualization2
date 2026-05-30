@@ -127,7 +127,7 @@ function buildPyramidSpec(rows, currentYear, chartWidth = 760) {
   return {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
     width: chartWidth,
-    height: 400,
+    height: 320,
     padding: { left: 8, right: 56, top: 8, bottom: 8 },
     background: null,
     layer: [

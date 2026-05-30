@@ -113,7 +113,7 @@ function buildHousingSpec(data) {
             scale: { domain: [0, houseMax] },
             axis: {
               orient: "right",
-              title: "House price index",
+              title: "House price index (bar)",
               titleColor: HOUSE_COLOR,
               titleFontSize: 13,
               titlePadding: 14,
@@ -163,7 +163,7 @@ function buildHousingSpec(data) {
             scale: { domain: [1.3, 2.15], zero: false },
             axis: {
               orient: "left",
-              title: "Total fertility rate (births per woman)",
+              title: "Total fertility rate (line)",
               titleColor: TFR_COLOR,
               titleFontSize: 13,
               titlePadding: 16,

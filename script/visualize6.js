@@ -10,7 +10,7 @@ const WORLD_MID = "#f0dfc2";
 const WORLD_HIGH = "#2f7d32";
 const AUSTRALIA_COLOR = "#1c1c1c";
 const EUROPE_LENS_COUNTRY_FILTER =
-  "indexof(['Albania','Austria','Belarus','Belgium','Bosnia and Herzegovina','Bulgaria','Croatia','Cyprus','Czechia','Denmark','Estonia','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Kosovo','Latvia','Lithuania','Luxembourg','Macedonia','Malta','Moldova','Montenegro','Netherlands','Norway','Poland','Portugal','Romania','Russia','Serbia','Slovakia','Slovenia','Spain','Sweden','Switzerland','Ukraine','United Kingdom'], datum.properties.name) >= 0";
+  "indexof(['Albania','Austria','Belarus','Belgium','Bosnia and Herzegovina','Bulgaria','Croatia','Cyprus','Czechia','Denmark','Estonia','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Kosovo','Latvia','Lithuania','Luxembourg','North Macedonia','Malta','Moldova','Montenegro','Netherlands','Norway','Poland','Portugal','Romania','Russia','Republic of Serbia','Slovakia','Slovenia','Spain','Sweden','Switzerland','Ukraine','United Kingdom'], datum.properties.name) >= 0";
 const SEA_LENS_COUNTRY_FILTER =
   "indexof(['Brunei','Cambodia','East Timor','Indonesia','Laos','Malaysia','Myanmar','Philippines','Singapore','Thailand','Vietnam'], datum.properties.name) >= 0";
 
@@ -136,7 +136,7 @@ function australiaLabelLayer() {
       align: "center",
       baseline: "bottom",
       dx: 4,
-      dy: -12,
+      dy: -7,
       font: WORLD_FONT,
       fontSize: 14,
       fontWeight: "bold",
@@ -150,17 +150,19 @@ function australiaLabelLayer() {
   };
 }
 
-function buildWorldFertilitySpec() {
+function buildWorldFertilitySpec(chartWidth = 980) {
+  const mapScale = Math.min(205, Math.max(170, chartWidth * 0.15));
+
   return {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-    width: "container",
-    height: 610,
+    width: chartWidth,
+    height: 660,
     background: WORLD_BACKGROUND,
     padding: { left: 0, right: 0, top: 0, bottom: 0 },
     projection: {
       type: "naturalEarth1",
-      scale: 185,
-      translate: [455, 286],
+      scale: mapScale,
+      translate: [chartWidth / 2, 300],
     },
     layer: [
       {
@@ -195,7 +197,7 @@ function buildWorldFertilitySpec() {
 }
 
 function buildEuropeLensSpec() {
-  const size = 125;
+  const size = 160;
 
   return {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
@@ -206,7 +208,7 @@ function buildEuropeLensSpec() {
     projection: {
       type: "mercator",
       center: [17, 49],
-      scale: 130,
+      scale: 166,
       translate: [size / 2, size / 2],
     },
     layer: [
@@ -228,7 +230,7 @@ function buildEuropeLensSpec() {
 }
 
 function buildSeaLensSpec() {
-  const size = 125;
+  const size = 160;
 
   return {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
@@ -239,8 +241,8 @@ function buildSeaLensSpec() {
     projection: {
       type: "mercator",
       center: [111, -2],
-      scale: 170,
-      translate: [size / 2 - 2, size / 2 + 25],
+      scale: 218,
+      translate: [size / 2 - 2, size / 2 + 32],
     },
     layer: [
       {
@@ -252,6 +254,33 @@ function buildSeaLensSpec() {
         },
       },
       countryLayer(false, 0.45, [{ filter: SEA_LENS_COUNTRY_FILTER }], true),
+      {
+        // Singapore and Brunei are too small to see at this zoom, so mark them with
+        // dots coloured by their fertility rate (same scale as the choropleth).
+        data: {
+          values: [
+            { lon: 103.82, lat: 1.35, country_name: "Singapore", fertility: 0.97, fertility_display: "0.97", year_display: "2024" },
+            { lon: 114.72, lat: 4.5, country_name: "Brunei", fertility: 1.73, fertility_display: "1.73", year_display: "2024" },
+          ],
+        },
+        mark: {
+          type: "circle",
+          size: 95,
+          stroke: "#ffffff",
+          strokeWidth: 1.2,
+        },
+        encoding: {
+          longitude: { field: "lon", type: "quantitative" },
+          latitude: { field: "lat", type: "quantitative" },
+          color: {
+            field: "fertility",
+            type: "quantitative",
+            scale: { domain: [0.8, 2.1, 5.5], range: [WORLD_LOW, WORLD_MID, WORLD_HIGH] },
+            legend: null,
+          },
+          tooltip: worldTooltip,
+        },
+      },
     ],
     config: {
       view: { stroke: null },
@@ -260,11 +289,39 @@ function buildSeaLensSpec() {
   };
 }
 
-vegaEmbed("#world-fertility-globe", buildWorldFertilitySpec(), {
-  actions: false,
-  renderer: "svg",
-  tooltip: { theme: "light" },
-});
+const worldGlobeEl = document.querySelector("#world-fertility-globe");
+let worldGlobeView = null;
+let worldGlobeRenderTimer = null;
+let lastWorldGlobeWidth = 0;
+
+async function renderWorldGlobe() {
+  if (!worldGlobeEl) return;
+  const width = Math.max(900, Math.floor(worldGlobeEl.clientWidth || worldGlobeEl.getBoundingClientRect().width || 980));
+  if (Math.abs(width - lastWorldGlobeWidth) < 12 && worldGlobeView) return;
+  lastWorldGlobeWidth = width;
+  if (worldGlobeView) {
+    await worldGlobeView.finalize();
+    worldGlobeView = null;
+  }
+  const result = await vegaEmbed("#world-fertility-globe", buildWorldFertilitySpec(width), {
+    actions: false,
+    renderer: "svg",
+    tooltip: { theme: "light" },
+  });
+  worldGlobeView = result.view;
+}
+
+function scheduleWorldGlobeRender() {
+  window.clearTimeout(worldGlobeRenderTimer);
+  worldGlobeRenderTimer = window.setTimeout(renderWorldGlobe, 80);
+}
+
+window.requestAnimationFrame(scheduleWorldGlobeRender);
+if (window.ResizeObserver && worldGlobeEl) {
+  new ResizeObserver(scheduleWorldGlobeRender).observe(worldGlobeEl);
+} else {
+  window.addEventListener("resize", scheduleWorldGlobeRender);
+}
 
 vegaEmbed("#world-lens-europe", buildEuropeLensSpec(), {
   actions: false,
