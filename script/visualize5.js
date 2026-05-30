@@ -248,7 +248,7 @@ async function renderAsfrHeatmap() {
 
     const noteEl = document.getElementById("asfr-viz-note");
     if (noteEl) {
-      noteEl.textContent = `${buildChartSubtitle(peakAge, earliestStates, earliestBand, rows)} Age-specific fertility by state, 2024.`;
+      noteEl.textContent = buildChartSubtitle(peakAge, earliestStates, earliestBand, rows);
     }
 
     if (!container) return;

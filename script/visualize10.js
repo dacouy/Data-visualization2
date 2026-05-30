@@ -169,12 +169,13 @@ function buildSpec(rows) {
     axis: totalYAxis,
   };
 
-  return {
+    return {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
     background: null,
     autosize: { type: "fit-x", contains: "padding" },
     width: "container",
     height: 340,
+    padding: { top: 18, right: 28, bottom: 8, left: 8 },
     layer: [
           {
             data: { values: fanRows },
@@ -225,17 +226,7 @@ function buildSpec(rows) {
                   domain: ["High", "Medium", "Low"],
                   range: [COLORS.high, COLORS.medium, COLORS.low],
                 },
-                legend: {
-                  orient: "top-right",
-                  direction: "horizontal",
-                  title: null,
-                  labelFont: "Times New Roman",
-                  labelFontSize: 15,
-                  labelColor: COLORS.muted,
-                  symbolType: "stroke",
-                  symbolStrokeWidth: 3,
-                  offset: 0,
-                },
+                legend: null,
               },
               strokeWidth: {
                 condition: { test: "datum.scenario === 'medium'", value: 4 },
@@ -306,6 +297,16 @@ async function renderFanChart() {
       actions: false,
       renderer: "svg",
     });
+
+    const legend = document.createElement("div");
+    legend.className = "fan-legend";
+    legend.setAttribute("aria-label", "Projection scenario legend");
+    legend.innerHTML = `
+      <span><i style="background:${COLORS.high}"></i>High</span>
+      <span><i style="background:${COLORS.medium}"></i>Medium</span>
+      <span><i style="background:${COLORS.low}"></i>Low</span>
+    `;
+    container.prepend(legend);
 
     const source = document.createElement("p");
     source.className = "fan-source";

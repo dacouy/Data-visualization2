@@ -4,7 +4,7 @@
 }
 
 .closing-chart-block {
-  width: 980px;
+  width: min(1080px, calc(100vw - 112px));
   max-width: 100%;
   margin-top: 30px;
   padding: 26px;
@@ -15,12 +15,42 @@
 #population-futures-chart {
   position: relative;
   width: 100%;
+  padding-top: 34px;
 }
 
 #population-futures-chart svg {
   display: block;
   width: 100%;
   height: auto;
+}
+
+.fan-legend {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  color: var(--muted);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.fan-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fan-legend i {
+  display: inline-block;
+  width: 16px;
+  height: 3px;
 }
 
 #population-futures-chart .error-message {
@@ -38,7 +68,7 @@
   border: 1px solid var(--rule);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
   color: var(--ink);
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 1.35;
   pointer-events: none;
@@ -74,5 +104,14 @@
 
   .fan-tooltip {
     display: none;
+  }
+
+  .fan-legend {
+    position: static;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    margin-bottom: 8px;
+    font-size: 13px;
   }
 }

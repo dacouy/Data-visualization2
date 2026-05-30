@@ -83,7 +83,7 @@
   align-items: stretch;
   gap: 28px;
   width: 100%;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: var(--ink);
 }
 
