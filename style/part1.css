@@ -84,6 +84,16 @@ h2 {
   text-align: left;
 }
 
+.number-kicker {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 .number {
   display: block;
   color: var(--red);

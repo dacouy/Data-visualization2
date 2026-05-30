@@ -127,6 +127,7 @@ function buildThreeYearRidgelineSpec(values) {
             legend: {
               title: null,
               orient: "top-right",
+              offset: 13,
               labelFont: RIDGE_FONT,
               labelFontSize: 16,
               symbolType: "stroke",

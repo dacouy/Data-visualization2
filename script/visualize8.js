@@ -301,7 +301,7 @@ function buildScatterSpec(rows) {
             legend: {
               title: "Population",
               values: [10_000_000, 100_000_000, 1_000_000_000],
-              format: ".2s",
+              labelExpr: "datum.value >= 1000000000 ? datum.value / 1000000000 + 'B' : datum.value / 1000000 + 'M'",
               titleFont: "Times New Roman",
               labelFont: "Times New Roman",
             },
@@ -329,13 +329,16 @@ function buildScatterSpec(rows) {
           ],
         },
       },
-      {
-        transform: [{ filter: "datum.highlight !== 'Other'" }],
+      ...[
+        { countries: ["AUS", "KOR"], dx: 8 },
+        { countries: ["CHN", "IND"], dx: 18 },
+      ].map(({ countries, dx }) => ({
+        transform: [{ filter: { field: "highlight", oneOf: countries } }],
         mark: {
           type: "text",
           align: "left",
           baseline: "middle",
-          dx: 8,
+          dx,
           font: "Times New Roman",
           fontSize: 12,
           fontWeight: "bold",
@@ -354,7 +357,7 @@ function buildScatterSpec(rows) {
             legend: null,
           },
         },
-      },
+      })),
       {
         data: {
           values: [

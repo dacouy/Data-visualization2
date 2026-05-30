@@ -1,5 +1,5 @@
 (() => {
-const FAN_URL = "data/part7/population_scenario_fan_2024_2054.csv";
+const FAN_URL = "data/part7/population_scenario_fan_2024_2071.csv";
 
 const COLORS = {
   low: "#8B3A2E",
@@ -131,9 +131,9 @@ function buildSpec(rows) {
   const baseX = {
     field: "year",
     type: "quantitative",
-    scale: { domain: [2024, 2054] },
+    scale: { domain: [2024, 2071] },
     axis: {
-      values: [2024, 2030, 2035, 2040, 2045, 2050, 2054],
+      values: [2024, 2035, 2045, 2055, 2065, 2071],
       format: "d",
       labelAngle: 0,
       labelColor: COLORS.muted,
@@ -153,7 +153,7 @@ function buildSpec(rows) {
     titleColor: COLORS.muted,
     titleFont: "Times New Roman",
     titleFontSize: 13,
-    values: [28000000, 32000000, 36000000, 40000000],
+    values: [28000000, 34000000, 40000000, 46000000],
     labelExpr: "datum.value / 1000000 + 'M'",
     labelColor: COLORS.muted,
     tickColor: COLORS.rule,
@@ -165,7 +165,7 @@ function buildSpec(rows) {
   const totalY = {
     field: "total_population",
     type: "quantitative",
-    scale: { domain: [26000000, 41000000], zero: false },
+    scale: { domain: [26000000, 47000000], zero: false },
     axis: totalYAxis,
   };
 
@@ -184,7 +184,7 @@ function buildSpec(rows) {
               y: {
                 field: "high",
                 type: "quantitative",
-                scale: { domain: [26000000, 41000000], zero: false },
+                scale: { domain: [26000000, 47000000], zero: false },
                 axis: totalYAxis,
               },
               y2: { field: "medium" },
@@ -202,7 +202,7 @@ function buildSpec(rows) {
               y: {
                 field: "medium",
                 type: "quantitative",
-                scale: { domain: [26000000, 41000000], zero: false },
+                scale: { domain: [26000000, 47000000], zero: false },
                 axis: totalYAxis,
               },
               y2: { field: "low" },
