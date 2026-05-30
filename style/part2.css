@@ -9,7 +9,7 @@
   align-items: start;
   width: 980px;
   max-width: 100%;
-  margin-top: 30px;
+  margin: 30px auto 0 auto;
   padding: 24px 16px 16px 24px;
   background: var(--paper);
   border: 1px solid var(--rule);
@@ -76,7 +76,7 @@
 }
 
 .slope-chart-follow {
-  margin-top: 22px;
+  margin: 22px auto 0 auto;
   max-width: 980px;
 }
 
