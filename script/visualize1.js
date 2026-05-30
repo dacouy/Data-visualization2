@@ -108,7 +108,7 @@ function buildHeroSpec(data) {
     ...tfrField,
     scale: yScale,
     axis: {
-      title: "Total fertility rate",
+      title: "Total fertility rate (births per woman)",
       titlePadding: 17,
       values: Y_TICKS,
       format: ".1f",

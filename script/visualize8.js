@@ -2,7 +2,6 @@
 const EDUCATION_URL = "data/part5/education.csv";
 const FERTILITY_URL = "data/part5/fertility_rate.csv";
 const POPULATION_URL = "data/part5/population_2024.csv";
-const WORLD_FONT = "Times New Roman";
 const POINT_COLOR = "#9B9690";
 const TREND_COLOR = "#8B1A1A";
 const HIGHLIGHT_COLORS = {
@@ -16,7 +15,7 @@ const AGGREGATE_CODES = new Set([
   "EMU", "EUU", "FCS", "HIC", "HPC", "IBD", "IBT", "IDA", "IDB", "IDX",
   "INX", "LAC", "LCN", "LDC", "LIC", "LMC", "LMY", "LTE", "MEA", "MIC",
   "MNA", "NAC", "OED", "OSS", "PRE", "PSS", "PST", "SAS", "SSA", "SSF",
-  "SST", "TEA", "TEC", "TLA", "TMN", "TSA", "TSS", "UMC", "WLD"
+  "SST", "TEA", "TEC", "TLA", "TMN", "TSA", "TSS", "UMC", "WLD",
 ]);
 const COUNTRY_NAME_ALIASES = new Map(
   Object.entries({
@@ -83,15 +82,9 @@ function parseWdiCsv(text) {
   const headerIndex = lines.findIndex((line) =>
     parseCsvLine(line).some((value) => value.replace(/^\uFEFF/, "") === "Country Name")
   );
+  if (headerIndex < 0) throw new Error("Could not find World Bank CSV header.");
 
-  if (headerIndex < 0) {
-    throw new Error("Could not find World Bank CSV header.");
-  }
-
-  const headers = parseCsvLine(lines[headerIndex]).map((header) =>
-    header.replace(/^\uFEFF/, "")
-  );
-
+  const headers = parseCsvLine(lines[headerIndex]).map((header) => header.replace(/^\uFEFF/, ""));
   return lines.slice(headerIndex + 1).map((line) => {
     const values = parseCsvLine(line);
     return Object.fromEntries(headers.map((header, index) => [header, values[index] ?? ""]));
@@ -104,7 +97,6 @@ function parseSimpleCsv(text) {
     .map((line) => line.trim())
     .filter(Boolean);
   const headers = parseCsvLine(lines[0]).map((header) => header.replace(/^\uFEFF/, ""));
-
   return lines.slice(1).map((line) => {
     const values = parseCsvLine(line);
     return Object.fromEntries(headers.map((header, index) => [header, values[index] ?? ""]));
@@ -135,14 +127,12 @@ function latestValue(row, startYear = 2019, endYear = 2024) {
 
 function buildPopulationByCountry(populationRows) {
   const populationByCountry = new Map();
-
   populationRows.forEach((row) => {
     const country = row.Country;
     const population = toNumber(row["Population 2024"]);
     if (!country || population === null) return;
     populationByCountry.set(countryKey(country), population);
   });
-
   return populationByCountry;
 }
 
@@ -158,7 +148,6 @@ function buildScatterData(educationRows, fertilityRows, populationRows) {
       fertilityByCode.set(code, {
         fertility: latest.value,
         fertilityYear: latest.year,
-        country: row["Country Name"],
       });
     }
   });
@@ -170,6 +159,7 @@ function buildScatterData(educationRows, fertilityRows, populationRows) {
       const education = latestValue(row, 2019, 2024);
       const fertility = fertilityByCode.get(code);
       if (!education || !fertility) return null;
+      const highlight = HIGHLIGHT_COLORS[code] ? code : "Other";
       return {
         code,
         country: row["Country Name"],
@@ -178,57 +168,14 @@ function buildScatterData(educationRows, fertilityRows, populationRows) {
         fertility: fertility.fertility,
         fertilityYear: fertility.fertilityYear,
         population: populationByCountry.get(countryKey(row["Country Name"])) ?? null,
+        population_for_size: populationByCountry.get(countryKey(row["Country Name"])) ?? 1_000_000,
+        highlight,
+        label: HIGHLIGHT_COLORS[code] ? code : "",
       };
     })
     .filter(Boolean)
     .filter((row) => row.education >= 0 && row.education <= 160 && row.fertility > 0)
     .sort((a, b) => a.education - b.education);
-}
-
-function scaleLinear(domainMin, domainMax, rangeMin, rangeMax) {
-  return (value) => {
-    const ratio = (value - domainMin) / (domainMax - domainMin);
-    return rangeMin + ratio * (rangeMax - rangeMin);
-  };
-}
-
-function scaleSqrt(domainMin, domainMax, rangeMin, rangeMax) {
-  const sqrtMin = Math.sqrt(domainMin);
-  const sqrtMax = Math.sqrt(domainMax);
-
-  return (value) => {
-    const safeValue = Math.max(domainMin, Math.min(domainMax, value));
-    const ratio = (Math.sqrt(safeValue) - sqrtMin) / (sqrtMax - sqrtMin);
-    return rangeMin + ratio * (rangeMax - rangeMin);
-  };
-}
-
-function formatPopulation(value) {
-  if (value === null) return "No population match";
-  if (value >= 1_000_000_000) return `${(value / 1_000_000_000).toFixed(2)}B`;
-  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
-  if (value >= 1_000) return `${(value / 1_000).toFixed(0)}K`;
-  return String(Math.round(value));
-}
-
-function createSvgElement(tag, attrs = {}) {
-  const element = document.createElementNS("http://www.w3.org/2000/svg", tag);
-  Object.entries(attrs).forEach(([key, value]) => {
-    element.setAttribute(key, String(value));
-  });
-  return element;
-}
-
-function appendText(svg, text, x, y, attrs = {}) {
-  const element = createSvgElement("text", {
-    x,
-    y,
-    "font-family": WORLD_FONT,
-    ...attrs,
-  });
-  element.textContent = text;
-  svg.appendChild(element);
-  return element;
 }
 
 function linearRegression(rows) {
@@ -238,7 +185,6 @@ function linearRegression(rows) {
   let numerator = 0;
   let denomX = 0;
   let denomY = 0;
-
   rows.forEach((row) => {
     const dx = row.education - meanX;
     const dy = row.fertility - meanY;
@@ -246,257 +192,205 @@ function linearRegression(rows) {
     denomX += dx * dx;
     denomY += dy * dy;
   });
-
-  const slope = numerator / denomX;
-  const intercept = meanY - slope * meanX;
-  const r = numerator / Math.sqrt(denomX * denomY);
-
-  return { slope, intercept, r };
+  return {
+    slope: numerator / denomX,
+    intercept: meanY - (numerator / denomX) * meanX,
+    r: numerator / Math.sqrt(denomX * denomY),
+  };
 }
 
-function drawScatter(rows) {
-  const container = document.querySelector("#education-fertility-scatter");
-  if (!container) return;
-  container.innerHTML = "";
-
-  const width = 960;
-  const height = 620;
-  const margin = { left: 86, right: 96, top: 86, bottom: 78 };
-  const plotLeft = margin.left;
-  const plotRight = width - margin.right;
-  const plotTop = margin.top;
-  const plotBottom = height - margin.bottom;
-  const maxEducation = Math.ceil(Math.max(...rows.map((row) => row.education)) / 20) * 20;
-  const xMax = Math.max(100, maxEducation);
-  const yMax = Math.ceil(Math.max(...rows.map((row) => row.fertility)) * 2) / 2;
-  const xScale = scaleLinear(0, xMax, plotLeft, plotRight);
-  const yScale = scaleLinear(0, yMax, plotBottom, plotTop);
-  const populationValues = rows
-    .map((row) => row.population)
-    .filter((value) => value !== null && value > 0);
-  const populationScale = scaleSqrt(
-    Math.min(...populationValues),
-    Math.max(...populationValues),
-    4,
-    18
-  );
+function buildScatterSpec(rows) {
   const regression = linearRegression(rows);
+  const xMax = Math.max(100, Math.ceil(Math.max(...rows.map((row) => row.education)) / 20) * 20);
+  const yMax = Math.ceil(Math.max(...rows.map((row) => row.fertility)) * 2) / 2;
 
-  const svg = createSvgElement("svg", {
-    viewBox: `0 0 ${width} ${height}`,
-    role: "img",
-    "aria-label": "Scatterplot of tertiary education and fertility by country",
-  });
-  container.appendChild(svg);
+  // Draw the trend line only over the central span of the data (trim the high
+  // education outliers like South Korea) so the dashed line is not too long.
+  const eduSorted = rows.map((row) => row.education).sort((a, b) => a - b);
+  const regressionExtent = [
+    eduSorted[0],
+    eduSorted[eduSorted.length - 2] +
+      0.35 * (eduSorted[eduSorted.length - 1] - eduSorted[eduSorted.length - 2]),
+  ];
 
-  appendText(svg, "Education gradient", plotLeft, 34, {
-    "font-size": 24,
-    "font-weight": "bold",
-    fill: "#1C1C1C",
-  });
-  appendText(
-    svg,
-    "Tertiary enrolment vs fertility rate. Circle size shows 2024 population.",
-    plotLeft,
-    58,
-    { "font-size": 14, fill: "#4A4038" }
-  );
-
-  const xTicks = Array.from({ length: Math.floor(xMax / 20) + 1 }, (_, i) => i * 20);
-  const yTicks = Array.from({ length: Math.floor(yMax) + 1 }, (_, i) => i);
-
-  yTicks.forEach((tick) => {
-    const y = yScale(tick);
-    svg.appendChild(
-      createSvgElement("line", {
-        x1: plotLeft,
-        x2: plotRight,
-        y1: y,
-        y2: y,
-        stroke: "#D8CFC0",
-        "stroke-opacity": 0.45,
-      })
-    );
-    appendText(svg, String(tick), plotLeft - 10, y + 4, {
-      "font-size": 11,
-      fill: "#4A4038",
-      "text-anchor": "end",
-    });
-  });
-
-  xTicks.filter((tick) => tick !== 0).forEach((tick) => {
-    const x = xScale(tick);
-    svg.appendChild(
-      createSvgElement("line", {
-        x1: x,
-        x2: x,
-        y1: plotBottom,
-        y2: plotBottom + 5,
-        stroke: "#8B8177",
-      })
-    );
-    appendText(svg, String(tick), x, plotBottom + 22, {
-      "font-size": 11,
-      fill: "#4A4038",
-      "text-anchor": "middle",
-    });
-  });
-
-  svg.appendChild(
-    createSvgElement("line", {
-      x1: plotLeft,
-      x2: plotRight,
-      y1: plotBottom,
-      y2: plotBottom,
-      stroke: "#8B8177",
-    })
-  );
-  svg.appendChild(
-    createSvgElement("line", {
-      x1: plotLeft,
-      x2: plotLeft,
-      y1: plotTop,
-      y2: plotBottom,
-      stroke: "#8B8177",
-    })
-  );
-
-  appendText(svg, "Tertiary education enrolment (% gross)", (plotLeft + plotRight) / 2, height - 22, {
-    "font-size": 13,
-    "font-weight": "bold",
-    fill: POINT_COLOR,
-    "text-anchor": "middle",
-  });
-  const yLabelX = 34;
-  const yLabel = appendText(svg, "Fertility rate (births per woman)", yLabelX, (plotTop + plotBottom) / 2, {
-    "font-size": 13,
-    "font-weight": "bold",
-    fill: TREND_COLOR,
-    "text-anchor": "middle",
-  });
-  yLabel.setAttribute("transform", `rotate(-90 ${yLabelX} ${(plotTop + plotBottom) / 2})`);
-
-  const trendX1 = 0;
-  const trendXAtZero =
-    regression.slope < 0 ? (0 - regression.intercept) / regression.slope : xMax;
-  const trendX2 = Math.min(xMax, Math.max(trendX1, trendXAtZero));
-  const trendY1 = regression.intercept + regression.slope * trendX1;
-  const trendY2 = regression.intercept + regression.slope * trendX2;
-  svg.appendChild(
-    createSvgElement("line", {
-      x1: xScale(trendX1),
-      x2: xScale(trendX2),
-      y1: yScale(trendY1),
-      y2: yScale(trendY2),
-      stroke: TREND_COLOR,
-      "stroke-width": 2.4,
-      "stroke-dasharray": "6 4",
-      opacity: 0.85,
-    })
-  );
-
-  const tooltip = document.createElement("div");
-  tooltip.className = "scatter-tooltip";
-  container.appendChild(tooltip);
-
-  [...rows]
-    .sort((a, b) => (b.population ?? 0) - (a.population ?? 0))
-    .forEach((row) => {
-      const highlighted = Boolean(HIGHLIGHT_COLORS[row.code]);
-      const radius =
-        row.population !== null && row.population > 0
-          ? populationScale(row.population)
-          : highlighted
-            ? 5.8
-            : 4.2;
-      const point = createSvgElement("circle", {
-        cx: xScale(row.education),
-        cy: yScale(row.fertility),
-        r: highlighted ? radius + 2.2 : radius,
-        fill: highlighted ? HIGHLIGHT_COLORS[row.code] : POINT_COLOR,
-        opacity: highlighted ? 0.96 : 0.34,
-        stroke: highlighted ? "#1C1C1C" : "#FFFFFF",
-        "stroke-width": highlighted ? 2 : 1,
-      });
-      point.addEventListener("mouseenter", (event) => showTooltip(event, tooltip, row));
-      point.addEventListener("mousemove", (event) => showTooltip(event, tooltip, row));
-      point.addEventListener("mouseleave", () => {
-        tooltip.style.opacity = "0";
-      });
-      svg.appendChild(point);
-    });
-
-  const legendX = plotRight + 7;
-  const legendY = plotTop + (plotBottom - plotTop) / 2 - 12;
-  appendText(svg, "Population", legendX, legendY - 18, {
-    "font-size": 12,
-    "font-weight": "bold",
-    fill: "#4A4038",
-  });
-  [
-    { label: "10M", value: 10_000_000 },
-    { label: "100M", value: 100_000_000 },
-    { label: "1B", value: 1_000_000_000 },
-  ].forEach((item, index) => {
-    const x = legendX + index * 36;
-    svg.appendChild(
-      createSvgElement("circle", {
-        cx: x,
-        cy: legendY,
-        r: populationScale(item.value),
-        fill: POINT_COLOR,
-        opacity: 0.32,
-        stroke: "#FFFFFF",
-        "stroke-width": 1,
-      })
-    );
-    appendText(svg, item.label, x, legendY + 30, {
-      "font-size": 11,
-      fill: "#4A4038",
-      "text-anchor": "middle",
-    });
-  });
-
-  rows
-    .filter((row) => HIGHLIGHT_COLORS[row.code])
-    .forEach((row) => {
-      const labelOffset = {
-        AUS: { dx: 8, dy: -8 },
-        KOR: { dx: 8, dy: -8 },
-        CHN: { dx: 8, dy: 27 },
-        IND: { dx: 8, dy: -21 },
-      }[row.code];
-      appendText(svg, row.code, xScale(row.education) + labelOffset.dx, yScale(row.fertility) + labelOffset.dy, {
-        "font-size": 11,
-        "font-weight": "bold",
-        fill: HIGHLIGHT_COLORS[row.code],
-      });
-    });
-
-  appendText(svg, `Correlation r = ${regression.r.toFixed(2)}`, plotRight - 6, plotTop + 12, {
-    "font-size": 13,
-    "font-weight": "bold",
-    fill: TREND_COLOR,
-    "text-anchor": "end",
-  });
-  appendText(svg, "Higher education is associated with lower fertility", plotRight - 6, plotTop + 32, {
-    "font-size": 12,
-    fill: "#4A4038",
-    "text-anchor": "end",
-  });
-}
-
-function showTooltip(event, tooltip, row) {
-  const rect = tooltip.parentElement.getBoundingClientRect();
-  tooltip.innerHTML = `
-    <strong>${row.country}</strong><br>
-    Tertiary enrolment: ${row.education.toFixed(1)}% (${row.educationYear})<br>
-    Fertility rate: ${row.fertility.toFixed(2)} (${row.fertilityYear})<br>
-    Population: ${formatPopulation(row.population)}
-  `;
-  tooltip.style.opacity = "1";
-  tooltip.style.left = `${event.clientX - rect.left + 14}px`;
-  tooltip.style.top = `${event.clientY - rect.top + 14}px`;
+  return {
+    $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+    width: "container",
+    height: 500,
+    background: null,
+    data: { values: rows },
+    layer: [
+      {
+        transform: [{ regression: "fertility", on: "education", extent: regressionExtent }],
+        mark: {
+          type: "line",
+          color: TREND_COLOR,
+          strokeDash: [3, 3],
+          strokeWidth: 2.4,
+          opacity: 0.85,
+        },
+        encoding: {
+          x: {
+            field: "education",
+            type: "quantitative",
+            scale: { domain: [0, xMax] },
+            axis: {
+              title: "Tertiary education enrolment (% gross)",
+              titleColor: POINT_COLOR,
+              labelColor: "#4A4038",
+              grid: false,
+              domainColor: "#8B8177",
+              tickColor: "#8B8177",
+            },
+          },
+          y: {
+            field: "fertility",
+            type: "quantitative",
+            scale: { domain: [0, yMax] },
+            axis: {
+              title: "Fertility rate (births per woman)",
+              titleColor: TREND_COLOR,
+              labelColor: "#4A4038",
+              gridColor: "#D8CFC0",
+              gridOpacity: 0.45,
+              domainColor: "#8B8177",
+              tickColor: "#8B8177",
+            },
+          },
+        },
+      },
+      {
+        mark: {
+          type: "circle",
+          opacity: 0.48,
+          stroke: "white",
+          strokeWidth: 1,
+        },
+        encoding: {
+          x: {
+            field: "education",
+            type: "quantitative",
+            scale: { domain: [0, xMax] },
+            axis: {
+              title: "Tertiary education enrolment (% gross)",
+              titleColor: POINT_COLOR,
+              labelColor: "#4A4038",
+              grid: false,
+              domainColor: "#8B8177",
+              tickColor: "#8B8177",
+            },
+          },
+          y: {
+            field: "fertility",
+            type: "quantitative",
+            scale: { domain: [0, yMax] },
+            axis: {
+              title: "Fertility rate (births per woman)",
+              titleColor: TREND_COLOR,
+              labelColor: "#4A4038",
+              gridColor: "#D8CFC0",
+              gridOpacity: 0.45,
+              domainColor: "#8B8177",
+              tickColor: "#8B8177",
+            },
+          },
+          size: {
+            field: "population_for_size",
+            type: "quantitative",
+            scale: { type: "sqrt", range: [18, 900] },
+            legend: {
+              title: "Population",
+              values: [10_000_000, 100_000_000, 1_000_000_000],
+              format: ".2s",
+              titleFont: "Times New Roman",
+              labelFont: "Times New Roman",
+            },
+          },
+          color: {
+            field: "highlight",
+            type: "nominal",
+            scale: {
+              domain: ["Other", "AUS", "KOR", "CHN", "IND"],
+              range: [POINT_COLOR, HIGHLIGHT_COLORS.AUS, HIGHLIGHT_COLORS.KOR, HIGHLIGHT_COLORS.CHN, HIGHLIGHT_COLORS.IND],
+            },
+            legend: null,
+          },
+          opacity: {
+            condition: { test: "datum.highlight !== 'Other'", value: 0.96 },
+            value: 0.34,
+          },
+          tooltip: [
+            { field: "country", type: "nominal", title: "Country" },
+            { field: "education", type: "quantitative", title: "Tertiary enrolment", format: ".1f" },
+            { field: "educationYear", type: "ordinal", title: "Education year" },
+            { field: "fertility", type: "quantitative", title: "Fertility rate", format: ".2f" },
+            { field: "fertilityYear", type: "ordinal", title: "Fertility year" },
+            { field: "population", type: "quantitative", title: "Population", format: ",.0f" },
+          ],
+        },
+      },
+      {
+        transform: [{ filter: "datum.highlight !== 'Other'" }],
+        mark: {
+          type: "text",
+          align: "left",
+          baseline: "middle",
+          dx: 8,
+          font: "Times New Roman",
+          fontSize: 12,
+          fontWeight: "bold",
+        },
+        encoding: {
+          x: { field: "education", type: "quantitative", scale: { domain: [0, xMax] } },
+          y: { field: "fertility", type: "quantitative", scale: { domain: [0, yMax] } },
+          text: { field: "label" },
+          color: {
+            field: "highlight",
+            type: "nominal",
+            scale: {
+              domain: ["AUS", "KOR", "CHN", "IND"],
+              range: [HIGHLIGHT_COLORS.AUS, HIGHLIGHT_COLORS.KOR, HIGHLIGHT_COLORS.CHN, HIGHLIGHT_COLORS.IND],
+            },
+            legend: null,
+          },
+        },
+      },
+      {
+        data: {
+          values: [
+            {
+              x: xMax,
+              y: yMax * 0.96,
+              label: `Correlation r = ${regression.r.toFixed(2)}`,
+            },
+          ],
+        },
+        mark: {
+          type: "text",
+          align: "right",
+          font: "Times New Roman",
+          fontSize: 13,
+          fontWeight: "bold",
+          color: TREND_COLOR,
+        },
+        encoding: {
+          x: { field: "x", type: "quantitative", scale: { domain: [0, xMax] } },
+          y: { field: "y", type: "quantitative", scale: { domain: [0, yMax] } },
+          text: { field: "label" },
+        },
+      },
+    ],
+    config: {
+      font: "Times New Roman",
+      axis: {
+        labelFont: "Times New Roman",
+        titleFont: "Times New Roman",
+        labelFontSize: 12,
+        titleFontSize: 13,
+      },
+      view: { stroke: null },
+    },
+  };
 }
 
 async function renderEducationScatter() {
@@ -524,17 +418,8 @@ async function renderEducationScatter() {
       parseSimpleCsv(populationText)
     );
 
-    if (rows.length < 10) {
-      throw new Error(`Only ${rows.length} joined countries available.`);
-    }
-
-    console.log(`Education/fertility scatter joined countries: ${rows.length}`);
-    console.log(
-      `Education/fertility scatter countries with population: ${
-        rows.filter((row) => row.population !== null).length
-      }`
-    );
-    drawScatter(rows);
+    if (rows.length < 10) throw new Error(`Only ${rows.length} joined countries available.`);
+    await vegaEmbed(container, buildScatterSpec(rows), { actions: false, renderer: "svg" });
   } catch (error) {
     console.error("Education/fertility scatter failed:", error);
     if (container) {

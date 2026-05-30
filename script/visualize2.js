@@ -95,19 +95,7 @@ function buildDumbbellSpec({ segments, points, national, stateOrder }) {
     width: "container",
     height: 300,
     background: CHART_BACKGROUND,
-    padding: { left: 28, right: 42, top: 38, bottom: 30 },
-    title: {
-      text: "Every jurisdiction moved lower",
-      subtitle: "Total fertility rate by state and territory, 2014 vs 2024",
-      anchor: "start",
-      font: FONT,
-      subtitleFont: FONT,
-      fontSize: 28,
-      subtitleFontSize: 15,
-      color: "#1C1C1C",
-      subtitleColor: "#6f6255",
-      offset: 12,
-    },
+    padding: { left: 86, right: 42, top: 38, bottom: 30 },
     layer: [
       {
         data: {
@@ -132,12 +120,12 @@ function buildDumbbellSpec({ segments, points, national, stateOrder }) {
             {
               x: AVG_2014,
               state: stateOrder[0],
-              label: `Aust. avg 2014: ${national.tfr2014.toFixed(3)}`,
+              label: `Avg fertility rate 2014: ${national.tfr2014.toFixed(3)}`,
             },
             {
               x: AVG_2024,
               state: stateOrder[0],
-              label: `Aust. avg 2024: ${national.tfr2024.toFixed(3)}`,
+              label: `Avg fertility rate 2024: ${national.tfr2024.toFixed(3)}`,
             },
           ],
         },
@@ -174,11 +162,15 @@ function buildDumbbellSpec({ segments, points, national, stateOrder }) {
             type: "nominal",
             sort: stateOrder,
             axis: {
-              title: null,
+              title: "State / territory",
               labelFont: FONT,
               labelFontSize: 15,
               labelColor: "#1C1C1C",
               labelPadding: 7,
+              titleFont: FONT,
+              titleFontSize: 13,
+              titleColor: "#6f6255",
+              titlePadding: 12,
               ticks: false,
               domain: false,
             },

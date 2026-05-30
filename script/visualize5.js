@@ -1,11 +1,9 @@
-// visualize5.js — state × age ASFR heatmap (Part 4, second visual). Data: data/part4/asfr_state_2024.csv
+(() => {
+// visualize5.js - state x age ASFR heatmap (Part 4, second visual). Data: data/part4/asfr_state_2024.csv
 const ASFR_CSV_URL = "data/part4/asfr_state_2024.csv";
 const AGE_ORDER = ["15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49"];
 const ALL_STATES = ["NSW", "VIC", "QLD", "SA", "WA", "TAS", "NT", "ACT", "Australia"];
 const ASFR_EPS = 1e-6;
-
-const COLOR_LOW = "#fff5eb";
-const COLOR_HIGH = "#7f0f0f";
 
 function parseAsfrCsv(text) {
   return text
@@ -20,240 +18,249 @@ function parseAsfrCsv(text) {
 }
 
 function verifyGrid(rows) {
-  const keys = new Set(rows.map((r) => `${r.state}|${r.age_group}`));
+  const keys = new Set(rows.map((row) => `${row.state}|${row.age_group}`));
   const missing = [];
-  for (const st of ALL_STATES) {
-    for (const ag of AGE_ORDER) {
-      if (!keys.has(`${st}|${ag}`)) missing.push([st, ag]);
+  for (const state of ALL_STATES) {
+    for (const age of AGE_ORDER) {
+      if (!keys.has(`${state}|${age}`)) missing.push([state, age]);
     }
   }
   if (missing.length) console.warn("ASFR grid missing cells:", missing);
-  else console.info("ASFR grid: 9×7 = 63 cells OK.");
-  return missing;
-}
-
-function ageGroupIndex(ag) {
-  return AGE_ORDER.indexOf(ag);
 }
 
 function buildYOrderAndPeaks(rows) {
   const byState = {};
-  for (const r of rows) {
-    if (!byState[r.state]) byState[r.state] = [];
-    byState[r.state].push(r);
-  }
-  const peakIdx = {};
-  const peakAge = {};
-  for (const st of ALL_STATES) {
-    let best = -Infinity;
-    let peak = null;
-    for (const r of byState[st]) {
-      if (r.asfr > best) {
-        best = r.asfr;
-        peak = r.age_group;
-      }
-    }
-    peakIdx[st] = ageGroupIndex(peak);
-    peakAge[st] = peak;
-  }
+  rows.forEach((row) => {
+    if (!byState[row.state]) byState[row.state] = [];
+    byState[row.state].push(row);
+  });
 
-  const tieNoAu = { ACT: 0, NSW: 1, VIC: 2, SA: 3, WA: 4, TAS: 5, QLD: 6, NT: 7 };
-  const nonAu = ALL_STATES.filter((s) => s !== "Australia");
+  const peakAge = {};
+  const peakIndex = {};
+  ALL_STATES.forEach((state) => {
+    const best = byState[state].reduce((winner, row) => (row.asfr > winner.asfr ? row : winner));
+    peakAge[state] = best.age_group;
+    peakIndex[state] = AGE_ORDER.indexOf(best.age_group);
+  });
+
+  const tieOrder = { ACT: 0, NSW: 1, VIC: 2, SA: 3, WA: 4, TAS: 5, QLD: 6, NT: 7 };
+  const nonAustralia = ALL_STATES.filter((state) => state !== "Australia");
   const yOrder = [
-    ...nonAu.slice().sort((a, b) => {
-      const ia = peakIdx[a];
-      const ib = peakIdx[b];
-      if (ib !== ia) return ib - ia;
-      return tieNoAu[a] - tieNoAu[b];
+    ...nonAustralia.slice().sort((a, b) => {
+      if (peakIndex[b] !== peakIndex[a]) return peakIndex[b] - peakIndex[a];
+      return tieOrder[a] - tieOrder[b];
     }),
     "Australia",
   ];
 
-  const maxByState = {};
-  for (const st of ALL_STATES) {
-    maxByState[st] = Math.max(...byState[st].map((r) => r.asfr));
-  }
+  const maxByState = Object.fromEntries(
+    ALL_STATES.map((state) => [state, Math.max(...byState[state].map((row) => row.asfr))])
+  );
+  const enriched = rows.map((row) => ({
+    ...row,
+    is_peak: Math.abs(row.asfr - maxByState[row.state]) < ASFR_EPS,
+    label_color:
+      row.asfr > 80 || row.age_group === "25-29" || row.age_group === "35-39" || (row.state === "NT" && row.age_group === "20-24")
+        ? "white"
+        : "#1c1c1c",
+  }));
 
-  const enriched = rows.map((r) => {
-    const isPeak = Math.abs(r.asfr - maxByState[r.state]) < ASFR_EPS;
-    return {
-      ...r,
-      is_peak: isPeak ? 1 : 0,
-    };
-  });
-
-  const minPeakIdx = Math.min(...nonAu.map((s) => peakIdx[s]));
-  const earliestStates = nonAu.filter((s) => peakIdx[s] === minPeakIdx).sort();
-  const earliestBand = AGE_ORDER[minPeakIdx];
-
-  return { enriched, yOrder, peakAge, earliestStates, earliestBand };
+  const earliestIndex = Math.min(...nonAustralia.map((state) => peakIndex[state]));
+  const earliestStates = nonAustralia.filter((state) => peakIndex[state] === earliestIndex).sort();
+  return {
+    enriched,
+    yOrder,
+    peakAge,
+    earliestStates,
+    earliestBand: AGE_ORDER[earliestIndex],
+  };
 }
 
 function buildChartSubtitle(peakAge, earliestStates, earliestBand, rows) {
-  const nonAu = ALL_STATES.filter((s) => s !== "Australia");
-  const bands = new Set(nonAu.map((s) => peakAge[s]));
+  const nonAustralia = ALL_STATES.filter((state) => state !== "Australia");
+  const bands = new Set(nonAustralia.map((state) => peakAge[state]));
+
   if (bands.size === 1) {
     const band = [...bands][0];
-    const actTeen = rows.find((r) => r.state === "ACT" && r.age_group === "15-19").asfr;
-    const ntTeen = rows.find((r) => r.state === "NT" && r.age_group === "15-19").asfr;
+    const actTeen = rows.find((row) => row.state === "ACT" && row.age_group === "15-19").asfr;
+    const ntTeen = rows.find((row) => row.state === "NT" && row.age_group === "15-19").asfr;
     return (
-      `Every jurisdiction’s highest ASFR is in the ${band} band (thick border = peak cell per row). ` +
-      `At 15–19 the NT (${ntTeen.toFixed(1)}) is far above the ACT (${actTeen.toFixed(1)}) per 1,000 women. `
+      `Darker cells mean a higher age-specific fertility rate (births per 1,000 women in that age group). ` +
+      `The bold outline marks each state or territory’s peak cell; every jurisdiction peaks at ${band}. ` +
+      `At 15-19, the NT (${ntTeen.toFixed(1)}) is far above the ACT (${actTeen.toFixed(1)}).`
     );
   }
-  const act = peakAge.ACT;
-  const earliestList = earliestStates.join(" and ");
+
   return (
-    `ACT peaks at ${act}. ` +
-    `${earliestList} peak in the ${earliestBand} band — earliest modal band among states. `
+    `Darker cells mean a higher age-specific fertility rate (births per 1,000 women in that age group). ` +
+    `The bold outline marks each state or territory’s peak cell. ACT peaks at ${peakAge.ACT}; ` +
+    `${earliestStates.join(" and ")} peak in the ${earliestBand} band, the earliest modal band among states.`
   );
 }
 
-function parseHex(hex) {
-  const m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(hex.trim());
-  if (!m) return [255, 245, 235];
-  return [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)];
+function buildHeatmapSpec(rows, yOrder) {
+  return {
+    $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+    width: "container",
+    height: 360,
+    background: null,
+    data: { values: rows },
+    layer: [
+      {
+        mark: {
+          type: "rect",
+          strokeWidth: 0,
+        },
+        encoding: {
+          x: {
+            field: "age_group",
+            type: "ordinal",
+            sort: AGE_ORDER,
+            axis: {
+              title: "Age group (years)",
+              labelAngle: 0,
+              labelFontSize: 13,
+              titleFontSize: 14,
+              labelColor: "#4A4038",
+              titleColor: "#4A4038",
+              domain: false,
+              tickColor: "#dacfc0",
+            },
+          },
+          y: {
+            field: "state",
+            type: "ordinal",
+            sort: yOrder,
+            axis: {
+              title: "State / territory",
+              labelFontSize: 13,
+              titleFontSize: 14,
+              labelColor: "#4A4038",
+              titleColor: "#4A4038",
+              domain: false,
+              tickColor: "#dacfc0",
+            },
+          },
+          color: {
+            field: "asfr",
+            type: "quantitative",
+            scale: { range: ["#fff5eb", "#7f0f0f"] },
+            legend: {
+              title: "ASFR / 1,000",
+              orient: "right",
+              direction: "vertical",
+              offset: 18,
+              gradientLength: 330,
+              gradientThickness: 14,
+              titleLimit: 120,
+              titleAlign: "center",
+              titleOrient: "top",
+              titleFont: "Times New Roman",
+              labelFont: "Times New Roman",
+              titleFontSize: 13,
+              labelFontSize: 12,
+            },
+          },
+          tooltip: [
+            { field: "state", type: "nominal", title: "State" },
+            { field: "age_group", type: "nominal", title: "Age group" },
+            { field: "asfr", type: "quantitative", title: "ASFR per 1,000 women", format: ".1f" },
+          ],
+        },
+      },
+      {
+        transform: [{ filter: "datum.is_peak" }],
+        mark: {
+          type: "rect",
+          fill: "transparent",
+          stroke: "#1c1c1c",
+          strokeWidth: 2.4,
+        },
+        encoding: {
+          x: { field: "age_group", type: "ordinal", sort: AGE_ORDER },
+          y: { field: "state", type: "ordinal", sort: yOrder },
+          tooltip: [
+            { field: "state", type: "nominal", title: "State" },
+            { field: "age_group", type: "nominal", title: "Peak age group" },
+            { field: "asfr", type: "quantitative", title: "ASFR per 1,000 women", format: ".1f" },
+          ],
+        },
+      },
+      {
+        mark: {
+          type: "text",
+          font: "Times New Roman",
+          fontSize: 13,
+          fontWeight: "bold",
+        },
+        encoding: {
+          x: { field: "age_group", type: "ordinal", sort: AGE_ORDER },
+          y: { field: "state", type: "ordinal", sort: yOrder },
+          text: { field: "asfr", type: "quantitative", format: ".1f" },
+          color: {
+            condition: { test: "datum.label_color === 'white'", value: "white" },
+            value: "#1c1c1c",
+          },
+          tooltip: [
+            { field: "state", type: "nominal", title: "State" },
+            { field: "age_group", type: "nominal", title: "Age group" },
+            { field: "asfr", type: "quantitative", title: "ASFR per 1,000 women", format: ".1f" },
+          ],
+        },
+      },
+    ],
+    config: {
+      font: "Times New Roman",
+      view: { stroke: null },
+    },
+  };
 }
 
-function mixRgb(a, b, t) {
-  const u = Math.max(0, Math.min(1, t));
-  const r = Math.round(a[0] + (b[0] - a[0]) * u);
-  const g = Math.round(a[1] + (b[1] - a[1]) * u);
-  const bl = Math.round(a[2] + (b[2] - a[2]) * u);
-  return `rgb(${r},${g},${bl})`;
-}
+function centerLegendGradient(container) {
+  const svg = container.querySelector("svg");
+  if (!svg) return;
+  const titleEl = svg.querySelector("g.role-legend-title text");
+  const gradEl = svg.querySelector("g.role-legend-gradient rect");
+  const labelEls = [...svg.querySelectorAll("g.role-legend-label text")];
+  if (!titleEl || !gradEl) return;
 
-function cellColor(asfr, minV, maxV) {
-  const lo = parseHex(COLOR_LOW);
-  const hi = parseHex(COLOR_HIGH);
-  if (maxV <= minV) return mixRgb(lo, hi, 0.5);
-  const t = (asfr - minV) / (maxV - minV);
-  return mixRgb(lo, hi, t);
-}
+  const titleCX = parseFloat(titleEl.getAttribute("x") || "0");
+  const gradW = parseFloat(gradEl.getAttribute("width") || "14");
+  const gradX = parseFloat(gradEl.getAttribute("x") || "0");
+  const dx = titleCX - gradW / 2 - gradX;
+  if (Math.abs(dx) < 0.5) return;
 
-function renderDomHeatmap(container, enriched, yOrder) {
-  const byKey = Object.fromEntries(enriched.map((r) => [`${r.state}|${r.age_group}`, r]));
-  const values = enriched.map((r) => r.asfr);
-  const minV = Math.min(...values);
-  const maxV = Math.max(...values);
-
-  const root = document.createElement("div");
-  root.className = "asfr-heatmap-root";
-
-  const main = document.createElement("div");
-  main.className = "asfr-heatmap-main";
-
-  const table = document.createElement("table");
-  table.className = "asfr-heatmap-table";
-  table.setAttribute("role", "grid");
-  table.setAttribute(
-    "aria-label",
-    "Age-specific fertility rate (ASFR) by state and age group: values are per 1,000 women, 2024"
-  );
-
-  const thead = document.createElement("thead");
-  const trTop = document.createElement("tr");
-  const corner = document.createElement("th");
-  corner.className = "asfr-heatmap-corner";
-  corner.scope = "col";
-  corner.textContent = "";
-  trTop.appendChild(corner);
-  const xTitle = document.createElement("th");
-  xTitle.className = "asfr-heatmap-x-title";
-  xTitle.colSpan = AGE_ORDER.length;
-  xTitle.scope = "colgroup";
-  xTitle.textContent = "Age group (years)";
-  trTop.appendChild(xTitle);
-  thead.appendChild(trTop);
-
-  const trAge = document.createElement("tr");
-  const yTitle = document.createElement("th");
-  yTitle.className = "asfr-heatmap-y-title";
-  yTitle.scope = "col";
-  yTitle.textContent = "State / territory";
-  trAge.appendChild(yTitle);
-  for (const ag of AGE_ORDER) {
-    const th = document.createElement("th");
-    th.scope = "col";
-    th.textContent = ag;
-    trAge.appendChild(th);
-  }
-  thead.appendChild(trAge);
-  table.appendChild(thead);
-
-  const tbody = document.createElement("tbody");
-  for (const state of yOrder) {
-    const tr = document.createElement("tr");
-    const th = document.createElement("th");
-    th.scope = "row";
-    th.textContent = state;
-    tr.appendChild(th);
-    for (const ag of AGE_ORDER) {
-      const r = byKey[`${state}|${ag}`];
-      const td = document.createElement("td");
-      td.className = "asfr-heatmap-cell";
-      if (r.is_peak) td.classList.add("asfr-heatmap-cell--peak");
-      td.textContent = r.asfr.toFixed(1);
-      td.style.backgroundColor = cellColor(r.asfr, minV, maxV);
-      const whiteCol = ag === "25-29" || ag === "35-39";
-      const whiteNt2024 = state === "NT" && ag === "20-24";
-      td.style.color =
-        whiteCol || whiteNt2024 || r.asfr > 80 ? "#ffffff" : "#1c1c1c";
-      td.title = `${state}, ${ag}: ${r.asfr.toFixed(1)} (ASFR per 1,000 women)`;
-      tr.appendChild(td);
-    }
-    tbody.appendChild(tr);
-  }
-  table.appendChild(tbody);
-  main.appendChild(table);
-
-  const legend = document.createElement("div");
-  legend.className = "asfr-heatmap-legend";
-  legend.setAttribute("aria-hidden", "true");
-  const legTitle = document.createElement("div");
-  legTitle.className = "asfr-heatmap-legend-title";
-  legTitle.textContent = "Age-specific rate (per 1,000 women)";
-  const legBody = document.createElement("div");
-  legBody.className = "asfr-heatmap-legend-body";
-  const bar = document.createElement("div");
-  bar.className = "asfr-heatmap-legend-bar";
-  const ticks = document.createElement("div");
-  ticks.className = "asfr-heatmap-legend-ticks";
-  const steps = 5;
-  for (let i = steps; i >= 0; i--) {
-    const v = Math.round(minV + ((maxV - minV) * i) / steps);
-    const span = document.createElement("span");
-    span.textContent = String(v);
-    ticks.appendChild(span);
-  }
-  legBody.appendChild(bar);
-  legBody.appendChild(ticks);
-  legend.appendChild(legTitle);
-  legend.appendChild(legBody);
-
-  root.appendChild(main);
-  root.appendChild(legend);
-  container.innerHTML = "";
-  container.appendChild(root);
+  gradEl.setAttribute("x", gradX + dx);
+  labelEls.forEach((el) => {
+    el.setAttribute("x", parseFloat(el.getAttribute("x") || "0") + dx);
+  });
 }
 
 async function renderAsfrHeatmap() {
-  const response = await fetch(ASFR_CSV_URL);
-  const text = await response.text();
-  const rows = parseAsfrCsv(text);
-  verifyGrid(rows);
-  const { enriched, yOrder, peakAge, earliestStates, earliestBand } = buildYOrderAndPeaks(rows);
+  const container = document.querySelector("#asfr-heatmap");
 
-  const chartSubtitle =
-    buildChartSubtitle(peakAge, earliestStates, earliestBand, rows) +
-    " Age-specific fertility by state, 2024.";
+  try {
+    const response = await fetch(ASFR_CSV_URL);
+    if (!response.ok) throw new Error("Could not load ASFR state CSV.");
+    const rows = parseAsfrCsv(await response.text());
+    verifyGrid(rows);
+    const { enriched, yOrder, peakAge, earliestStates, earliestBand } = buildYOrderAndPeaks(rows);
 
-  const noteEl = document.getElementById("asfr-viz-note");
-  if (noteEl) noteEl.textContent = chartSubtitle;
+    const noteEl = document.getElementById("asfr-viz-note");
+    if (noteEl) {
+      noteEl.textContent = `${buildChartSubtitle(peakAge, earliestStates, earliestBand, rows)} Age-specific fertility by state, 2024.`;
+    }
 
-  const el = document.querySelector("#asfr-heatmap");
-  if (!el) return;
-  renderDomHeatmap(el, enriched, yOrder);
+    if (!container) return;
+    await vegaEmbed(container, buildHeatmapSpec(enriched, yOrder), { actions: false, renderer: "svg" });
+    centerLegendGradient(container);
+  } catch (error) {
+    console.error("ASFR heatmap failed:", error);
+    if (container) {
+      container.innerHTML = `<p class="error-message">Could not load ASFR heatmap: ${error.message}</p>`;
+    }
+  }
 }
 
 renderAsfrHeatmap();
+})();

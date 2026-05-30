@@ -45,11 +45,41 @@ hr.visual-divider {
   background: var(--rule);
 }
 
+.chart-panel-header {
+  margin: 0 0 18px 0;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.chart-panel-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.chart-panel-subtitle {
+  max-width: 760px;
+  margin: 6px 0 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.35;
+}
+
 @media (max-width: 860px) {
   hr.visual-divider {
     width: min(100%, 320px);
     margin-top: 20px;
     margin-bottom: 20px;
+  }
+
+  .chart-panel-title {
+    font-size: 19px;
+  }
+
+  .chart-panel-subtitle {
+    font-size: 14px;
   }
 }
 
@@ -81,6 +111,13 @@ h1 {
   color: var(--muted);
   font-size: 21px;
   line-height: 1.3;
+}
+
+.hero-byline {
+  margin: 14px 0 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  letter-spacing: 0.3px;
 }
 
 @media (max-width: 860px) {

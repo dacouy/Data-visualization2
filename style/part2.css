@@ -10,9 +10,14 @@
   width: 980px;
   max-width: 100%;
   margin-top: 30px;
-  padding: 0 16px 0 24px;
+  padding: 24px 16px 16px 24px;
   background: var(--paper);
   border: 1px solid var(--rule);
+}
+
+.slope-chart-block .chart-panel-header {
+  grid-column: 1 / -1;
+  margin-right: 8px;
 }
 
 #state-slope-chart {
@@ -22,9 +27,11 @@
 
 .slope-legend {
   align-self: center;
+  justify-self: center;
   padding-top: 0;
   color: var(--ink);
   font-family: "Times New Roman", Times, serif;
+  text-align: center;
 }
 
 .slope-legend-title {
@@ -37,6 +44,7 @@
 .slope-legend-item {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   margin-bottom: 8px;
   font-size: 13px;
@@ -86,6 +94,7 @@
     display: flex;
     gap: 14px;
     align-items: center;
+    justify-content: center;
     padding-top: 12px;
   }
 

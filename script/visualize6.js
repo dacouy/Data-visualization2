@@ -72,6 +72,9 @@ function fertilityColorEncoding(showLegend) {
           labelFont: WORLD_FONT,
           titleFontSize: 13,
           labelFontSize: 12,
+          titlePadding: 14,
+          titleAlign: "right",
+          titleAnchor: "end",
           gradientLength: 160,
           gradientThickness: 14,
         }
@@ -259,18 +262,18 @@ function buildSeaLensSpec() {
 
 vegaEmbed("#world-fertility-globe", buildWorldFertilitySpec(), {
   actions: false,
-  renderer: "canvas",
+  renderer: "svg",
   tooltip: { theme: "light" },
 });
 
 vegaEmbed("#world-lens-europe", buildEuropeLensSpec(), {
   actions: false,
-  renderer: "canvas",
+  renderer: "svg",
   tooltip: { theme: "light" },
 });
 
 vegaEmbed("#world-lens-sea", buildSeaLensSpec(), {
   actions: false,
-  renderer: "canvas",
+  renderer: "svg",
   tooltip: { theme: "light" },
 });

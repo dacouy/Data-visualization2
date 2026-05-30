@@ -39,6 +39,174 @@
   height: auto;
 }
 
+.age-stream-block {
+  width: 1120px;
+  margin-top: 30px;
+}
+
+#age-stream-chart {
+  width: 100%;
+}
+
+#age-stream-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#age-stream-chart .map-note {
+  max-width: 100%;
+  margin: 14px 0 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+#age-stream-chart .error-message {
+  color: #8B1A1A;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.pyramid-status {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  align-items: center;
+  margin: 0 18px 14px 18px;
+}
+
+.pyramid-status-year {
+  color: var(--ink);
+  font-family: "Times New Roman", serif;
+  font-size: 62px;
+  font-weight: bold;
+  line-height: 0.95;
+  text-align: center;
+}
+
+.pyramid-status-total {
+  color: #4A4038;
+  font-family: "Times New Roman", serif;
+  font-size: 20px;
+  text-align: center;
+}
+
+.pyramid-stat-stack {
+  display: grid;
+  grid-template-columns: repeat(3, 126px);
+  gap: 10px;
+  justify-content: center;
+}
+
+.pyramid-vega-chart {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 12px 0 0 0;
+  overflow: visible;
+}
+
+.pyramid-vega-chart .vega-embed {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow: visible;
+}
+
+.pyramid-vega-chart .vega-embed > svg {
+  max-width: 100%;
+  overflow: visible;
+}
+
+.pyramid-stat-card {
+  padding: 10px 12px;
+  background: #FFFFFF;
+  border: 1px solid var(--rule);
+}
+
+.pyramid-stat-card strong,
+.pyramid-stat-card span,
+.pyramid-stat-card em {
+  display: block;
+  font-style: normal;
+}
+
+.pyramid-stat-card strong {
+  color: var(--red);
+  font-size: 15px;
+}
+
+.pyramid-stat-card span {
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.pyramid-stat-card em {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.pyramid-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 18px 16px 18px;
+  padding: 12px 14px;
+  background: #FFFFFF;
+  border: 1px solid var(--rule);
+}
+
+.pyramid-play-button {
+  flex: 0 0 auto;
+  min-width: 92px;
+  padding: 10px 18px;
+  border: 1px solid #7A3B2E;
+  background: #8B1A1A;
+  color: #FFFFFF;
+  font-family: "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(139, 26, 26, 0.16);
+}
+
+.pyramid-play-button:hover,
+.pyramid-play-button:focus-visible {
+  background: #6F1414;
+  outline: none;
+}
+
+.pyramid-play-hint {
+  flex: 0 0 245px;
+  margin: 0;
+  color: #5C2A22;
+  font-family: "Times New Roman", serif;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.pyramid-slider-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.pyramid-year-slider {
+  width: 100%;
+  accent-color: #8B1A1A;
+  cursor: pointer;
+}
+
+.pyramid-year-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  color: var(--muted);
+  font-family: "Times New Roman", serif;
+  font-size: 13px;
+}
+
 #population-pyramid-chart .error-message {
   color: #8B1A1A;
   font-size: 16px;
@@ -69,5 +237,30 @@
   .pyramid-chart-block {
     width: 100%;
     padding: 18px;
+  }
+
+  .pyramid-controls {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 0 14px 0;
+  }
+
+  .pyramid-play-button {
+    width: 100%;
+  }
+
+  .pyramid-play-hint {
+    flex: 0 0 auto;
+    text-align: center;
+  }
+
+  .pyramid-status {
+    grid-template-columns: 1fr;
+    margin: 0 0 14px 0;
+  }
+
+  .pyramid-stat-stack {
+    grid-template-columns: 1fr;
   }
 }

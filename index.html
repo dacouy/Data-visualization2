@@ -24,6 +24,7 @@
         <p class="hero-subtitle">
           Why Australians are having fewer children than ever.
         </p>
+        <p class="hero-byline">Cong Duy Dang &mdash; 36234567 &nbsp;&middot;&nbsp; 29 May 2026</p>
       </section>
 
       <section class="story-section" aria-labelledby="part-one-title">
@@ -51,9 +52,9 @@
         </div>
 
         <div class="chart-block">
-          <div class="chart-title-row">
-            <h3>Total fertility rate, 1927-2024</h3>
-            <span>Children per woman</span>
+          <div class="chart-panel-header">
+            <h4 class="chart-panel-title">National fertility rate over time, 1927-2024</h4>
+            <p class="chart-panel-subtitle">Line tracks children per woman; the dashed rule marks replacement level.</p>
           </div>
           <div id="hero-chart"></div>
         </div>
@@ -81,6 +82,10 @@
         </div>
 
         <div class="slope-chart-block">
+          <div class="chart-panel-header">
+            <h4 class="chart-panel-title">Fertility rate shift by state, 2014-2024</h4>
+            <p class="chart-panel-subtitle">Dots compare each state or territory; dashed rules mark national averages.</p>
+          </div>
           <div id="state-slope-chart"></div>
           <div class="slope-legend" aria-label="Year legend">
             <div class="slope-legend-title">Year</div>
@@ -94,7 +99,7 @@
             </div>
             <div class="slope-legend-item">
               <span class="slope-legend-line"></span>
-              <span>Aust. avg</span>
+              <span>National avg</span>
             </div>
           </div>
         </div>
@@ -103,7 +108,7 @@
           steepest fall, dropping from 1.738 to 1.273 children per woman, a decline of 26.8%. Western Australia,
           Tasmania, Queensland and South Australia also fell by more than one-fifth over the decade. The Northern
           Territory declined the least, from 2.041 to 1.629, and remains the highest-fertility jurisdiction in 2024.
-          The dashed Aust. line marks the national 2024 average of 1.481. By the end of the decade, most states had
+          The dashed lines mark the national average fertility rates in 2014 and 2024. By the end of the decade, most states had
           converged close to that level, showing that fertility rates are not only falling, but becoming more similar
           across much of the country.
         </p>
@@ -122,38 +127,44 @@
         <div class="map-subheader">
           <h3>LGA fertility rates, 2024</h3>
           <p>
-            This map shows how fertility varies between local government areas.
-            Red areas are below the national average, green areas are higher, and grey areas have too few births for a published rate.
+            This map shows two local stories at once: colour shows the fertility rate, while each spike shows how
+            many babies were registered in that LGA in 2024.
           </p>
         </div>
 
         <div class="map-chart-block">
+          <div class="chart-panel-header">
+            <h4 class="chart-panel-title">Fertility rate and birth count by LGA, 2024</h4>
+            <p class="chart-panel-subtitle">Area colour maps children per woman; spike height maps births registered.</p>
+          </div>
           <div id="lga-map"></div>
           <p class="map-note">
-            White circles mark each state or territory capital and are sized by total births registered
-            in that state or territory in 2024.
-            Hover any local area for its LGA, state, births, and TFR. Unpublished values appear as N/P.
+            Each vertical spike marks an LGA and grows taller as births registered in 2024 increase.
+            Hover any local area or spike for its LGA, state, births, and TFR. Unpublished values appear as N/P.
           </p>
         </div>
 
         <p class="hero-copy">
-          Australia's fertility landscape tells a clear geographic story. The lowest rates are found in the hearts
-          of the major cities: Melbourne's CBD recorded just 0.54 children per woman in 2024 — the lowest of any LGA
-          in the country — followed closely by Adelaide (0.57), Perth (0.61) and Sydney (0.73). These are places
-          where young professionals are concentrated, housing costs are at their peak, and the pace of life leaves
-          little room for raising children.
+          Australia's fertility landscape tells a clear geographic story, but the spikes add the missing punchline:
+          the places with the lowest fertility rates can still be places where many babies are born. Melbourne's CBD
+          recorded just 0.54 children per woman in 2024 — the lowest of any LGA in the country — followed closely by
+          Adelaide (0.57), Perth (0.61) and Sydney (0.73). These inner-city councils are not empty of births; they are
+          places where births are spread across a much larger population of adults, young professionals, students and
+          renters.
         </p>
         <p class="hero-copy">
           At the other extreme, the highest fertility rates are found in small, remote Indigenous communities.
           Cherbourg in Queensland recorded 3.99 — the highest in Australia — followed by Hope Vale (3.95) and
           Doomadgee (3.40), all in Queensland. These communities have distinct cultural, social and economic
-          circumstances that shape very different family patterns.
+          circumstances that shape very different family patterns. But because their populations are small, a high
+          fertility rate does not always produce a tall birth spike.
         </p>
         <p class="hero-copy">
-          This is why the map can look greener than the national figure. It is an area map, not a population-weighted
-          map: 371 of the 456 published LGAs sit above the national average, but the LGAs at 2.0 children per woman
-          or higher account for only 13.4% of births in the file. Many below-average LGAs are dense urban councils
-          with far more births, including Brisbane, Gold Coast, Parramatta, Stirling and Sydney.
+          That is why the map needs both layers. Colour answers "how high is fertility here?", while spike height
+          answers "how many babies are actually being born here?". Brisbane has a low TFR of 1.19, yet it has the
+          tallest spike with 12,514 births. Gold Coast (6,566), Casey (6,152), Wyndham (5,828), Blacktown (5,651) and
+          Logan (5,590) also stand out as major birth-volume LGAs. The big baby counts are therefore concentrated in
+          populous urban and suburban councils, even when their fertility rates are only average or below average.
         </p>
         <p class="hero-copy">
           In the vast interior of Australia — the outback stretching across the centre of the continent — fertility
@@ -170,16 +181,20 @@
         <div class="map-subheader state-bubble-heading">
           <h3>Birth volume by state, 2024</h3>
           <p>
-            The bubble map tells a different story from the LGA fertility map. Large states dominate the number of
-            babies born because they have more people, even when their fertility rates are not especially high.
+            The mini pie map tells a different story from the LGA fertility map. Large states dominate the number of
+            babies born because they have more people, while the map beneath still compares fertility rates.
           </p>
         </div>
 
         <div class="map-chart-block state-bubble-block">
+          <div class="chart-panel-header">
+            <h4 class="chart-panel-title">Birth share and fertility rate by state, 2024</h4>
+            <p class="chart-panel-subtitle">Mini pies show each state’s share of national births; map colour shows TFR.</p>
+          </div>
           <div id="state-births-map"></div>
           <p class="map-note">
-            State and territory bubbles are sized by births registered in 2024. Colour still shows the
-            total fertility rate, making the gap between birth volume and fertility rate easier to compare.
+            Each mini pie shows that state or territory's share of national births registered in 2024. Colour still
+            shows the total fertility rate, making the gap between birth volume and fertility rate easier to compare.
           </p>
         </div>
 
@@ -190,7 +205,7 @@
           18,444. The smallest totals are in the smaller jurisdictions: Tasmania (5,509), the ACT (5,218) and
           the Northern Territory (3,521). This shows that the number of babies born is driven mainly by population
           size rather than fertility rate. The Northern Territory has the highest TFR, but the fewest births;
-          New South Wales has the largest birth count despite sitting below the national fertility average.
+          New South Wales has the largest birth count even though its fertility rate is not the highest.
         </p>
       </section>
 
@@ -206,6 +221,10 @@
         </div>
 
         <div class="ridgeline-chart-block">
+          <div class="chart-panel-header">
+            <h4 class="chart-panel-title">Age-specific fertility profile, 1976-2024</h4>
+            <p class="chart-panel-subtitle">Ridges show births per 1,000 women by age group across three benchmark years.</p>
+          </div>
           <div id="asfr-ridgeline"></div>
         </div>
 
@@ -230,8 +249,10 @@
         </div>
 
         <div class="asfr-chart-block">
-          <h3 class="asfr-viz-heading">Where each state’s fertility peaks</h3>
-          <p class="asfr-viz-note" id="asfr-viz-note"></p>
+          <div class="chart-panel-header">
+            <h4 class="chart-panel-title">Age-specific fertility peaks by state, 2024</h4>
+            <p class="chart-panel-subtitle asfr-viz-note" id="asfr-viz-note"></p>
+          </div>
           <div id="asfr-heatmap"></div>
         </div>
 
@@ -267,6 +288,10 @@
         </div>
 
         <div class="world-chart-block">
+          <div class="chart-panel-header">
+            <h4 class="chart-panel-title">Global fertility rate comparison</h4>
+            <p class="chart-panel-subtitle">Countries are coloured by latest births per woman; insets zoom Europe and Southeast Asia.</p>
+          </div>
           <div class="world-globe-stage">
             <div id="world-fertility-globe"></div>
             <div class="world-lens world-lens--europe" aria-label="EU Europe zoom lens">
@@ -305,6 +330,10 @@
         </div>
 
         <div class="world-chart-block education-scatter-block">
+          <div class="chart-panel-header">
+            <h4 class="chart-panel-title">Education enrolment versus fertility rate</h4>
+            <p class="chart-panel-subtitle">Each point is a country; x maps tertiary enrolment, y maps fertility, size maps population.</p>
+          </div>
           <div id="education-fertility-scatter"></div>
         </div>
         <p class="hero-copy">
@@ -329,6 +358,10 @@
         </div>
 
         <div class="world-chart-block housing-timeline-block">
+          <div class="chart-panel-header">
+            <h4 class="chart-panel-title">Home prices and fertility in Australia, 2009-2024</h4>
+            <p class="chart-panel-subtitle">Bars map the real home price index; the line maps total fertility rate.</p>
+          </div>
           <div id="housing-tfr-chart"></div>
         </div>
         <p class="hero-copy">
@@ -352,25 +385,57 @@
         </div>
 
         <div class="pyramid-subheader">
-          <h3>Population pyramid: 2024 vs 2054</h3>
+          <h3>Population pyramid: 2024 to 2071 projection</h3>
           <p>
-            Australia’s medium projection shows the base narrowing while the older population expands sharply.
+            Australia’s medium projection shows the base narrowing while the older population expands year by year.
           </p>
         </div>
 
         <div class="pyramid-chart-block">
+          <div class="chart-panel-header">
+            <h4 class="chart-panel-title">Population age structure, 2024-2071</h4>
+            <p class="chart-panel-subtitle">Animated pyramid uses ABS medium projection (Series B) by sex and five-year age group.</p>
+          </div>
           <div id="population-pyramid-chart"></div>
         </div>
 
         <p class="hero-copy">
-          The pyramid makes the long-term consequence of low fertility visible. In 2024, Australia’s age structure is
+          The animated pyramid makes the long-term consequence of low fertility visible. In 2024, Australia’s age structure is
           still relatively balanced: children aged 0-14 make up 17.9% of the population, close to the 17.6% aged 65 and
-          over. By 2054, the population is larger overall, so the number of children also rises slightly. The important
-          change is the balance of the structure: children aged 0-14 fall from 17.9% to 15.4% of the population, while
-          the 65+ share rises to 23.1%. The oldest group changes most dramatically in absolute terms, with Australians
-          aged 85 and over growing from about 0.59 million to 1.64 million. That shift means young people become a
+          over. By 2071, the population is larger overall, so the number of children also rises slightly. The important
+          change is the balance of the structure: children aged 0-14 fall from 17.9% to 14.6% of the population, while
+          the 65+ share rises to 25.1%. The oldest group changes most dramatically in absolute terms, with Australians
+          aged 85 and over growing from about 0.59 million to 2.05 million. That shift means young people become a
           smaller part of the population supporting a much larger older cohort, increasing pressure on health care,
           pensions, aged care and the working-age tax base.
+        </p>
+
+        <hr class="visual-divider" />
+
+        <div class="pyramid-subheader">
+          <h3 id="age-stream-title">When the age groups change rank</h3>
+          <p>
+            The pyramid shows the structure year by year. This sorted stream shows the same story as a race: each ribbon
+            is an age band, and when one band overtakes another, their ribbons cross.
+          </p>
+        </div>
+
+        <div class="pyramid-chart-block age-stream-block">
+          <div class="chart-panel-header">
+            <h4 class="chart-panel-title">Age bands re-sorted by share, 2024-2071</h4>
+            <p class="chart-panel-subtitle">Ribbon thickness maps each broad age band's share of the population; ribbons are re-ranked at each plotted year so crossings mark overtakes.</p>
+          </div>
+          <div id="age-stream-chart"></div>
+        </div>
+
+        <p class="hero-copy">
+          Normalising every year to 100% strips out raw population growth and shows the changing mix. In 2024 the 65+
+          band is the smallest of the five, at about 17.6% of the population, just below children aged 0-14 (17.9%),
+          while the 45-64 band is the largest at 23.8%. Within a decade the order has been rewritten: by 2034 the 65+
+          ribbon has climbed past the 0-14, 15-29 and 30-44 bands to become the second largest share. By 2071 it has
+          also overtaken 45-64, becoming the largest band at about 25.1%. The most striking movement is the 0-14 band
+          sliding to the bottom, reaching about 14.6% by 2071 as the 65+ band rises over it. Each crossing
+          point is a moment when Australia's population mix has, in effect, swapped a younger cohort for an older one.
         </p>
       </section>
 
@@ -384,30 +449,34 @@
         </div>
 
         <div class="closing-chart-block">
-          <div id="replacement-gap-waffle"></div>
+          <div class="chart-panel-header">
+            <h4 class="chart-panel-title">Australia’s population futures, 2024-2054</h4>
+            <p class="chart-panel-subtitle">ABS low, medium and high projection paths show how total population growth and ageing pressure diverge by 2054.</p>
+          </div>
+          <div id="population-futures-chart"></div>
         </div>
 
         <p class="hero-copy">
           The replacement benchmark is 2.1 births per woman. Australia’s 2024 fertility rate is 1.48, leaving a gap of
           0.62 births per woman. That number is not just a statistic; it changes the scale of the country’s future.
-          In the ABS 2054 projections, the gap between the high and medium population futures is about 3.7 million
-          people. The waffle chart turns that difference into units: each square represents 100,000 people. The exact
-          future will depend on migration, mortality, housing, work, family policy and culture, but the direction is
-          clear. If fertility remains low, Australia becomes older, more dependent on migration for growth, and more
-          exposed to the economic pressure of supporting a larger older population with a smaller younger share.
+          In the ABS 2054 projections, the gap between the low and high population futures is more than 6.5 million
+          people. The fan chart shows the range of plausible population paths. Even in the medium path, Australia becomes
+          older, more dependent on migration for growth, and more exposed to the economic pressure of supporting a larger
+          older population with a smaller younger share.
         </p>
       </section>
     </main>
 
     <script src="script/visualize1.js"></script>
-    <script src="script/visualize2.js"></script>
-    <script src="script/visualize3.js"></script>
-    <script src="script/visualize4.js"></script>
-    <script src="script/visualize5.js"></script>
-    <script src="script/visualize6.js"></script>
-    <script src="script/visualize7.js"></script>
-    <script src="script/visualize8.js"></script>
-    <script src="script/visualize9.js"></script>
-    <script src="script/visualize10.js"></script>
+    <script src="script/visualize2.js?v=panel-layout-1"></script>
+    <script src="script/visualize3.js?v=tfr-legend-left-1"></script>
+    <script src="script/visualize4.js?v=panel-layout-1"></script>
+    <script src="script/visualize5.js?v=vegalite-4"></script>
+    <script src="script/visualize6.js?v=world-legend-align-1"></script>
+    <script src="script/visualize7.js?v=vegalite-5"></script>
+    <script src="script/visualize8.js?v=vegalite-9"></script>
+    <script src="script/visualize9.js?v=vegalite-16"></script>
+    <script src="script/visualize10.js?v=fan-chart-vegalite-3"></script>
+    <script src="script/visualize11.js?v=age-stream-21"></script>
   </body>
 </html>

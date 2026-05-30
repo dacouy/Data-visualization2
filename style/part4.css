@@ -5,8 +5,8 @@
 .ridgeline-chart-block {
   width: 980px;
   max-width: 100%;
-  margin-top: 8px;
-  padding: 2px 2px 4px 2px;
+  margin-top: 30px;
+  padding: 24px;
   background: var(--paper);
   border: 1px solid var(--rule);
 }
@@ -53,25 +53,28 @@
   border: 1px solid var(--rule);
 }
 
-.asfr-viz-heading {
-  margin: 0 0 8px 0;
-  font-size: 22px;
-  font-weight: bold;
-  line-height: 1.25;
-  color: var(--ink);
-}
-
 .asfr-viz-note {
-  margin: 0 0 18px 0;
-  max-width: 100%;
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--muted);
+  max-width: 52rem;
+  line-height: 1.38;
 }
 
 #asfr-heatmap {
   width: 100%;
   overflow: visible;
+}
+
+#asfr-heatmap .vega-embed {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#asfr-heatmap .vega-embed > svg {
+  max-width: 100%;
+}
+
+#asfr-heatmap .role-legend {
+  transform: translateX(-14px);
 }
 
 .asfr-heatmap-root {
