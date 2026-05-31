@@ -90,8 +90,9 @@ function buildFanRows(yearly) {
     high: row.high.total_population,
     medium: row.medium.total_population,
     low: row.low.total_population,
-    high_medium_gap: row.high.total_population - row.medium.total_population,
-    medium_low_gap: row.medium.total_population - row.low.total_population,
+    high_label: formatMillions(row.high.total_population, 2),
+    medium_label: formatMillions(row.medium.total_population, 2),
+    low_label: formatMillions(row.low.total_population, 2),
   }));
 }
 
@@ -127,6 +128,12 @@ function buildSpec(rows) {
     population_label: formatMillions(row.total_population, 2),
   }));
   const endpointRows = buildEndpointRows(yearly);
+  const sharedTooltip = [
+    { field: "year", type: "ordinal", title: "Year" },
+    { field: "high_label", type: "nominal", title: "High" },
+    { field: "medium_label", type: "nominal", title: "Medium" },
+    { field: "low_label", type: "nominal", title: "Low" },
+  ];
 
   const baseX = {
     field: "year",
@@ -189,10 +196,7 @@ function buildSpec(rows) {
                 axis: totalYAxis,
               },
               y2: { field: "medium" },
-              tooltip: [
-                { field: "year", type: "ordinal", title: "Year" },
-                { field: "high_medium_gap", type: "quantitative", title: "High minus medium", format: ",.0f" },
-              ],
+              tooltip: null,
             },
           },
           {
@@ -207,10 +211,7 @@ function buildSpec(rows) {
                 axis: totalYAxis,
               },
               y2: { field: "low" },
-              tooltip: [
-                { field: "year", type: "ordinal", title: "Year" },
-                { field: "medium_low_gap", type: "quantitative", title: "Medium minus low", format: ",.0f" },
-              ],
+              tooltip: null,
             },
           },
           {
@@ -236,11 +237,15 @@ function buildSpec(rows) {
                 condition: { test: "datum.scenario === 'low'", value: 0.68 },
                 value: 1,
               },
-              tooltip: [
-                { field: "year", type: "ordinal", title: "Year" },
-                { field: "scenario_label", type: "nominal", title: "Scenario" },
-                { field: "total_population", type: "quantitative", title: "Population", format: ",.0f" },
-              ],
+              tooltip: null,
+            },
+          },
+          {
+            data: { values: fanRows },
+            mark: { type: "rule", stroke: COLORS.ink, strokeWidth: 16, opacity: 0.001 },
+            encoding: {
+              x: baseX,
+              tooltip: sharedTooltip,
             },
           },
           {

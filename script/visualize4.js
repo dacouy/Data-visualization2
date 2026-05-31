@@ -101,7 +101,7 @@ function prepareThreeYearRows(rows) {
   });
 }
 
-function ridgeAreaLayer(year, showAxis, values) {
+function ridgeAreaLayer(year, values) {
   return {
     data: { values },
     transform: [{ filter: `datum.year === ${year}` }],
@@ -127,26 +127,12 @@ function ridgeAreaLayer(year, showAxis, values) {
         field: "age_group",
         type: "ordinal",
         sort: RIDGE_AGE_GROUPS,
-        axis: showAxis
-          ? {
-              title: "Age group of mother",
-              labelFont: RIDGE_FONT,
-              titleFont: RIDGE_FONT,
-              labelFontSize: 12,
-              titleFontSize: 13,
-              labelAngle: 0,
-              grid: true,
-              gridColor: "#D8CFC0",
-              gridOpacity: 0.45,
-              domainColor: "#1C1C1C",
-              tickColor: "#1C1C1C",
-            }
-          : null,
+        axis: null,
       },
       y: {
         field: "ridge_top",
         type: "quantitative",
-        scale: { domain: [-8, 278] },
+        scale: { domain: [-44, 278] },
         axis: null,
       },
       y2: { field: "baseline" },
@@ -165,17 +151,85 @@ function buildThreeYearRidgelineSpec(values) {
     age_group: "15-19",
     y: index * RIDGE_GAP + 34,
   }));
+  const xAxisLabels = RIDGE_AGE_GROUPS.map((age_group) => ({
+    age_group,
+    y: -24,
+  }));
+  const xAxisTicks = RIDGE_AGE_GROUPS.map((age_group) => ({
+    age_group,
+    y: -7,
+    y2: -12,
+  }));
 
   return {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
     width: "container",
     height: 460,
     background: RIDGE_BACKGROUND,
-    padding: { left: 0, right: 2, top: 12, bottom: 18 },
+    padding: { left: 0, right: 2, top: 12, bottom: 44 },
     layer: [
-      ridgeAreaLayer(1976, true, values),
-      ridgeAreaLayer(2000, false, values),
-      ridgeAreaLayer(2024, false, values),
+      ridgeAreaLayer(1976, values),
+      ridgeAreaLayer(2000, values),
+      ridgeAreaLayer(2024, values),
+      {
+        data: { values: [{ y: -7 }] },
+        mark: {
+          type: "rule",
+          stroke: "#4A4038",
+          strokeWidth: 0.9,
+          opacity: 0.7,
+        },
+        encoding: {
+          y: { field: "y", type: "quantitative", scale: { domain: [-44, 278] } },
+        },
+      },
+      {
+        data: { values: xAxisTicks },
+        mark: {
+          type: "rule",
+          stroke: "#4A4038",
+          strokeWidth: 0.75,
+          opacity: 0.7,
+        },
+        encoding: {
+          x: { field: "age_group", type: "ordinal", sort: RIDGE_AGE_GROUPS },
+          y: { field: "y", type: "quantitative", scale: { domain: [-44, 278] } },
+          y2: { field: "y2" },
+        },
+      },
+      {
+        data: { values: xAxisLabels },
+        mark: {
+          type: "text",
+          align: "center",
+          baseline: "top",
+          font: RIDGE_FONT,
+          fontSize: 12,
+          color: "#4A4038",
+        },
+        encoding: {
+          x: { field: "age_group", type: "ordinal", sort: RIDGE_AGE_GROUPS },
+          y: { field: "y", type: "quantitative", scale: { domain: [-44, 278] } },
+          text: { field: "age_group" },
+        },
+      },
+      {
+        data: { values: [{ age_group: "30-34", y: -39, label: "Age group of mother" }] },
+        mark: {
+          type: "text",
+          align: "center",
+          baseline: "top",
+          font: RIDGE_FONT,
+          fontSize: 13,
+          fontWeight: "bold",
+          color: "#4A4038",
+        },
+        encoding: {
+          x: { field: "age_group", type: "ordinal", sort: RIDGE_AGE_GROUPS },
+          y: { field: "y", type: "quantitative", scale: { domain: [-44, 278] } },
+          text: { field: "label" },
+        },
+      },
       {
         data: { values: yearLabels },
         mark: {

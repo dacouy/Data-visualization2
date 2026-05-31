@@ -164,7 +164,6 @@ function buildSpec(streamRows) {
         { field: "band", type: "nominal", title: "Age band" },
         { field: "share", type: "quantitative", title: "Share of population", format: ".1f" },
         { field: "population", type: "quantitative", title: "People", format: ",.0f" },
-        { field: "rank", type: "ordinal", title: "Rank (1 = largest)" },
       ],
     },
   });
