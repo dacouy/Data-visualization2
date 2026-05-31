@@ -13,6 +13,7 @@ const EUROPE_LENS_COUNTRY_FILTER =
   "indexof(['Albania','Austria','Belarus','Belgium','Bosnia and Herzegovina','Bulgaria','Croatia','Cyprus','Czechia','Denmark','Estonia','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Kosovo','Latvia','Lithuania','Luxembourg','North Macedonia','Malta','Moldova','Montenegro','Netherlands','Norway','Poland','Portugal','Romania','Russia','Republic of Serbia','Slovakia','Slovenia','Spain','Sweden','Switzerland','Ukraine','United Kingdom'], datum.properties.name) >= 0";
 const SEA_LENS_COUNTRY_FILTER =
   "indexof(['Brunei','Cambodia','East Timor','Indonesia','Laos','Malaysia','Myanmar','Philippines','Singapore','Thailand','Vietnam'], datum.properties.name) >= 0";
+const NZ_LENS_COUNTRY_FILTER = "datum.iso3 === 'NZL'";
 
 const worldTooltip = [
   { field: "country_name", type: "nominal", title: "Country" },
@@ -151,18 +152,23 @@ function australiaLabelLayer() {
 }
 
 function buildWorldFertilitySpec(chartWidth = 980) {
-  const mapScale = Math.min(205, Math.max(170, chartWidth * 0.15));
+  const compactViewport = window.matchMedia("(max-width: 1919px)").matches;
+  const mapScale = compactViewport
+    ? Math.min(178, Math.max(154, chartWidth * 0.132))
+    : Math.min(205, Math.max(170, chartWidth * 0.15));
+  const chartHeight = compactViewport ? 530 : 670;
+  const projectionY = compactViewport ? 249 : 305;
 
   return {
     $schema: "https://vega.github.io/schema/vega-lite/v5.json",
     width: chartWidth,
-    height: 660,
+    height: chartHeight,
     background: WORLD_BACKGROUND,
     padding: { left: 0, right: 0, top: 0, bottom: 0 },
     projection: {
       type: "naturalEarth1",
       scale: mapScale,
-      translate: [chartWidth / 2, 300],
+      translate: [chartWidth / 2, projectionY],
     },
     layer: [
       {
@@ -289,6 +295,39 @@ function buildSeaLensSpec() {
   };
 }
 
+function buildNzLensSpec() {
+  const size = 160;
+
+  return {
+    $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+    width: size,
+    height: size,
+    background: WORLD_BACKGROUND,
+    padding: 0,
+    projection: {
+      type: "mercator",
+      center: [173.1, -41.3],
+      scale: 515,
+      translate: [size / 2 + 20, size / 2 + 4],
+    },
+    layer: [
+      {
+        data: { sphere: true },
+        mark: {
+          type: "geoshape",
+          fill: WORLD_OCEAN,
+          stroke: null,
+        },
+      },
+      countryLayer(false, 0.55, [{ filter: NZ_LENS_COUNTRY_FILTER }], true),
+    ],
+    config: {
+      view: { stroke: null },
+      font: WORLD_FONT,
+    },
+  };
+}
+
 const worldGlobeEl = document.querySelector("#world-fertility-globe");
 let worldGlobeView = null;
 let worldGlobeRenderTimer = null;
@@ -297,8 +336,10 @@ let lastWorldGlobeWidth = 0;
 async function renderWorldGlobe() {
   if (!worldGlobeEl) return;
   const width = Math.max(900, Math.floor(worldGlobeEl.clientWidth || worldGlobeEl.getBoundingClientRect().width || 980));
-  if (Math.abs(width - lastWorldGlobeWidth) < 12 && worldGlobeView) return;
-  lastWorldGlobeWidth = width;
+  const compactViewport = window.matchMedia("(max-width: 1919px)").matches;
+  const renderKey = `${width}:${compactViewport ? "compact" : "large"}`;
+  if (renderKey === lastWorldGlobeWidth && worldGlobeView) return;
+  lastWorldGlobeWidth = renderKey;
   if (worldGlobeView) {
     await worldGlobeView.finalize();
     worldGlobeView = null;
@@ -330,6 +371,12 @@ vegaEmbed("#world-lens-europe", buildEuropeLensSpec(), {
 });
 
 vegaEmbed("#world-lens-sea", buildSeaLensSpec(), {
+  actions: false,
+  renderer: "svg",
+  tooltip: { theme: "light" },
+});
+
+vegaEmbed("#world-lens-nz", buildNzLensSpec(), {
   actions: false,
   renderer: "svg",
   tooltip: { theme: "light" },

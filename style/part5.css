@@ -73,7 +73,7 @@
 .world-globe-stage {
   position: relative;
   width: 100%;
-  min-height: 660px;
+  min-height: 700px;
   overflow: hidden;
 }
 
@@ -106,12 +106,37 @@
   box-shadow: 0 12px 28px rgba(28, 28, 28, 0.18);
 }
 
+@media (max-width: 1919px) {
+  .world-globe-stage {
+    min-height: 560px;
+  }
+
+  .world-lens {
+    --lens-size: clamp(128px, 9vw, 148px);
+    bottom: 18px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .world-globe-stage {
+    min-height: 710px;
+  }
+
+  .world-lens {
+    bottom: 32px;
+  }
+}
+
 .world-lens--europe {
-  left: calc(50% - var(--lens-size) - 15px);
+  left: calc(50% - (var(--lens-size) * 1.5) - 30px);
 }
 
 .world-lens--sea {
-  left: calc(50% + 15px);
+  left: calc(50% - (var(--lens-size) / 2));
+}
+
+.world-lens--nz {
+  left: calc(50% + (var(--lens-size) / 2) + 30px);
 }
 
 .world-lens-label {
@@ -130,7 +155,8 @@
 }
 
 #world-lens-europe,
-#world-lens-sea {
+#world-lens-sea,
+#world-lens-nz {
   width: 100%;
   height: 100%;
 }
@@ -138,8 +164,10 @@
 /* The lens SVG carries a viewBox, so filling the container scales the map crisply. */
 #world-lens-europe .vega-embed,
 #world-lens-sea .vega-embed,
+#world-lens-nz .vega-embed,
 #world-lens-europe svg,
-#world-lens-sea svg {
+#world-lens-sea svg,
+#world-lens-nz svg {
   display: block;
   width: 100%;
   height: 100%;
@@ -159,7 +187,7 @@
   }
 
   .world-globe-stage {
-    min-height: 520px;
+    min-height: 470px;
   }
 
   .world-lens {
@@ -176,5 +204,10 @@
     top: 205px;
     left: auto;
     right: 8px;
+  }
+
+  .world-lens--nz {
+    top: 205px;
+    left: 8px;
   }
 }
