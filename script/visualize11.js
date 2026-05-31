@@ -225,8 +225,7 @@ async function renderAgeStream() {
     source.className = "map-note";
     source.textContent =
       "Each ribbon is an age band; thickness is its share of the population that year. " +
-      "Bands are re-sorted by share at each plotted year, so a crossing means one band has overtaken another. " +
-      "Source: ABS 3222.0 Population Projections, medium series.";
+      "Bands are re-sorted by share at each plotted year, so a crossing means one band has overtaken another.";
     container.appendChild(source);
   } catch (error) {
     console.error("Age streamgraph failed:", error);

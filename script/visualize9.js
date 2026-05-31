@@ -345,11 +345,6 @@ async function renderPopulationPyramid() {
     });
 
     await setYear(currentYear);
-
-    const source = document.createElement("p");
-    source.className = "pyramid-source";
-    source.textContent = "Source: ABS 3222.0 Population Projections, Australia, medium series.";
-    container.appendChild(source);
   } catch (error) {
     console.error(`Population pyramid failed at ${stage}:`, error.stack || error);
     if (container) {

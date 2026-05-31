@@ -307,11 +307,6 @@ async function renderFanChart() {
       <span><i style="background:${COLORS.low}"></i>Low</span>
     `;
     container.prepend(legend);
-
-    const source = document.createElement("p");
-    source.className = "fan-source";
-    source.textContent = "Source: ABS 3222.0 Population Projections, Australia. Green band shows high minus medium; brown band shows medium minus low.";
-    container.appendChild(source);
   } catch (error) {
     console.error("Population futures fan chart failed:", error);
     container.innerHTML = `<p class="error-message">Could not load population futures chart: ${error.message}</p>`;

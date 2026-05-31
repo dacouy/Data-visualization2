@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style/general.css?v=ghost-removed-1" />
+    <link rel="stylesheet" href="style/general.css?v=chart-source-2" />
     <link rel="stylesheet" href="style/part1.css?v=responsive-scale-2" />
     <link rel="stylesheet" href="style/part2.css?v=responsive-scale-1" />
     <link rel="stylesheet" href="style/part3.css?v=responsive-scale-2" />
@@ -65,6 +65,7 @@
             <p class="chart-panel-subtitle">Line tracks children per woman; the dashed rule marks replacement level.</p>
           </div>
           <div id="hero-chart"></div>
+          <p class="chart-source">Source: <a href="https://www.abs.gov.au/statistics/people/population/births-australia/latest-release" target="_blank" rel="noopener">ABS, Births, Australia</a> (total fertility rate).</p>
         </div>
 
         <p class="hero-copy">
@@ -110,6 +111,7 @@
               <span>National avg</span>
             </div>
           </div>
+          <p class="chart-source">Source: <a href="https://www.abs.gov.au/statistics/people/population/births-australia/latest-release#states-and-territories" target="_blank" rel="noopener">ABS, Births, Australia</a> (fertility rate by state and territory).</p>
         </div>
         <p class="hero-copy slope-chart-follow">
           Every state and territory recorded a lower fertility rate in 2024 than in 2014. The ACT experienced the
@@ -139,9 +141,9 @@
           </div>
           <div id="lga-map"></div>
           <p class="map-note">
-            Each vertical spike marks an LGA and grows taller as births registered in 2024 increase.
             Hover any local area or spike for its LGA, state, births, and TFR. Unpublished values appear as N/P.
           </p>
+          <p class="chart-source">Sources: <a href="https://www.abs.gov.au/statistics/people/population/births-australia/latest-release" target="_blank" rel="noopener">ABS, Births, Australia</a> (by LGA); <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files" target="_blank" rel="noopener">ABS ASGS digital boundaries</a>.</p>
         </div>
 
         <p class="hero-copy">
@@ -188,6 +190,7 @@
             Each mini pie shows that state or territory's share of national births registered in 2024. Colour still
             shows the total fertility rate, making the gap between birth volume and fertility rate easier to compare.
           </p>
+          <p class="chart-source">Source: <a href="https://www.abs.gov.au/statistics/people/population/births-australia/latest-release#states-and-territories" target="_blank" rel="noopener">ABS, Births, Australia</a> (births by state and territory, 2024).</p>
         </div>
 
         <p class="hero-copy">
@@ -218,6 +221,7 @@
             <p class="chart-panel-subtitle">Ridges show births per 1,000 women by age group across three benchmark years.</p>
           </div>
           <div id="asfr-ridgeline"></div>
+          <p class="chart-source">Source: <a href="https://www.abs.gov.au/statistics/people/population/births-australia/latest-release" target="_blank" rel="noopener">ABS, Births, Australia</a> (age-specific fertility rates).</p>
         </div>
 
         <p class="hero-copy">
@@ -238,6 +242,7 @@
             <p class="chart-panel-subtitle asfr-viz-note" id="asfr-viz-note"></p>
           </div>
           <div id="asfr-heatmap"></div>
+          <p class="chart-source">Source: <a href="https://www.abs.gov.au/statistics/people/population/births-australia/latest-release#states-and-territories" target="_blank" rel="noopener">ABS, Births, Australia</a> (age-specific fertility rates by state, 2024).</p>
         </div>
 
         <p class="hero-copy">
@@ -289,9 +294,9 @@
             </div>
           </div>
           <p class="map-note">
-            Countries are coloured by births per woman. Grey countries have no matched value in the
-            source file. Hover to inspect each country.
+            Countries are coloured by births per woman. Hover to inspect each country.
           </p>
+          <p class="chart-source">Source: <a href="https://data.worldbank.org/indicator/SP.DYN.TFRT.IN" target="_blank" rel="noopener">World Bank, Fertility rate, total</a> (SP.DYN.TFRT.IN).</p>
         </div>
         <p class="hero-copy">
           The globe shows that Australia's baby drought is part of a much wider shift. Most high-income countries now
@@ -319,6 +324,7 @@
             <p class="chart-panel-subtitle">Each point is a country; x maps tertiary enrolment, y maps fertility, size maps population.</p>
           </div>
           <div id="education-fertility-scatter"></div>
+          <p class="chart-source">Sources: World Bank &mdash; <a href="https://data.worldbank.org/indicator/SE.TER.ENRR" target="_blank" rel="noopener">tertiary enrolment</a> (SE.TER.ENRR) and <a href="https://data.worldbank.org/indicator/SP.DYN.TFRT.IN" target="_blank" rel="noopener">fertility rate</a> (SP.DYN.TFRT.IN).</p>
         </div>
         <p class="hero-copy">
           The scatterplot does not prove that education causes lower fertility, but it shows the two often travel
@@ -346,6 +352,7 @@
             <p class="chart-panel-subtitle">Bars map the real home price index; the line maps total fertility rate.</p>
           </div>
           <div id="housing-tfr-chart"></div>
+          <p class="chart-source">Sources: <a href="https://www.macrotrends.net/3267/australia-real-home-prices" target="_blank" rel="noopener">Macrotrends, Australia real home prices</a>; <a href="https://www.abs.gov.au/statistics/people/population/births-australia/latest-release" target="_blank" rel="noopener">ABS, Births, Australia</a> (total fertility rate).</p>
         </div>
         <p class="hero-copy">
           The housing chart gives that pressure a local shape. From 2009 to 2024, the real home price index rose from
@@ -373,6 +380,7 @@
             <p class="chart-panel-subtitle">Watch the base thin out while the older ages widen as the medium projection moves toward 2071.</p>
           </div>
           <div id="population-pyramid-chart"></div>
+          <p class="chart-source">Source: <a href="https://www.abs.gov.au/statistics/people/population/population-projections-australia/latest-release#data-downloads" target="_blank" rel="noopener">ABS, Population Projections, Australia</a> (medium series, 2022 base).</p>
         </div>
 
         <p class="hero-copy">
@@ -402,6 +410,7 @@
             <p class="chart-panel-subtitle">Ribbon thickness shows each age band's share; crossings mark the moments one generation overtakes another.</p>
           </div>
           <div id="age-stream-chart"></div>
+          <p class="chart-source">Source: <a href="https://www.abs.gov.au/statistics/people/population/population-projections-australia/latest-release#data-downloads" target="_blank" rel="noopener">ABS, Population Projections, Australia</a> (medium series, 2022 base).</p>
         </div>
 
         <p class="hero-copy">
@@ -430,6 +439,7 @@
             <p class="chart-panel-subtitle">Three ABS projections &mdash; low, medium and high &mdash; show how big Australia&rsquo;s total population could grow by 2071.</p>
           </div>
           <div id="population-futures-chart"></div>
+          <p class="chart-source">Source: <a href="https://www.abs.gov.au/statistics/people/population/population-projections-australia/latest-release#data-downloads" target="_blank" rel="noopener">ABS, Population Projections, Australia</a> (low, medium and high series, 2022 base).</p>
         </div>
 
         <p class="hero-copy">
@@ -461,8 +471,8 @@
     <script src="script/visualize6.js?v=australia-label-1"></script>
     <script src="script/visualize7.js?v=housing-axis-sides-2"></script>
     <script src="script/visualize8.js?v=vegalite-10"></script>
-    <script src="script/visualize9.js?v=pyramid-compact-1"></script>
-    <script src="script/visualize10.js?v=fan-chart-2071-2"></script>
-    <script src="script/visualize11.js?v=age-stream-21"></script>
+    <script src="script/visualize9.js?v=no-source-1"></script>
+    <script src="script/visualize10.js?v=no-source-1"></script>
+    <script src="script/visualize11.js?v=no-source-1"></script>
   </body>
 </html>
